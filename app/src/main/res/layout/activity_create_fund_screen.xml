@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CreateFundScreen">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:titleTextColor="@android:color/white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/btnCreatefund"
+            android:layout_below="@id/toolbar4">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/etFundName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ripple_hollow_rectangle"
+                        android:hint="Name of Fund"
+                        android:inputType="textPersonName"
+                        android:padding="10dp" />
+
+                    <EditText
+                        android:id="@+id/etSelectAmount"
+                        android:drawablePadding="@dimen/h5"
+                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ripple_hollow_rectangle"
+                        android:hint="Select Donation/Supported  Amount"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp" />
+
+                    <EditText
+                        android:id="@+id/etFundPeriod"
+                        android:drawablePadding="@dimen/h5"
+                        android:drawableRight="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ripple_hollow_rectangle"
+                        android:hint="Fund Growth Period"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ripple_hollow_rectangle"
+                        android:hint="Field 3"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ripple_hollow_rectangle"
+                        android:hint="Field 4"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ripple_hollow_rectangle"
+                        android:hint="Field 5"
+                        android:inputType="textPersonName"
+                        android:padding="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp" />
+
+                    <ImageView
+
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/tvAddImage"
+                        android:onClick="onClick"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/ripple_hollow_rectangle"
+                        android:clickable="true"
+                        android:gravity="center_horizontal"
+                        android:hint="@string/select_image"
+                        android:padding="13dp"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnCreatefund"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:onClick="createFund"
+            android:text="Create Fund" />
+    </RelativeLayout>
+</layout>
