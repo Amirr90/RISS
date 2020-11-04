@@ -1,30 +1,21 @@
 package com.example.riss;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.riss.databinding.ActivityMainBinding;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static com.example.riss.AppUtils.Utils.hideAlertDialog;
-import static com.example.riss.AppUtils.Utils.showAlertDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -87,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 Toast.makeText(MainActivity.this, "sign in successfully", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                startActivity(new Intent(MainActivity.this, HomeScreen.class));
                 finish();
             } else {
                 Toast.makeText(MainActivity.this, "sign in failed", Toast.LENGTH_SHORT).show();

@@ -16,15 +16,7 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"
-            app:popUpTo="@id/homeFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_searchFundFragment"
-            app:destination="@id/searchFundFragment"
-            app:enterAnim="@anim/slide_out_bottom"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/slide_out_bottom" />
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/topFundsFragment"
@@ -32,34 +24,29 @@
         android:label="Top Funds"
         tools:layout="@layout/fragment_top_funds" >
         <action
-            android:id="@+id/action_topFundsFragment_to_fundsFragment"
-            app:destination="@id/fundsFragment"
+            android:id="@+id/action_topFundsFragment_to_fundFragment"
+            app:destination="@id/fundFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/fundsFragment"
-        android:name="com.example.riss.view.FundsFragment"
-        android:label="Funds"
-        tools:layout="@layout/fragment_funds" >
+        android:id="@+id/fundFragment"
+        android:name="com.example.riss.view.FundFragment"
+        android:label="Fund"
+        tools:layout="@layout/fragment_fund" >
         <action
-            android:id="@+id/action_fundsFragment_to_createFundFragment"
-            app:destination="@id/createFundFragment"
+            android:id="@+id/action_fundFragment_to_supportFundFragment"
+            app:destination="@id/supportFundFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
-        android:id="@+id/createFundFragment"
-        android:name="com.example.riss.view.CreateFundFragment"
-        android:label="Create Fund"
-        tools:layout="@layout/fragment_create_fund" />
-    <fragment
-        android:id="@+id/searchFundFragment"
-        android:name="com.example.riss.view.SearchFundFragment"
-        android:label="Search Fragment"
-        tools:layout="@layout/fragment_search_fund" />
+        android:id="@+id/supportFundFragment"
+        android:name="com.example.riss.view.SupportFundFragment"
+        android:label="fragment_support_fund"
+        tools:layout="@layout/fragment_support_fund" />
 </navigation>

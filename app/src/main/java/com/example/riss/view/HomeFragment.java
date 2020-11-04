@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -17,9 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.riss.HomeScreen;
 import com.example.riss.MainActivity;
-import com.example.riss.Models.HomeModel;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentHomeBinding;
+import com.example.riss.databinding.HomeViewBinding;
+import com.example.riss.models.HomeModel;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -72,20 +73,19 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadData() {
-        list.add(new HomeModel(1 + ". Top Funds"));
-        list.add(new HomeModel(2 + ". Miracle Drops"));
-        list.add(new HomeModel(3 + ". Distribute"));
-        list.add(new HomeModel(4 + ". Public review"));
-        list.add(new HomeModel(5 + ". Donates For M Drops"));
-        list.add(new HomeModel(6 + ". Search A funds"));
-        list.add(new HomeModel(7 + ". Supports A funds"));
-        list.add(new HomeModel(8 + ". Create A funds"));
-        list.add(new HomeModel(9 + ". My funds"));
-        list.add(new HomeModel(10 + ". My favourites funds"));
+        list.add(new HomeModel("Top", "Funds", R.drawable.savings));
+        list.add(new HomeModel("My Personal", "Funds", R.drawable.my_personal_fund_image));
+        list.add(new HomeModel("Support a", "Funds", R.drawable.support_fund_image));
+        list.add(new HomeModel("Miracle", "Drops", R.drawable.pills));
+        list.add(new HomeModel("Service", "Distribute", R.drawable.image_distribution_center));
+        list.add(new HomeModel("Distribution", "Centers", R.drawable.growth));
+        list.add(new HomeModel("Create a", "Funds", R.drawable.create_fund_image));
+        list.add(new HomeModel("Search a", "Funds", R.drawable.search_fund_image));
+        list.add(new HomeModel("My Favourite", "Funds", R.drawable.my_personal_fund_image));
+        list.add(new HomeModel("Public", "Reviews", R.drawable.public_review_image));
+        list.add(new HomeModel("Write a", "Review", R.drawable.survey));
+        list.add(new HomeModel("Donate for", "Miracle Drops", R.drawable.donate));
 
-        /*for (int a = 0; a < 20; a++) {
-            list.add(new HomeModel(a + " title"));
-        }*/
         homeScreenAdapter.notifyDataSetChanged();
     }
 
@@ -112,18 +112,17 @@ public class HomeFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-            View listItem = layoutInflater.inflate(R.layout.home_view, parent, false);
-            ViewHolder viewHolder = new ViewHolder(listItem);
-            return viewHolder;
+            HomeViewBinding homeViewBinding = HomeViewBinding.inflate(layoutInflater, parent, false);
+            return new ViewHolder(homeViewBinding);
         }
 
         @Override
         public void onBindViewHolder(@NonNull HomeScreenAdapter.ViewHolder holder, final int position) {
 
             HomeModel model = homeModelList.get(position);
-            holder.textView.setText(model.getTitle());
+            holder.binding.setHomeView(model);
 
-            holder.textView.setOnClickListener(new View.OnClickListener() {
+            holder.binding.cvMain.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     switch (position) {
@@ -131,7 +130,7 @@ public class HomeFragment extends Fragment {
                             navController.navigate(R.id.action_homeFragment_to_topFundsFragment);
                             break;
                         case 5:
-                            navController.navigate(R.id.action_homeFragment_to_searchFundFragment);
+                            //navController.navigate(R.id.action_homeFragment_to_searchFundFragment);
                             break;
                         default:
                             showSnackBar("Coming Soon", v);
@@ -147,12 +146,25 @@ public class HomeFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView textView;
+            HomeViewBinding binding;
 
-            public ViewHolder(@NonNull View view) {
-                super(view);
-                textView = view.findViewById(R.id.textView9);
+            public ViewHolder(HomeViewBinding binding) {
+                super(binding.getRoot());
+                this.binding = binding;
             }
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
+
 }
