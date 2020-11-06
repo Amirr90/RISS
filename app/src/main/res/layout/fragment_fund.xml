@@ -12,6 +12,8 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSupportFund"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="14dp"
         android:layout_marginRight="12dp"
@@ -227,22 +229,28 @@
             android:textColor="#999999"
             android:textSize="14dp" />
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/otherFundRec"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="13dp"
+            tools:itemCount="3"
+            tools:listitem="@layout/other_funds_view" />
     </LinearLayout>
 
     <Button
-        android:textSize="19dp"
-        android:textStyle="bold"
-        android:fontFamily="@font/lato_bold"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_alignParentBottom="true"
         android:id="@+id/btnSupportFund"
-        android:backgroundTint="#F5487F"
-        android:background="@drawable/rectangle_border"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="Support Fund" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rectangle_border"
+        android:backgroundTint="#F5487F"
+        android:fontFamily="@font/lato_bold"
+        android:text="Support Fund"
+        android:textColor="@android:color/white"
+        android:textSize="19dp"
+        android:textStyle="bold" />
 </RelativeLayout>

@@ -17,6 +17,13 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/topFundsFragment"
@@ -48,5 +55,31 @@
         android:id="@+id/supportFundFragment"
         android:name="com.example.riss.view.SupportFundFragment"
         android:label="fragment_support_fund"
-        tools:layout="@layout/fragment_support_fund" />
+        tools:layout="@layout/fragment_support_fund" >
+        <action
+            android:id="@+id/action_supportFundFragment_to_createFundFragment"
+            app:destination="@id/createFundFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/createFundFragment"
+        android:name="com.example.riss.view.CreateFundFragment"
+        android:label="@string/create_fund"
+        tools:layout="@layout/fragment_create_fund" >
+        <action
+            android:id="@+id/action_createFundFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.riss.view.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

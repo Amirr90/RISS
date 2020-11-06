@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="126dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="50dp"
+        app:srcCompat="@drawable/aadhar_card" />
+
+    <TextView
+        android:layout_marginTop="28dp"
+        android:id="@+id/textView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:fontFamily="@font/lato"
+        android:gravity="center"
+        android:text="Your aadhaar card is not linked please link it to continue"
+        android:textColor="#424242"
+        android:textSize="20dp" />
+
+    <Button
+        android:layout_marginTop="50dp"
+        android:id="@+id/btnLinkAadhar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="53dp"
+        android:background="@drawable/rectangle_border"
+        android:backgroundTint="#F5487F"
+        android:fontFamily="@font/lato_bold"
+        android:text="Link"
+        android:textColor="@android:color/white"
+        android:textSize="19dp"
+        android:textStyle="bold" />
+
+</LinearLayout>

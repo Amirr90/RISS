@@ -108,4 +108,5 @@
     <string name="create_fund">Create Fund</string>
     <string name="select_image">Select Image</string>
     <string name="change_image">Change Image</string>
+    <string name="demo">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
 </resources>

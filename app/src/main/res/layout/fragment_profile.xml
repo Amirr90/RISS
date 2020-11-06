@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.google.firebase.firestore.DocumentSnapshot" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.ProfileFragment">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnUpdateProfile"
+            android:layout_alignParentTop="true">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                android:orientation="vertical"
+                android:paddingBottom="75dp">
+
+                <TextView
+                    android:id="@+id/textView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/edit"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Edit Profile"
+                    android:textColor="#F5487F"
+                    android:textSize="14dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:loadHomeProfileImage="@{user.getString(`image`)}"
+                    android:id="@+id/ivFund"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="22dp"
+                    android:src="@drawable/profile"
+                    app:civ_border_color="#F5487F"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="43dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Your name"
+                    android:textColor="#626262"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:weightSum="2">
+                   <EditText
+                       android:layout_marginRight="10dp"
+                       android:layout_weight="1"
+                       android:id="@+id/etFirstName"
+                       android:hint="first name"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginBottom="25dp"
+                       android:fontFamily="@font/lato_bold"
+                       android:inputType="textPersonName"
+                       android:text="@{user.getString(`username`)}"
+                       android:textColor="#626262"
+                       android:textColorHint="#80626262"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+                   <EditText
+                       android:layout_marginLeft="10dp"
+                       android:layout_weight="1"
+                       android:id="@+id/etLastName"
+                       android:hint="last name"
+                       android:layout_width="0dp"
+                       android:layout_height="wrap_content"
+                       android:layout_marginBottom="25dp"
+                       android:fontFamily="@font/lato_bold"
+                       android:inputType="textPersonName"
+                       android:text="@{user.getString(`username`)}"
+                       android:textColor="#626262"
+                       android:textColorHint="#80626262"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Mobile No."
+                    android:textColor="#626262"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:enabled="false"
+                    android:id="@+id/etMobile"
+                    android:hint="enter Mobile Number here"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:inputType="textPersonName"
+                    android:text="@{user.getString(`mobile`)}"
+                    android:textColor="#626262"
+                    android:textColorHint="#80626262"
+                    android:textSize="21dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Email ID"
+                    android:textColor="#626262"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:hint="enter EmailId here"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:inputType="textPersonName"
+                    android:text="@{user.getString(`email`)}"
+                    android:textColor="#626262"
+                    android:textColorHint="#80626262"
+                    android:textSize="21dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Address"
+                    android:textColor="#626262"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/etAddress"
+                    android:hint="enter Address here"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:inputType="textPersonName"
+                    android:text="@{user.getString(`address`)}"
+                    android:textColor="#626262"
+                    android:textColorHint="#80626262"
+                    android:textSize="21dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Occupation"
+                    android:textColor="#626262"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/etOccupation"
+                    android:hint="enter Occupation here"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:inputType="textPersonName"
+                    android:text="@{user.getString(`occupation`)}"
+                    android:textColor="#626262"
+                    android:textColorHint="#80626262"
+                    android:textSize="21dp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Education"
+                    android:textColor="#626262"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/etEducation"
+                    android:hint="enter Education here"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:inputType="textPersonName"
+                    android:text="@{user.getString(`education`)}"
+                    android:textColor="#626262"
+                    android:textColorHint="#80626262"
+                    android:textSize="21dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Aadhar Card No"
+                    android:textColor="#626262"
+                    android:textSize="15dp"
+                    android:textStyle="normal" />
+
+                <EditText
+                    android:id="@+id/etAddharNo"
+                    android:maxLength="12"
+                    android:hint="987456321132"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:inputType="textPersonName"
+                    android:text="@{user.getString(`aadharNo`)}"
+                    android:textColor="#626262"
+                    android:textColorHint="#80626262"
+                    android:textSize="21dp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato"
+                    android:text="Description"
+                    android:textColor="#626262"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:drawableRight="@drawable/edit"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Type Description Here"
+                    android:textColor="#626262"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="25dp"
+                    android:text="@{user.getString(`mobile`)}"
+                    android:textColor="#424242"
+                    android:textColorHint="#80626262" />
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnUpdateProfile"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rectangle_border"
+            android:backgroundTint="#F5487F"
+            android:fontFamily="@font/lato_bold"
+            android:text="Update Profile"
+            android:textColor="@android:color/white"
+            android:textSize="19dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</layout>

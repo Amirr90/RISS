@@ -7,10 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.NonNull;
+
 import com.example.riss.R;
+import com.example.riss.interfaces.IUserProfileInterface;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -27,10 +33,19 @@ import java.util.concurrent.TimeUnit;
 
 public class Utils {
 
+    public static final String REF_USER = "Users";
+
     public static AlertDialog alertDialog;
     public static final String USER_NAME = "username";
     public static final String TOKEN = "token";
     public static final String MOBILE = "mobile";
+    public static final String EMAIL = "email";
+    public static final String FIRST_NAME = "firstName";
+    public static final String LAST_NAME = "lastName";
+    public static final String ADDRESS = "address";
+    public static final String OCCUPATION = "occupation";
+    public static final String EDUCATION = "education";
+    public static final String AADHAR_NO = "aadharNo";
     public static final String UID = "uid";
     public static final String IMAGE = "image";
     public static final String IS_ACTIVE = "isActive";
@@ -215,27 +230,6 @@ public class Utils {
 
     public static void removeLike(String fundId, final Activity activity, ArrayList<String> likedIdsList) {
 
-       /* for (int a = 0; a < likedIdsList.size(); a++) {
-            if (likedIdsList.get(a).equalsIgnoreCase(getUid())) {
-                likedIdsList.remove(a);
-            }
-        }
-
-        Map<String, Object> map = new HashMap<>();
-        map.put(LIKED_IDS, likedIdsList);
-        map.put(LIKE, FieldValue.increment(-1));
-        getFirestoreReference().collection(FUNDS).document(fundId)
-                .update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(activity, "Liked", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(activity, R.string.try_again, Toast.LENGTH_SHORT).show();
-            }
-        });*/
 
         Map<String, Object> map = new HashMap<>();
         map.put(LIKED_IDS, FieldValue.arrayRemove(getUid()));
@@ -251,5 +245,29 @@ public class Utils {
     public static String getMobile() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         return user.getPhoneNumber();
+    }
+
+    public static void checkUserProfile(final IUserProfileInterface iUserProfileInterface) {
+        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (null != user)
+            firestore.collection(REF_USER).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (null != documentSnapshot) {
+                        if (!documentSnapshot.contains(USER_NAME) && documentSnapshot.getString(USER_NAME).trim().isEmpty()) {
+                            iUserProfileInterface.isProfileCompleted(false);
+                        } else iUserProfileInterface.isProfileCompleted(true);
+
+                        iUserProfileInterface.profileData(documentSnapshot);
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    iUserProfileInterface.onError(e.getLocalizedMessage());
+                }
+            });
     }
 }

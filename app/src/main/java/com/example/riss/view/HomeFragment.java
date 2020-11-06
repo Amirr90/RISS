@@ -20,14 +20,19 @@ import com.example.riss.MainActivity;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentHomeBinding;
 import com.example.riss.databinding.HomeViewBinding;
+import com.example.riss.interfaces.IUserProfileInterface;
 import com.example.riss.models.HomeModel;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.riss.AppUtils.Utils.checkUserProfile;
+import static com.example.riss.AppUtils.Utils.hideAlertDialog;
+import static com.example.riss.AppUtils.Utils.showAlertDialog;
 import static com.example.riss.AppUtils.Utils.showSnackBar;
 
 
@@ -50,7 +55,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         init();
+
         navController = Navigation.findNavController(view);
         homeBinding.btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,10 +65,44 @@ public class HomeFragment extends Fragment {
                 signOut();
             }
         });
+
+
+        homeBinding.profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_homeFragment_to_profileFragment);
+            }
+        });
     }
 
     private void init() {
-        setRecData();
+        showAlertDialog(requireActivity());
+        checkUserProfile(new IUserProfileInterface() {
+            @Override
+            public boolean isProfileVerified() {
+                return false;
+            }
+
+            @Override
+            public void profileData(DocumentSnapshot snapshot) {
+                homeBinding.setUser(snapshot);
+            }
+
+            @Override
+            public void isProfileCompleted(boolean isProfileCom) {
+                hideAlertDialog();
+                if (isProfileCom) {
+                    setRecData();
+                } else navController.navigate(R.id.action_homeFragment_to_profileFragment);
+            }
+
+            @Override
+            public void onError(String msg) {
+                hideAlertDialog();
+                Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 

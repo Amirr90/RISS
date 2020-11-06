@@ -1,5 +1,6 @@
 package com.example.riss;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.riss.databinding.ActivityHomeScreenBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeScreen extends AppCompatActivity {
@@ -24,6 +26,8 @@ public class HomeScreen extends AppCompatActivity {
 
     NavController navController;
 
+
+    DocumentSnapshot snapshotUser;
 
     public static HomeScreen getInstance() {
         return instance;
@@ -42,7 +46,6 @@ public class HomeScreen extends AppCompatActivity {
 
         navController = Navigation.findNavController(this, R.id.nav_controller_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController);
-
 
     }
 
@@ -67,10 +70,31 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (isLogin()) {
+            user = FirebaseAuth.getInstance().getCurrentUser();
+        } else {
+            startActivity(new Intent(HomeScreen.this, MainActivity.class));
+            finish();
+        }
+    }
+
+
+    private boolean isLogin() {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            return false;
+        } else return true;
     }
 
 
     public void navigateUp() {
         onSupportNavigateUp();
+    }
+
+    public void setUser(DocumentSnapshot user) {
+        snapshotUser = user;
+    }
+
+    public DocumentSnapshot getUser() {
+        return snapshotUser;
     }
 }

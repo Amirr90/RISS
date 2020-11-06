@@ -14,6 +14,8 @@ public class AppRepo {
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     public MutableLiveData<List<FundsModel>> topFundsMutableLiveData;
+    public MutableLiveData<List<FundsModel>> otherFundsMutableLiveData;
+    public MutableLiveData<FundsModel> FundsMutableLiveData;
 
 
     public LiveData<List<FundsModel>> getTopFundsData() {
@@ -22,6 +24,43 @@ public class AppRepo {
             loadTopFundsData();
         }
         return topFundsMutableLiveData;
+
+    }
+
+    public LiveData<FundsModel> getFundById(String fundId) {
+        if (FundsMutableLiveData == null) {
+            FundsMutableLiveData = new MutableLiveData<>();
+            loadFundsData();
+        }
+        return FundsMutableLiveData;
+
+    }
+
+    public LiveData<List<FundsModel>> getOtherFundByUserId(String userId) {
+        if (otherFundsMutableLiveData == null) {
+            otherFundsMutableLiveData = new MutableLiveData<>();
+            loadOtherFundsData();
+        }
+        return otherFundsMutableLiveData;
+
+    }
+
+    private void loadOtherFundsData() {
+        List<FundsModel> fundsModels = new ArrayList<>();
+        for (int a = 0; a < 5; a++) {
+            FundsModel fundsModel = new FundsModel();
+            fundsModel.setFundName("Fund name");
+            fundsModel.setFundImage("Fund name");
+            fundsModel.setCreatedBy("Fund name");
+            fundsModel.setLikes("Fund name");
+            fundsModel.setTotalInvested("Fund name");
+            fundsModel.setCurrentValue("Fund name");
+            fundsModels.add(fundsModel);
+        }
+        otherFundsMutableLiveData.setValue(fundsModels);
+    }
+
+    private void loadFundsData() {
 
     }
 

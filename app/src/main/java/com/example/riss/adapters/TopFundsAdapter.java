@@ -18,6 +18,7 @@ public class TopFundsAdapter extends ListAdapter<FundsModel, TopFundsAdapter.Fun
     public TopFundsAdapter(AdapterInterface adapterInterface) {
         super(FundsModel.itemCallback);
         this.adapterInterface = adapterInterface;
+
     }
 
     @NonNull
@@ -38,6 +39,8 @@ public class TopFundsAdapter extends ListAdapter<FundsModel, TopFundsAdapter.Fun
                 adapterInterface.onItemClicked(fundsModel);
             }
         });
+
+
     }
 
     public class FundsVH extends RecyclerView.ViewHolder {
