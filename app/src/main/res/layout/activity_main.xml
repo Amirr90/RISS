@@ -23,12 +23,13 @@
         android:textStyle="bold" />
 
     <TextView
+        android:fontFamily="@font/lato"
         android:layout_centerHorizontal="true"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView4"
-        android:text="Reeveating India By Social Service" />
+        android:text="Recreating India By Social Service" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:layout_marginTop="30dp"

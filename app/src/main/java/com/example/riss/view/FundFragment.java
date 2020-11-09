@@ -20,9 +20,12 @@ import com.example.riss.databinding.FragmentFundBinding;
 import com.example.riss.databinding.OtherFundsViewBinding;
 import com.example.riss.models.FundsModel;
 import com.example.riss.viewModel.AppViewModel;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.riss.AppUtils.Utils.KEY_FUND_ID;
 
 
 public class FundFragment extends Fragment implements AdapterInterface {
@@ -33,6 +36,8 @@ public class FundFragment extends Fragment implements AdapterInterface {
     OtherFundsAdapter otherFundsAdapter;
     AppViewModel appViewModel;
     List<FundsModel> fundsModels;
+
+    String fundID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,13 +53,14 @@ public class FundFragment extends Fragment implements AdapterInterface {
 
         navController = Navigation.findNavController(view);
 
+        fundID = getArguments().getString(KEY_FUND_ID);
+
         fundBinding.btnSupportFund.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_fundFragment_to_supportFundFragment);
             }
         });
-
 
 
         fundsModels = new ArrayList<>();
@@ -65,17 +71,12 @@ public class FundFragment extends Fragment implements AdapterInterface {
         fundBinding.otherFundRec.setAdapter(otherFundsAdapter);
         loadData();
 
-
-        String fundId = "";
-        appViewModel.getFundById(fundId).observe(getViewLifecycleOwner(), new Observer<FundsModel>() {
+        appViewModel.getFundById(fundID).observe(getViewLifecycleOwner(), new Observer<DocumentSnapshot>() {
             @Override
-            public void onChanged(FundsModel fundsModel) {
-
+            public void onChanged(DocumentSnapshot fundsModel) {
+                fundBinding.setFund(fundsModel);
             }
         });
-
-
-        String userId = "";
 
 
     }

@@ -15,6 +15,8 @@ import androidx.navigation.Navigation;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentSupportFundBinding;
 
+import static com.google.common.net.HttpHeaders.FROM;
+
 
 public class SupportFundFragment extends Fragment {
 
@@ -39,7 +41,9 @@ public class SupportFundFragment extends Fragment {
         supportFundBinding.btnCreateFund.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_supportFundFragment_to_createFundFragment);
+                Bundle bundle = new Bundle();
+                bundle.putString(FROM, "SupportFundFragment");
+                navController.navigate(R.id.action_supportFundFragment_to_createFundFragment, bundle);
             }
         });
     }

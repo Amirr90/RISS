@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.CreateFundFragment">
 
 
@@ -21,7 +22,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView34"
+                android:id="@+id/tvFundName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -32,7 +33,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/tvFundID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -49,10 +50,11 @@
                 android:fontFamily="@font/lato_bold"
                 android:text="Fund Name"
                 android:textColor="#424242"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etCreatedBy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
@@ -68,10 +70,11 @@
                 android:fontFamily="@font/lato_bold"
                 android:text="Mobile No."
                 android:textColor="#424242"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etMobileNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
@@ -87,10 +90,11 @@
                 android:fontFamily="@font/lato_bold"
                 android:text="Email ID"
                 android:textColor="#424242"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
@@ -106,10 +110,11 @@
                 android:fontFamily="@font/lato_bold"
                 android:text="Address"
                 android:textColor="#424242"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
@@ -123,9 +128,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lato_bold"
+                android:text="Select Plan"
+                android:textColor="#424242"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="25dp"
+                android:id="@+id/spinner"
+                android:layout_marginRight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_multiline="false"
+                app:ms_hint="Fund Plan"
+                app:ms_enableFloatingLabel="false"
+                app:ms_enableErrorLabel="false"
+                app:ms_floatingLabelText="floating label"
+                app:ms_baseColor="@color/colorAccent"
+                app:ms_highlightColor="@color/colorPrimary"
+                app:ms_thickness="0.35dp"
+                app:ms_arrowSize="16dp"
+                app:ms_alignLabels="false" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
                 android:text="Occupation"
                 android:textColor="#424242"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -144,7 +176,7 @@
                 android:fontFamily="@font/lato_bold"
                 android:text="Education"
                 android:textColor="#424242"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <EditText
@@ -163,10 +195,11 @@
                 android:fontFamily="@font/lato_bold"
                 android:text="Description"
                 android:textColor="#424242"
-                android:textSize="21dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"

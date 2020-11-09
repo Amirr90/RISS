@@ -17,10 +17,15 @@ import com.example.riss.AdapterInterface;
 import com.example.riss.R;
 import com.example.riss.adapters.TopFundsAdapter;
 import com.example.riss.databinding.FragmentTopFundsBinding;
+import com.example.riss.models.Fund;
 import com.example.riss.models.FundsModel;
 import com.example.riss.viewModel.AppViewModel;
 
 import java.util.List;
+
+import static com.example.riss.AppUtils.Utils.KEY_FUND_ID;
+import static com.example.riss.AppUtils.Utils.hideAlertDialog;
+import static com.example.riss.AppUtils.Utils.showAlertDialog;
 
 
 public class TopFundsFragment extends Fragment implements AdapterInterface {
@@ -51,10 +56,12 @@ public class TopFundsFragment extends Fragment implements AdapterInterface {
 
         topFundsBinding.topFundsRec.setAdapter(topFundsAdapter);
 
-        appViewModel.getTopFundsData().observe(requireActivity(), new Observer<List<FundsModel>>() {
+
+        appViewModel.getTopFundsData(requireActivity()).observe(getViewLifecycleOwner(), new Observer<List<Fund>>() {
             @Override
-            public void onChanged(List<FundsModel> fundsModels) {
-                topFundsAdapter.submitList(fundsModels);
+            public void onChanged(List<Fund> funds) {
+                topFundsAdapter.submitList(funds);
+
             }
         });
 
@@ -63,6 +70,14 @@ public class TopFundsFragment extends Fragment implements AdapterInterface {
 
     @Override
     public void onItemClicked(Object o) {
-        navController.navigate(R.id.action_topFundsFragment_to_fundFragment);
+        try {
+            Fund fund = (Fund) o;
+            Bundle bundle = new Bundle();
+            bundle.putString(KEY_FUND_ID, fund.getFundId());
+            navController.navigate(R.id.action_topFundsFragment_to_fundFragment, bundle);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -67,8 +67,8 @@ public class ProfileFragment extends Fragment {
         showAlertDialog(requireActivity());
         checkUserProfile(new IUserProfileInterface() {
             @Override
-            public boolean isProfileVerified() {
-                return false;
+            public void isProfileVerified(boolean b) {
+
             }
 
             @Override
@@ -79,7 +79,8 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void isProfileCompleted(boolean isProfileCom) {
-
+                if (!isProfileCom)
+                    Toast.makeText(requireActivity(), "Complete Your profile", Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -79,6 +79,10 @@ dependencies {
     //Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    implementation 'com.github.ganfra:material-spinner:2.0.0'
+
+
+
 
 
 }

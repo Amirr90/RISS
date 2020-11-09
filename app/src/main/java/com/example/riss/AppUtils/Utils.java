@@ -74,6 +74,15 @@ public class Utils {
     public static final String DONATION = "duration";
 
 
+    public static final String KEY_FUND_ID = "fundId";
+    public static final String FUND_STATISTICS = "FundStatistics";
+    public static final String TotalFundAmount = "TotalFundAmount";
+    public static final String TotalFundManger = "TotalFundManger";
+    public static final String isAadharVerified = "isAadharVerified";
+
+    public static final String VALUE = "value";
+
+
     public static void showAlertDialog(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
@@ -205,22 +214,7 @@ public class Utils {
         return firestore;
     }
 
-    public static void addLike(String fundId, final Activity activity, ArrayList<String> likedIdsList) {
-        /*Map<String, Object> map = new HashMap<>();
-        map.put(LIKED_IDS, likedIdsList);
-        map.put(LIKE, FieldValue.increment(1));
-        likedIdsList.add(getUid());
-        getFirestoreReference().collection(FUNDS).document(fundId)
-                .update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(activity, R.string.try_again, Toast.LENGTH_SHORT).show();
-            }
-        });*/
+    public static void addLike(String fundId) {
         Map<String, Object> map = new HashMap<>();
         map.put(LIKED_IDS, FieldValue.arrayUnion(getUid()));
         map.put(LIKE, FieldValue.increment(1));
@@ -228,9 +222,7 @@ public class Utils {
 
     }
 
-    public static void removeLike(String fundId, final Activity activity, ArrayList<String> likedIdsList) {
-
-
+    public static void removeLike(String fundId) {
         Map<String, Object> map = new HashMap<>();
         map.put(LIKED_IDS, FieldValue.arrayRemove(getUid()));
         map.put(LIKE, FieldValue.increment(-1));
@@ -248,17 +240,25 @@ public class Utils {
     }
 
     public static void checkUserProfile(final IUserProfileInterface iUserProfileInterface) {
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (null != user)
-            firestore.collection(REF_USER).document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        if (null != getUid())
+            getFirestoreReference().collection(REF_USER).document(getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if (null != documentSnapshot) {
-                        if (!documentSnapshot.contains(USER_NAME) && documentSnapshot.getString(USER_NAME).trim().isEmpty()) {
+                        if (documentSnapshot.contains(USER_NAME) && !documentSnapshot.getString(USER_NAME).trim().isEmpty()) {
+                            iUserProfileInterface.isProfileCompleted(true);
+                        } else {
+                            try {
+                                if (documentSnapshot.getBoolean("isAadharVerified")) {
+                                    iUserProfileInterface.isProfileVerified(true);
+
+                                } else iUserProfileInterface.isProfileVerified(false);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
                             iUserProfileInterface.isProfileCompleted(false);
-                        } else iUserProfileInterface.isProfileCompleted(true);
+                        }
 
                         iUserProfileInterface.profileData(documentSnapshot);
                     }

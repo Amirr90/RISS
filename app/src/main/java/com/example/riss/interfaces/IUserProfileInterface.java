@@ -3,7 +3,7 @@ package com.example.riss.interfaces;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 public interface IUserProfileInterface {
-    boolean isProfileVerified();
+    void isProfileVerified(boolean status);
 
     void profileData(DocumentSnapshot snapshot);
 

@@ -1,133 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="12dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginRight="12dp"
-    android:layout_marginBottom="10dp"
-    app:cardCornerRadius="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
 
-    <RelativeLayout
-        android:id="@+id/rlMainFundsView"
+        <variable
+            name="fund"
+            type="com.example.riss.models.Fund" />
+
+        <variable
+            name="adpterI"
+            type="com.example.riss.AdapterInterface" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:paddingLeft="11dp"
-        android:paddingTop="12dp"
-        android:paddingRight="15dp"
-        android:paddingBottom="11dp">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/fund_image"
-            android:layout_width="47dp"
-            android:layout_height="47dp"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/profile"
-            app:civ_border_color="#F5487F"
-            app:civ_border_width="2dp" />
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/fund_image"
-            android:fontFamily="@font/lato_bold"
-            android:text="Sundaram Mutual Fund"
-            android:textColor="#424242"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView6"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/fund_image"
-            android:fontFamily="@font/lato_bold"
-            android:text="Atul Verma"
-            android:textColor="#626262"
-            android:textSize="17dp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/imageView5"
-            android:layout_width="16dp"
-            android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            app:srcCompat="@drawable/heart" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageView5"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/lato"
-            android:text="2,500 Likes"
-            android:textColor="#626262"
-            android:textSize="11dp" />
-
-        <View
-            android:id="@+id/viewLine1"
+        <RelativeLayout
+            android:id="@+id/rlMainFundsView"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/fund_image"
-            android:layout_marginTop="8dp"
-            android:background="#80616161" />
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:onClick="@{()->adpterI.onItemClicked(fund)}"
+            android:paddingLeft="11dp"
+            android:paddingTop="12dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="11dp">
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewLine1"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/lato"
-            android:text="Total Invested"
-            android:textColor="#626262"
-            android:textSize="14dp" />
 
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView13"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/lato"
-            android:text="500"
-            android:textColor="#424242"
-            android:textSize="14dp" />
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/fund_image"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/profile"
+                app:civ_border_color="#F5487F"
+                app:civ_border_width="2dp" />
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/viewLine1"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/lato"
-            android:text="Current Value"
-            android:textColor="#626262"
-            android:textSize="14dp" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/fund_image"
+                android:fontFamily="@font/lato_bold"
+                android:text="@{fund.fundName}"
+                android:textColor="#424242"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView15"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="6dp"
-            android:layout_marginRight="40dp"
-            android:fontFamily="@font/lato"
-            android:text="9,500"
-            android:textColor="#5AC557"
-            android:textSize="14dp" />
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView6"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/fund_image"
+                android:fontFamily="@font/lato_bold"
+                android:text="@{fund.createdBy}"
+                android:textColor="#626262"
+                android:textSize="17dp"
+                android:textStyle="bold" />
 
-    </RelativeLayout>
-</androidx.cardview.widget.CardView>
+            <RadioButton
+                android:id="@+id/ivLike"
+                android:layout_width="32dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:button="@drawable/radio_like_layout"
+                android:checked="true"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ivLike"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/lato"
+                android:text="@{fund.like+` Likes`}"
+                android:textColor="#626262"
+                android:textSize="11dp" />
+
+            <View
+                android:id="@+id/viewLine1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/fund_image"
+                android:layout_marginTop="8dp"
+                android:background="#80616161" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewLine1"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/lato"
+                android:text="Total Invested"
+                android:textColor="#626262"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView13"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/lato"
+                android:text="500"
+                android:textColor="#424242"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewLine1"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/lato"
+                android:text="Current Value"
+                android:textColor="#626262"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView15"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="6dp"
+                android:layout_marginRight="40dp"
+                android:fontFamily="@font/lato"
+                android:text="9,500"
+                android:textColor="#5AC557"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
