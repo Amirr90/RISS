@@ -75,6 +75,7 @@ public class Utils {
     public static final String FUNDS_DURATION = "fund_duration";
     public static final String DONATION = "duration";
     public static final String QUERY_PUBLIC_REVIEW = "PublicReviews";
+    public static final String QUERY_DISTRIBUTOR_LIST = "DistributorsList";
 
 
     public static final String KEY_FUND_ID = "fundId";

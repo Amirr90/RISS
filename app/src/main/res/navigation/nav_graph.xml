@@ -38,6 +38,20 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_medicineDistributorListFragment"
+            app:destination="@id/medicineDistributorListFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_distributionHistoryFragment"
+            app:destination="@id/distributionHistoryFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/topFundsFragment"
@@ -122,4 +136,53 @@
         android:name="com.example.riss.view.WriteReviewFragment"
         android:label="Write Review"
         tools:layout="@layout/fragment_write_review" />
+    <fragment
+        android:id="@+id/medicineDistributorListFragment"
+        android:name="com.example.riss.view.MedicineDistributorListFragment"
+        android:label="Distributors List"
+        tools:layout="@layout/fragment_medicine_distributor_list" >
+        <action
+            android:id="@+id/action_medicineDistributorListFragment_to_distributorDetailFragment"
+            app:destination="@id/distributorDetailFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/distributorDetailFragment"
+        android:name="com.example.riss.view.DistributorDetailFragment"
+        android:label="Distributor Details"
+        tools:layout="@layout/fragment_distributor_detail" >
+        <action
+            android:id="@+id/action_distributorDetailFragment_to_medicineRequestStatusFragment"
+            app:destination="@id/medicineRequestStatusFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/medicineRequestStatusFragment"
+        android:name="com.example.riss.view.MedicineRequestStatusFragment"
+        android:label="Request Medicine"
+        tools:layout="@layout/fragment_medicine_request_status" />
+    <fragment
+        android:id="@+id/distributionHistoryFragment"
+        android:name="com.example.riss.view.DistributionHistoryFragment"
+        android:label="Distribution History"
+        tools:layout="@layout/fragment_distribution_history" >
+        <action
+            android:id="@+id/action_distributionHistoryFragment_to_addDistributionFragment"
+            app:destination="@id/addDistributionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/addDistributionFragment"
+        android:name="com.example.riss.view.AddDistributionFragment"
+        android:label="Add Distributor"
+        tools:layout="@layout/fragment_add_distribution" />
 </navigation>

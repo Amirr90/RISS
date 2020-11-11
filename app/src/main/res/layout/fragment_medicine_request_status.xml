@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:paddingLeft="53dp"
+    android:paddingRight="53dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MedicineRequestStatusFragment">
+
+
+    <LinearLayout
+        android:background="@drawable/round"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="183dp"
+        android:gravity="center"
+        android:layout_height="183dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="117dp"
+            android:layout_height="117dp"
+            android:src="@drawable/tick" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="42dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:gravity="center"
+            android:textSize="28dp"
+            android:fontFamily="@font/lato"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, Mr. Vishal Singh request for miracle drop is successfully done" />
+
+        <Button
+            android:layout_marginTop="38dp"
+            android:textSize="19dp"
+            android:textStyle="bold"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="14dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:backgroundTint="#F5487F"
+            android:background="@drawable/rectangle_border"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Ok" />
+    </LinearLayout>
+
+</LinearLayout>

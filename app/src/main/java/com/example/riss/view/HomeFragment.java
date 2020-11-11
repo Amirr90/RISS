@@ -220,6 +220,9 @@ public class HomeFragment extends Fragment {
                         case 0:
                             navController.navigate(R.id.action_homeFragment_to_topFundsFragment);
                             break;
+                        case 3:
+                            navController.navigate(R.id.action_homeFragment_to_medicineDistributorListFragment);
+                            break;
                         case 5:
                             Bundle bundle = new Bundle();
                             bundle.putString(FROM, "HomeFragment");
