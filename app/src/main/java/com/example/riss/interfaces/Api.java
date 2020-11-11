@@ -1,4 +1,6 @@
-package com.example.riss.AppUtils;
+package com.example.riss.interfaces;
+
+import com.example.riss.AppUtils.ResponseModel;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

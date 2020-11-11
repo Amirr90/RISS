@@ -1,5 +1,6 @@
 package com.example.riss.AppUtils;
 
+import com.example.riss.interfaces.Api;
 import com.example.riss.interfaces.ApiCallbackInterface;
 
 import retrofit2.Call;

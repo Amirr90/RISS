@@ -1,5 +1,7 @@
 package com.example.riss.AppUtils;
 
+import com.example.riss.interfaces.Api;
+
 public class ApiUtils {
 
     private ApiUtils() {
