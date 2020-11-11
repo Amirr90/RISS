@@ -22,7 +22,6 @@ public class HomeScreen extends AppCompatActivity {
     ActivityHomeScreenBinding binding;
     static HomeScreen instance;
     FirebaseUser user;
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     NavController navController;
 

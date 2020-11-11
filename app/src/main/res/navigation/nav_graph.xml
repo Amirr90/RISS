@@ -31,6 +31,13 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_publicReviewsFragment"
+            app:destination="@id/publicReviewsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/topFundsFragment"
@@ -97,4 +104,22 @@
         android:name="com.example.riss.view.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/publicReviewsFragment"
+        android:name="com.example.riss.view.PublicReviewsFragment"
+        android:label="Public Reviews"
+        tools:layout="@layout/fragment_public_reviews">
+        <action
+            android:id="@+id/action_publicReviewsFragment_to_writeReviewFragment"
+            app:destination="@id/writeReviewFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/writeReviewFragment"
+        android:name="com.example.riss.view.WriteReviewFragment"
+        android:label="Write Review"
+        tools:layout="@layout/fragment_write_review" />
 </navigation>

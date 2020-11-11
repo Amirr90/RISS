@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.PublicReviewsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingBottom="20dp"
+        android:id="@+id/publicReviewRec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnProceedToWriteReview"
+        android:layout_alignParentTop="true"
+        android:paddingTop="11dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/public_review_view" />
+
+    <Button
+        android:id="@+id/btnProceedToWriteReview"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rectangle_border"
+        android:backgroundTint="#F5487F"
+        android:fontFamily="@font/lato_bold"
+        android:text="Write Review"
+        android:textColor="@android:color/white"
+        android:textSize="19dp"
+        android:textStyle="bold" />
+</RelativeLayout>

@@ -20,10 +20,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -72,6 +74,7 @@ public class Utils {
     public static final String TIMESTAMP = "timestamp";
     public static final String FUNDS_DURATION = "fund_duration";
     public static final String DONATION = "duration";
+    public static final String QUERY_PUBLIC_REVIEW = "PublicReviews";
 
 
     public static final String KEY_FUND_ID = "fundId";
@@ -269,5 +272,12 @@ public class Utils {
                     iUserProfileInterface.onError(e.getLocalizedMessage());
                 }
             });
+    }
+
+    public static String getDateInDMY(long timestamp) {
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE, MMM d, ''yy");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis((int) timestamp);
+        return formatter.format(calendar.getTime());
     }
 }

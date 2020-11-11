@@ -53,7 +53,15 @@ public class HomeFragment extends Fragment {
     HomeScreenAdapter homeScreenAdapter;
     List<HomeModel> list = new ArrayList<>();
     NavController navController;
+    public static DocumentSnapshot user;
 
+    public static DocumentSnapshot getUser() {
+        return user;
+    }
+
+    public static void setUser(DocumentSnapshot user) {
+        HomeFragment.user = user;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,6 +105,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void profileData(DocumentSnapshot snapshot) {
                 homeBinding.setUser(snapshot);
+                setUser(snapshot);
+
             }
 
             @Override
@@ -163,8 +173,8 @@ public class HomeFragment extends Fragment {
         list.add(new HomeModel("Create a", "Funds", R.drawable.create_fund_image));
         list.add(new HomeModel("Search a", "Funds", R.drawable.search_fund_image));
         list.add(new HomeModel("My Favourite", "Funds", R.drawable.my_personal_fund_image));
-        //list.add(new HomeModel("Public", "Reviews", R.drawable.public_review_image));
-        list.add(new HomeModel("Write a", "Review", R.drawable.survey));
+        list.add(new HomeModel("Public", "Reviews", R.drawable.public_review_image));
+        //zlist.add(new HomeModel("Write a", "Review", R.drawable.survey));
         //list.add(new HomeModel("Donate for", "Miracle Drops", R.drawable.donate));
 
         homeScreenAdapter.notifyDataSetChanged();
@@ -215,8 +225,8 @@ public class HomeFragment extends Fragment {
                             bundle.putString(FROM, "HomeFragment");
                             navController.navigate(R.id.action_homeFragment_to_createFundFragment, bundle);
                             break;
-                        case 6:
-                            //navController.navigate(R.id.action_homeFragment_to_createFundFragment);
+                        case 8:
+                            navController.navigate(R.id.action_homeFragment_to_publicReviewsFragment);
                             break;
                         default:
                             showSnackBar("Coming Soon", v);
