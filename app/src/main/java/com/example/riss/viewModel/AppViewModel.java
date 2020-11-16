@@ -17,6 +17,14 @@ public class AppViewModel extends ViewModel {
 
     AppRepo repo = new AppRepo();
 
+    public LiveData<List<Fund>> getTopFundById(String text, Activity activity) {
+        return repo.getTopFundById(text, activity);
+    }
+
+    public LiveData<List<Fund>> getPersonalFundsData(Activity activity) {
+        return repo.getPersonalFundsData(activity);
+    }
+
     public LiveData<List<Fund>> getTopFundsData(Activity activity) {
         return repo.getTopFundsData(activity);
     }
@@ -24,6 +32,7 @@ public class AppViewModel extends ViewModel {
     public LiveData<DocumentSnapshot> getFundById(String fundId) {
         return repo.getFundById(fundId);
     }
+
     public LiveData<List<FundsModel>> getOtherFundByUserId(String userId) {
         return repo.getOtherFundByUserId(userId);
     }

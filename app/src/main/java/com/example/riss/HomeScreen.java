@@ -7,8 +7,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
@@ -25,8 +28,10 @@ public class HomeScreen extends AppCompatActivity {
 
     NavController navController;
 
-
     DocumentSnapshot snapshotUser;
+
+    MenuItem addImage;
+
 
     public static HomeScreen getInstance() {
         return instance;
@@ -46,6 +51,17 @@ public class HomeScreen extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_controller_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController);
 
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                if (null != addImage) {
+                    if (destination.getId() == R.id.distributionHistoryFragment)
+                        addImage.setVisible(true);
+                    else addImage.setVisible(false);
+                }
+            }
+        });
+
     }
 
 
@@ -58,11 +74,16 @@ public class HomeScreen extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        addImage = menu.findItem(R.id.action_distributionHistoryFragment_to_addDistributionFragment);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.addDistributionFragment) {
+
+        }
         return NavigationUI.onNavDestinationSelected(item, navController) || super.onOptionsItemSelected(item);
     }
 

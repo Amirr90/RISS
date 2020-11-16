@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ import static com.example.riss.AppUtils.Utils.showAlertDialog;
 
 public class MedicineDistributorListFragment extends Fragment implements AdapterInterface {
 
+    private static final String TAG = "MedicineDistributorList";
 
     FragmentMedicineDistributorListBinding distributorListBinding;
     NavController navController;
@@ -76,22 +78,20 @@ public class MedicineDistributorListFragment extends Fragment implements Adapter
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
 
-                if (null != charSequence) {
-                    loadDistributorsData(charSequence.toString());
-                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                hideKeyboard(requireActivity());
+                if (null != s.toString()) {
+                    loadDistributorsData(s.toString());
+                }
             }
         });
 
     }
 
     private void loadDistributorsData(String distributorName) {
-
-
         if (distributorName == null) {
             showAlertDialog(requireActivity());
             getFirestoreReference().collection(QUERY_DISTRIBUTOR_LIST)
@@ -100,16 +100,24 @@ public class MedicineDistributorListFragment extends Fragment implements Adapter
                     .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
+                    hideAlertDialog();
+                    try {
+                        if (null == queryDocumentSnapshots || queryDocumentSnapshots.isEmpty()) {
+                            return;
+                        }
+                        distributorsList.addAll(queryDocumentSnapshots.getDocuments());
+                        distributorAdapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-
+                    Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
                 }
             });
         } else {
-
             distributorListBinding.loadingLayout.getRoot().setVisibility(View.VISIBLE);
             getFirestoreReference().collection(QUERY_DISTRIBUTOR_LIST)
                     .limit(20)
@@ -120,11 +128,10 @@ public class MedicineDistributorListFragment extends Fragment implements Adapter
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             distributorListBinding.loadingLayout.getRoot().setVisibility(View.GONE);
                             try {
-                                if (null != queryDocumentSnapshots && queryDocumentSnapshots.isEmpty()) {
-                                    Toast.makeText(requireActivity(), "No Distributor Found, try again", Toast.LENGTH_SHORT).show();
+                                if (null == queryDocumentSnapshots || queryDocumentSnapshots.isEmpty()) {
                                     return;
                                 }
-                                distributorsList = queryDocumentSnapshots.getDocuments();
+                                distributorsList.addAll(queryDocumentSnapshots.getDocuments());
                                 distributorAdapter.notifyDataSetChanged();
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -143,9 +150,11 @@ public class MedicineDistributorListFragment extends Fragment implements Adapter
 
     @Override
     public void onItemClicked(Object o) {
+
         String distributorId = (String) o;
+        Log.d(TAG, "onItemClicked: ID "+distributorId);
         Bundle bundle = new Bundle();
-        bundle.putString(ID, distributorId);
+        bundle.putString("ID", distributorId);
         navController.navigate(R.id.action_medicineDistributorListFragment_to_distributorDetailFragment, bundle);
     }
 }

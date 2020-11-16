@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.AddDistributionFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
         android:layout_marginLeft="11dp"
+        android:layout_marginTop="11dp"
         android:layout_marginRight="11dp"
-        android:layout_marginTop="11dp">
+        app:cardCornerRadius="10dp">
 
         <RelativeLayout
-            android:layout_margin="13dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="13dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,12 +25,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:drawableTint="@color/colorPrimary"
-                    android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/user_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="43dp"
+                    android:drawableLeft="@drawable/user_small"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/colorPrimary"
                     android:fontFamily="@font/lato_bold"
                     android:text="Full Name"
                     android:textColor="#626262"
@@ -38,6 +38,7 @@
                     android:textStyle="bold" />
 
                 <EditText
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
@@ -48,32 +49,79 @@
                     android:textColorHint="#80626262" />
 
                 <TextView
-                    android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/smartphone_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/smartphone_small"
+                    android:drawablePadding="10dp"
                     android:fontFamily="@font/lato_bold"
                     android:text="Mobile No."
                     android:textColor="#626262"
                     android:textSize="17dp"
                     android:textStyle="bold" />
 
-                <EditText
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
+                    <EditText
+                        android:id="@+id/etMobileToDis"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="25dp"
+                        android:layout_weight="2"
+                        android:hint="Fund Name"
+                        android:inputType="phone"
+                        android:maxLength="10"
+                        android:textColor="#424242"
+                        android:textColorHint="#80626262" />
+
+                    <Button
+                        android:id="@+id/btnGetOTP"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="12dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:fontFamily="@font/lato_bold"
+                        android:text="GET  OTP"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/address_small"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="OTP"
+                    android:textColor="#626262"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/etOtp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:layout_marginBottom="25dp"
-                    android:hint="Fund Name"
-                    android:inputType="textPersonName"
+                    android:hint="OTP here"
+                    android:inputType="phone"
+                    android:maxLength="4"
                     android:textColor="#424242"
                     android:textColorHint="#80626262" />
 
                 <TextView
-                    android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/address_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/address_small"
+                    android:drawablePadding="10dp"
                     android:fontFamily="@font/lato_bold"
                     android:text="Address"
                     android:textColor="#626262"
@@ -81,7 +129,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-
+                    android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
@@ -90,24 +138,26 @@
                     android:inputType="textPersonName"
                     android:textColor="#424242"
                     android:textColorHint="#80626262" />
+                <Button
+                    android:id="@+id/btnDistributeMedicine"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/rectangle_border"
+                    android:backgroundTint="#F5487F"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Save"
+                    android:textColor="@android:color/white"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnSupportFund"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/rectangle_border"
-                android:backgroundTint="#F5487F"
-                android:fontFamily="@font/lato_bold"
-                android:text="Save"
-                android:textColor="@android:color/white"
-                android:textSize="19dp"
-                android:textStyle="bold" />
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-</FrameLayout>
+</ScrollView>

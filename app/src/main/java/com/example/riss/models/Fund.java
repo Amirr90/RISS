@@ -21,6 +21,16 @@ public class Fund {
     long timestamp;
     int totalInvested;
     int currentValue;
+    int initialValue;
+
+    public int getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(int initialValue) {
+        this.initialValue = initialValue;
+    }
+
     String fundId;
     boolean isActive;
     List<String> likedIds;

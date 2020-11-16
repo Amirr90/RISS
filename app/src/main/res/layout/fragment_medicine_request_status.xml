@@ -46,6 +46,7 @@
             android:text="Hello, Mr. Vishal Singh request for miracle drop is successfully done" />
 
         <Button
+            android:id="@+id/btnOk"
             android:layout_marginTop="38dp"
             android:textSize="19dp"
             android:textStyle="bold"

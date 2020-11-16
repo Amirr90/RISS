@@ -30,7 +30,8 @@
                 android:gravity="center"
                 android:text="Sundaram Mutual Fund"
                 android:textSize="21sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvFundID"
@@ -41,7 +42,8 @@
                 android:gravity="center"
                 android:text="#424242"
                 android:textSize="21dp"
-                android:textStyle="normal" />
+                android:textStyle="normal"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="match_parent"

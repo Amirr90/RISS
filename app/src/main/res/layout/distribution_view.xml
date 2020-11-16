@@ -1,110 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="snapshots"
+            type="com.google.firebase.firestore.DocumentSnapshot" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:elevation="10dp"
-        android:layout_marginRight="32dp"
-        android:layout_alignParentRight="true"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fund_image"
-        android:layout_width="31dp"
-        android:layout_height="31dp"
-        android:src="@drawable/profile"
-        app:civ_border_color="@color/colorPrimary"
-        app:civ_border_width="2dp" />
+        <variable
+            name="adapterInterface"
+            type="com.example.riss.AdapterInterface" />
+    </data>
 
+    <RelativeLayout
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginBottom="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginRight="1dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         app:cardCornerRadius="10dp">
-        <RelativeLayout
+
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ivIsUser"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="32dp"
+            android:elevation="10dp"
+            android:src="@drawable/profile"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="2dp" />
+
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="11dp"
-            android:paddingTop="13dp"
-            android:paddingRight="11dp"
-            android:paddingBottom="13dp">
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            app:cardCornerRadius="10dp">
 
-            <TextView
-                android:id="@+id/textView49"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/lato_bold"
-                android:text="Rima Singh"
-                android:textColor="#424242"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="4dp"
-                android:id="@+id/ll1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textView49"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-
-                <ImageView
-                    android:layout_width="9dp"
-                    android:layout_height="15dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/iphone" />
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:onClick="@{()->adapterInterface.onItemClicked(`helloo`)}"
+                android:paddingLeft="11dp"
+                android:paddingTop="13dp"
+                android:paddingRight="11dp"
+                android:paddingBottom="13dp">
 
                 <TextView
-
+                    android:id="@+id/textView49"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@{snapshots.getString(`name`)}"
+                    android:textColor="#424242"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView49"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="9dp"
+                        android:layout_height="15dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/iphone" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato"
+                        android:text="@{snapshots.getString(`mobile`)}"
+                        android:textColor="#626262"
+                        android:textSize="14dp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll1"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/house" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato"
+                        android:text="@{snapshots.getString(`address`)}"
+                        android:textColor="#626262"
+                        android:textSize="14dp"
+                        android:textStyle="normal" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/timestamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll2"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="5dp"
                     android:fontFamily="@font/lato"
-                    android:text="+91- 9873432234"
                     android:textColor="#626262"
                     android:textSize="14dp"
                     android:textStyle="normal" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll1"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal">
-
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/house" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato"
-                    android:text="28-B, Lehraj Market, Sector 2, VikasNagar, Lucknow, Uttar Pradesh 226022"
-                    android:textColor="#626262"
-                    android:textSize="14dp"
-                    android:textStyle="normal" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>
 
 
 

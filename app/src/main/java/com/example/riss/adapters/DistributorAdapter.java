@@ -30,6 +30,7 @@ public class DistributorAdapter extends RecyclerView.Adapter<DistributorAdapter.
     public DistributorAdapter.DistributorVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         DistributorsViewBinding distributorsViewBinding = DistributorsViewBinding.inflate(inflater, parent, false);
+        distributorsViewBinding.setAdapterInterface(adapterInterface);
         return new DistributorVH(distributorsViewBinding);
     }
 

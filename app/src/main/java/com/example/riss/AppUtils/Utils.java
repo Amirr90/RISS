@@ -76,6 +76,8 @@ public class Utils {
     public static final String DONATION = "duration";
     public static final String QUERY_PUBLIC_REVIEW = "PublicReviews";
     public static final String QUERY_DISTRIBUTOR_LIST = "DistributorsList";
+    public static final String MedicineDistribute = "MedicineDistribute";
+    public static final String uid = "uid";
 
 
     public static final String KEY_FUND_ID = "fundId";
@@ -83,6 +85,7 @@ public class Utils {
     public static final String TotalFundAmount = "TotalFundAmount";
     public static final String TotalFundManger = "TotalFundManger";
     public static final String isAadharVerified = "isAadharVerified";
+    public static final String fundName = "fundName";
 
     public static final String VALUE = "value";
 
@@ -117,6 +120,34 @@ public class Utils {
 
     public static String getLastSeen(String time) {
         try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+            Date past = format.parse(time);
+            Date now = new Date();
+            long seconds = TimeUnit.MILLISECONDS.toSeconds(now.getTime() - past.getTime());
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - past.getTime());
+            long hours = TimeUnit.MILLISECONDS.toHours(now.getTime() - past.getTime());
+            long days = TimeUnit.MILLISECONDS.toDays(now.getTime() - past.getTime());
+
+
+            if (seconds < 60) {
+                return seconds + " seconds ago";
+            } else if (minutes < 60) {
+                return minutes + " minutes ago";
+            } else if (hours < 24) {
+                return hours + " hours ago";
+            } else {
+                return days + " days ago";
+            }
+        } catch (Exception j) {
+            j.printStackTrace();
+
+            return j.getLocalizedMessage();
+        }
+    }
+
+    public static String getLastSeen(long timestamp) {
+        try {
+            String time = String.valueOf(timestamp);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
             Date past = format.parse(time);
             Date now = new Date();

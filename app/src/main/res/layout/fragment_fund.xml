@@ -17,235 +17,257 @@
         tools:context=".view.FundFragment">
 
 
-        <LinearLayout
+       <androidx.core.widget.NestedScrollView
+           android:layout_alignParentTop="true"
+           android:layout_above="@+id/btnSupportFund"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <LinearLayout
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btnSupportFund"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginRight="12dp"
-            android:elevation="3dp"
-            android:orientation="vertical"
-            android:paddingBottom="26dp">
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_above="@+id/btnSupportFund"
+               android:layout_alignParentTop="true"
+               android:layout_marginLeft="12dp"
+               android:layout_marginTop="14dp"
+               android:layout_marginRight="12dp"
+               android:elevation="3dp"
+               android:orientation="vertical"
+               android:paddingBottom="26dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp">
-
-
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/ivFund"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentStart="true"
-                    android:src="@drawable/profile"
-                    app:civ_border_color="#F5487F"
-                    app:civ_border_width="2dp" />
-
-                <LinearLayout
-                    android:id="@+id/rlNamingLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@id/ivFund"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView17"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="@{fund.getString(`fundName`)}"
-                        android:textColor="#424242"
-                        android:textSize="21dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato_bold"
-                        android:text="@{fund.getString(`createdBy`)}"
-                        android:textColor="#626262"
-                        android:textSize="19dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lato_italic"
-                        android:text="@{fund.getString(`fundId`)}"
-                        android:textColor="#626262"
-                        android:textSize="19dp" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlNamingLayout"
-                    android:layout_marginTop="21dp"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="Current Value"
-                    android:textColor="#626262"
-                    android:textSize="19dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView20"
-                    android:layout_marginTop="11dp"
-                    android:fontFamily="@font/lato"
-                    android:text="Expiry Date 12 Oct, 2020"
-                    android:textColor="#626262"
-                    android:textSize="14dp" />
-
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/rlNamingLayout"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="21dp"
-                    android:layout_marginRight="18dp"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="500- 9,500"
-                    android:textColor="#5AC557"
-                    android:textSize="19dp"
-                    android:textStyle="bold" />
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:padding="12dp">
 
 
-            </RelativeLayout>
+                       <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                           android:id="@+id/ivFund"
+                           android:layout_width="70dp"
+                           android:layout_height="70dp"
+                           android:layout_alignParentStart="true"
+                           android:src="@drawable/profile"
+                           app:civ_border_color="#F5487F"
+                           app:civ_border_width="2dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="12dp"
-                android:background="#707070" />
+                       <LinearLayout
+                           android:id="@+id/rlNamingLayout"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="12dp"
+                           android:layout_toRightOf="@id/ivFund"
+                           android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp">
+                           <TextView
+                               android:id="@+id/textView17"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:fontFamily="@font/lato_bold"
+                               android:text="@{fund.getString(`fundName`)}"
+                               android:textColor="#424242"
+                               android:textSize="21dp"
+                               android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/ivHeartFilled"
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginTop="12dp"
-                    android:src="@drawable/heart_filled" />
+                           <TextView
+                               android:id="@+id/textView18"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:fontFamily="@font/lato_bold"
+                               android:text="@{fund.getString(`createdBy`)}"
+                               android:textColor="#626262"
+                               android:textSize="19dp"
+                               android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_toRightOf="@+id/ivHeartFilled"
-                    android:fontFamily="@font/lato"
-                    android:text="Total Likes"
-                    android:textColor="#4F62C1"
-                    android:textSize="19dp" />
+                           <TextView
+                               android:id="@+id/textView19"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:fontFamily="@font/lato_italic"
+                               android:text="@{fund.getString(`fundId`)}"
+                               android:textColor="#626262"
+                               android:textSize="19dp" />
+                       </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textView23"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView24"
-                    android:layout_marginLeft="53dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginBottom="9dp"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="3,987"
-                    android:textColor="#424242"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                       <TextView
+                           android:id="@+id/textView20"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/rlNamingLayout"
+                           android:layout_marginTop="21dp"
+                           android:fontFamily="@font/lato_bold"
+                           android:text="Current Value"
+                           android:textColor="#626262"
+                           android:textSize="19dp"
+                           android:textStyle="bold" />
 
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:background="#707070" />
+                       <TextView
+                           android:id="@+id/textView21"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@id/textView20"
+                           android:layout_marginTop="11dp"
+                           android:fontFamily="@font/lato"
+                           android:text="Expiry Date 12 Oct, 2020"
+                           android:textColor="#626262"
+                           android:textSize="14dp" />
 
-                <ImageView
-                    android:id="@+id/ivMembers"
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="7dp"
-                    android:layout_toLeftOf="@+id/textView25"
-                    android:src="@drawable/member" />
+                       <TextView
+                           android:id="@+id/textView22"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/rlNamingLayout"
+                           android:layout_alignParentRight="true"
+                           android:layout_marginTop="21dp"
+                           android:layout_marginRight="18dp"
+                           android:fontFamily="@font/lato_bold"
+                           android:textColor="#5AC557"
+                           android:textSize="19dp"
+                           android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textView25"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="9dp"
 
-                    android:layout_marginRight="32dp"
-                    android:fontFamily="@font/lato"
-                    android:text="Members"
-                    android:textColor="#4F62C1"
-                    android:textSize="19dp" />
+                   </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView25"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="9dp"
+                   <View
+                       android:layout_width="match_parent"
+                       android:layout_height="0.5dp"
+                       android:layout_marginTop="12dp"
+                       android:background="#707070" />
 
-                    android:layout_marginRight="46dp"
-                    android:layout_marginBottom="9dp"
-                    android:fontFamily="@font/lato_bold"
-                    android:text="1987"
-                    android:textColor="#424242"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                   <RelativeLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="80dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#707070" />
+                       <ImageView
+                           android:id="@+id/ivHeartFilled"
+                           android:layout_width="17dp"
+                           android:layout_height="17dp"
+                           android:layout_marginLeft="23dp"
+                           android:layout_marginTop="12dp"
+                           android:src="@drawable/heart_filled" />
 
-            <TextView
-                android:id="@+id/textView27"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="23dp"
-                android:fontFamily="@font/lato_bold"
-                android:text="Description"
-                android:textColor="#626262"
-                android:textSize="19dp"
-                android:textStyle="bold" />
+                       <TextView
+                           android:id="@+id/textView24"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="7dp"
+                           android:layout_marginTop="9dp"
+                           android:layout_toRightOf="@+id/ivHeartFilled"
+                           android:fontFamily="@font/lato"
+                           android:text="Total Likes"
+                           android:textColor="#4F62C1"
+                           android:textSize="19dp" />
 
-            <TextView
-                android:id="@+id/textView28"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:fontFamily="@font/lato"
-                android:text="@{fund.getString(`description`)}"
-                android:textColor="#999999"
-                android:textSize="14dp" />
+                       <TextView
+                           android:id="@+id/tvLikes"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@id/textView24"
+                           android:layout_marginLeft="53dp"
+                           android:layout_marginTop="9dp"
+                           android:layout_marginBottom="9dp"
+                           android:fontFamily="@font/lato_bold"
+                           android:text="3,987"
+                           android:textColor="#424242"
+                           android:textSize="20dp"
+                           android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/otherFundRec"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="13dp"
-                tools:itemCount="3"
-                tools:listitem="@layout/other_funds_view" />
-        </LinearLayout>
+                       <View
+                           android:layout_width="0.5dp"
+                           android:layout_height="wrap_content"
+                           android:layout_centerHorizontal="true"
+                           android:background="#707070" />
+
+                       <ImageView
+                           android:id="@+id/ivMembers"
+                           android:layout_width="17dp"
+                           android:layout_height="17dp"
+                           android:layout_marginTop="12dp"
+                           android:layout_marginRight="7dp"
+                           android:layout_toLeftOf="@+id/textView25"
+                           android:src="@drawable/member" />
+
+                       <TextView
+                           android:id="@+id/textView25"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentRight="true"
+                           android:layout_marginTop="9dp"
+
+                           android:layout_marginRight="32dp"
+                           android:fontFamily="@font/lato"
+                           android:text="Members"
+                           android:textColor="#4F62C1"
+                           android:textSize="19dp" />
+
+                       <TextView
+                           android:id="@+id/tvMember"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@id/textView25"
+                           android:layout_alignParentRight="true"
+                           android:layout_marginTop="9dp"
+
+                           android:layout_marginRight="46dp"
+                           android:layout_marginBottom="9dp"
+                           android:fontFamily="@font/lato_bold"
+                           android:text="1987"
+                           android:textColor="#424242"
+                           android:textSize="20dp"
+                           android:textStyle="bold" />
+                   </RelativeLayout>
+
+                   <View
+                       android:layout_width="match_parent"
+                       android:layout_height="0.5dp"
+                       android:background="#707070" />
+
+                   <TextView
+                       android:id="@+id/textView27"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="23dp"
+                       android:fontFamily="@font/lato_bold"
+                       android:text="Description"
+                       android:textColor="#626262"
+                       android:textSize="19dp"
+                       android:textStyle="bold" />
+
+                   <TextView
+                       android:id="@+id/textView28"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="9dp"
+                       android:fontFamily="@font/lato"
+                       android:text="@{fund.getString(`description`)}"
+                       android:textColor="#999999"
+                       android:textSize="14dp" />
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="23dp"
+                       android:fontFamily="@font/lato_bold"
+                       android:text="Other Funds"
+                       android:textColor="#626262"
+                       android:textSize="19dp"
+                       android:textStyle="bold" />
+               </LinearLayout>
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:nestedScrollingEnabled="false"
+                   android:id="@+id/otherFundRec"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_marginTop="13dp"
+                   tools:itemCount="3"
+                   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                   tools:listitem="@layout/other_funds_view" />
+           </LinearLayout>
+       </androidx.core.widget.NestedScrollView>
 
         <Button
             android:id="@+id/btnSupportFund"

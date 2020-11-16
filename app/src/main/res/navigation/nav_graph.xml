@@ -52,6 +52,20 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFundFragment"
+            app:destination="@id/searchFundFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_personalFundsFragment2"
+            app:destination="@id/personalFundsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/topFundsFragment"
@@ -160,7 +174,8 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/medicineRequestStatusFragment"
@@ -178,11 +193,22 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/addDistributionFragment"
         android:name="com.example.riss.view.AddDistributionFragment"
         android:label="Add Distributor"
         tools:layout="@layout/fragment_add_distribution" />
+    <fragment
+        android:id="@+id/searchFundFragment"
+        android:name="com.example.riss.view.SearchFundFragment"
+        android:label="Search Fund"
+        tools:layout="@layout/fragment_search_fund" />
+    <fragment
+        android:id="@+id/personalFundsFragment"
+        android:name="com.example.riss.view.PersonalFundsFragment"
+        android:label="My Personal Funds"
+        tools:layout="@layout/fragment_personal_funds" />
 </navigation>

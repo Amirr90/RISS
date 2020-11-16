@@ -63,14 +63,14 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/etQuantity"
         android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_border"
         android:gravity="center_vertical"
         android:hint="Enter quantity here"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
@@ -90,8 +90,8 @@
             android:layout_height="50dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:drawableTint="#F5487F"
             android:background="@drawable/rectangle_border"
+            android:drawableTint="#F5487F"
             android:fontFamily="@font/lato_bold"
             android:text="Cancel"
             android:textColor="#F5487F"

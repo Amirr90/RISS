@@ -110,8 +110,8 @@ public class CreateFundFragment extends Fragment {
         });
 
         setSpinnerPlan();
-        createFundBinding.tvFundName.setVisibility(FROM.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
-        createFundBinding.tvFundID.setVisibility(FROM.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
+        createFundBinding.tvFundName.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
+        createFundBinding.tvFundID.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
     }
 
     private void setSpinnerPlan() {

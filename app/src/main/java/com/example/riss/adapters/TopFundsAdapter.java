@@ -20,6 +20,8 @@ import java.util.List;
 import kotlin.jvm.functions.FunctionN;
 
 import static com.example.riss.AppUtils.Utils.addLike;
+import static com.example.riss.AppUtils.Utils.getCountInRomanFormat;
+import static com.example.riss.AppUtils.Utils.getCurrencyFormat;
 import static com.example.riss.AppUtils.Utils.getUid;
 import static com.example.riss.AppUtils.Utils.removeLike;
 
@@ -50,6 +52,12 @@ public class TopFundsAdapter extends ListAdapter<Fund, TopFundsAdapter.FundsVH> 
 
             holder.topFundsViewBinding.setFund(fund);
             holder.topFundsViewBinding.ivLike.setChecked(isContain);
+
+            String initialValue = getCurrencyFormat(fund.getInitialValue());
+            String totalValue = getCurrencyFormat(fund.getTotalInvested());
+            holder.topFundsViewBinding.textView14.setText(initialValue);
+            holder.topFundsViewBinding.textView16.setText(totalValue);
+
         } catch (Exception e) {
             e.printStackTrace();
             Log.d(TAG, "onBindViewHolder: " + e.getLocalizedMessage());

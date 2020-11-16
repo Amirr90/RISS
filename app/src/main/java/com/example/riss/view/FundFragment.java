@@ -20,12 +20,24 @@ import com.example.riss.databinding.FragmentFundBinding;
 import com.example.riss.databinding.OtherFundsViewBinding;
 import com.example.riss.models.FundsModel;
 import com.example.riss.viewModel.AppViewModel;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.riss.AppUtils.Utils.FUNDS;
 import static com.example.riss.AppUtils.Utils.KEY_FUND_ID;
+import static com.example.riss.AppUtils.Utils.LIKED_IDS;
+import static com.example.riss.AppUtils.Utils.TIMESTAMP;
+import static com.example.riss.AppUtils.Utils.getCountInRomanFormat;
+import static com.example.riss.AppUtils.Utils.getCurrencyFormat;
+import static com.example.riss.AppUtils.Utils.getFirestoreReference;
+import static com.example.riss.AppUtils.Utils.getRandomNumber;
+import static com.example.riss.AppUtils.Utils.getUid;
+import static com.example.riss.AppUtils.Utils.uid;
 
 
 public class FundFragment extends Fragment implements AdapterInterface {
@@ -35,7 +47,7 @@ public class FundFragment extends Fragment implements AdapterInterface {
     NavController navController;
     OtherFundsAdapter otherFundsAdapter;
     AppViewModel appViewModel;
-    List<FundsModel> fundsModels;
+    List<DocumentSnapshot> fundsModels;
 
     String fundID;
 
@@ -75,6 +87,18 @@ public class FundFragment extends Fragment implements AdapterInterface {
             @Override
             public void onChanged(DocumentSnapshot fundsModel) {
                 fundBinding.setFund(fundsModel);
+
+                try {
+
+                    String initialValue = getCurrencyFormat(fundsModel.getLong("initialValue"));
+                    String totalValue = getCurrencyFormat(fundsModel.getLong("totalInvested"));
+                    fundBinding.textView22.setText(initialValue + "-" + totalValue);
+                    List<String> list = (List<String>) fundsModel.get(LIKED_IDS);
+
+                    fundBinding.tvLikes.setText(getCountInRomanFormat(list.size()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -83,17 +107,21 @@ public class FundFragment extends Fragment implements AdapterInterface {
 
     private void loadData() {
 
-        for (int a = 0; a < 5; a++) {
-            FundsModel fundsModel = new FundsModel();
-            fundsModel.setFundName("Fund name");
-            fundsModel.setFundImage("Fund name");
-            fundsModel.setCreatedBy("Fund name");
-            fundsModel.setLikes("Fund name");
-            fundsModel.setTotalInvested("Fund name");
-            fundsModel.setCurrentValue("Fund name");
-            fundsModels.add(fundsModel);
-        }
-        otherFundsAdapter.notifyDataSetChanged();
+        getFirestoreReference().collection(FUNDS).whereEqualTo(uid, getUid())
+                .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
+                .limit(3)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (null != queryDocumentSnapshots) {
+                            fundsModels.clear();
+                            fundsModels.addAll(queryDocumentSnapshots.getDocuments());
+                            otherFundsAdapter.notifyDataSetChanged();
+
+                        }
+                    }
+                });
     }
 
     @Override
@@ -101,10 +129,10 @@ public class FundFragment extends Fragment implements AdapterInterface {
 
     }
 
-    private class OtherFundsAdapter extends RecyclerView.Adapter<OtherFundsAdapter.FundsVH> {
-        List<FundsModel> fundsModelList;
+    public class OtherFundsAdapter extends RecyclerView.Adapter<OtherFundsAdapter.FundsVH> {
+        List<DocumentSnapshot> fundsModelList;
 
-        public OtherFundsAdapter(List<FundsModel> fundsModelList) {
+        public OtherFundsAdapter(List<DocumentSnapshot> fundsModelList) {
             this.fundsModelList = fundsModelList;
         }
 
@@ -131,6 +159,7 @@ public class FundFragment extends Fragment implements AdapterInterface {
 
             public FundsVH(OtherFundsViewBinding otherFundsViewBinding) {
                 super(otherFundsViewBinding.getRoot());
+                this.otherFundsViewBinding = otherFundsViewBinding;
             }
         }
     }
