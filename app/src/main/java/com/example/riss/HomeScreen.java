@@ -2,10 +2,12 @@ package com.example.riss;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,13 +17,23 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.riss.PaymentUtils.PaymentCallback;
+import com.example.riss.PaymentUtils.StartPayment;
 import com.example.riss.databinding.ActivityHomeScreenBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.razorpay.PaymentData;
+import com.razorpay.PaymentResultWithDataListener;
 
-public class HomeScreen extends AppCompatActivity {
+import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_FAILED;
+import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_SUCCESS;
+import static com.example.riss.view.SupportFundFragment.payment;
+
+public class HomeScreen extends AppCompatActivity implements PaymentResultWithDataListener {
+    private static final String TAG = "HomeScreen";
+
     ActivityHomeScreenBinding binding;
     static HomeScreen instance;
     FirebaseUser user;
@@ -45,6 +57,7 @@ public class HomeScreen extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         instance = this;
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -116,5 +129,25 @@ public class HomeScreen extends AppCompatActivity {
 
     public DocumentSnapshot getUser() {
         return snapshotUser;
+    }
+
+    @Override
+    public void onPaymentSuccess(String s, PaymentData paymentData) {
+        Log.d(TAG, "onPaymentSuccess: Status " + s);
+        Log.d(TAG, "onPaymentSuccess: " + paymentData.getSignature());
+      try {
+          payment.updatePaymentStatus(paymentData.getPaymentId(), PAYMENT_STATUS_SUCCESS);
+      } catch (Exception e) {
+          e.printStackTrace();
+          Log.d(TAG, "onPaymentSuccess: "+e.getLocalizedMessage());
+      }
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s, PaymentData paymentData) {
+        Log.d(TAG, "onPaymentError: " + paymentData.getData());
+        payment.updatePaymentStatus(paymentData.getPaymentId(), PAYMENT_STATUS_FAILED);
+
     }
 }

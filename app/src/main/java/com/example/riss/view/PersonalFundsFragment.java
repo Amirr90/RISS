@@ -15,12 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.riss.AdapterInterface;
+import com.example.riss.R;
 import com.example.riss.adapters.TopFundsAdapter;
 import com.example.riss.databinding.FragmentPersonalFundsBinding;
 import com.example.riss.models.Fund;
 import com.example.riss.viewModel.AppViewModel;
 
 import java.util.List;
+
+import static com.example.riss.AppUtils.Utils.KEY_FUND_ID;
 
 public class PersonalFundsFragment extends Fragment implements AdapterInterface {
 
@@ -65,6 +68,14 @@ public class PersonalFundsFragment extends Fragment implements AdapterInterface 
 
     @Override
     public void onItemClicked(Object o) {
+        try {
+            Fund fund = (Fund) o;
+            Bundle bundle = new Bundle();
+            bundle.putString(KEY_FUND_ID, fund.getFundId());
+            navController.navigate(R.id.action_personalFundsFragment_to_fundFragment, bundle);
+        } catch (Exception e) {
+            e.printStackTrace();
 
+        }
     }
 }

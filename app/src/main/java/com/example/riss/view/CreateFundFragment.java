@@ -60,6 +60,8 @@ public class CreateFundFragment extends Fragment {
 
     Fund fund = new Fund();
 
+    String fundID;
+
     String createdBy, mobileNo, email, address, description, from;
 
     @Override
@@ -76,6 +78,7 @@ public class CreateFundFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         from = getArguments().getString(FROM);
+
 
         createFundBinding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,8 +113,8 @@ public class CreateFundFragment extends Fragment {
         });
 
         setSpinnerPlan();
-        createFundBinding.tvFundName.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
-        createFundBinding.tvFundID.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
+      /*  createFundBinding.tvFundName.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
+        createFundBinding.tvFundID.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);*/
     }
 
     private void setSpinnerPlan() {
@@ -184,6 +187,12 @@ public class CreateFundFragment extends Fragment {
             fund.setCurrentValue(0);
             fund.setTimestamp(System.currentTimeMillis());
             fund.setLikedIds(likeList);
+
+            if (from.equalsIgnoreCase("SupportFundFragment")) {
+                fundID = getArguments().getString("id");
+                fund.setRefId(fundID);
+            }
+
             return true;
         }
     }

@@ -6,9 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import com.example.riss.R;
 import com.example.riss.adapters.DistributorDetailsAdapter;
 import com.example.riss.databinding.FragmentDistributionHistoryBinding;
 import com.example.riss.databinding.FragmentDistributorDetailBinding;
+import com.example.riss.viewModel.AppViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,6 +46,7 @@ public class DistributionHistoryFragment extends Fragment implements AdapterInte
     NavController navController;
     DistributorDetailsAdapter detailsAdapter;
     List<DocumentSnapshot> snapshots;
+    AppViewModel appViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,39 +61,91 @@ public class DistributionHistoryFragment extends Fragment implements AdapterInte
 
         navController = Navigation.findNavController(view);
 
+
+        appViewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
+
         snapshots = new ArrayList<>();
 
         detailsAdapter = new DistributorDetailsAdapter(this, snapshots);
 
         distributionHistoryBinding.recDistributionList.setAdapter(detailsAdapter);
 
-        loadData();
+        distributionHistoryBinding.editTextTextSearchMember.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (null != s.toString()) {
+                    loadData(s.toString());
+                }
+            }
+        });
+
+
+        loadData(null);
 
     }
 
-    private void loadData() {
-        getFirestoreReference().collection(MedicineDistribute)
-                .whereEqualTo(uid, getUid())
-                .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
-                .limit(30)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+    private void loadData(String name) {
+        if (null == name) {
+            getFirestoreReference().collection(MedicineDistribute)
+                    .whereEqualTo(uid, getUid())
+                    .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
+                    .limit(30)
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
 
-                        if (null != queryDocumentSnapshots && !queryDocumentSnapshots.isEmpty()) {
-                            snapshots.clear();
-                            snapshots.addAll(queryDocumentSnapshots.getDocuments());
-                            detailsAdapter.notifyDataSetChanged();
-                        } else
-                            navController.navigate(R.id.action_distributionHistoryFragment_to_addDistributionFragment);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
+                            if (null != queryDocumentSnapshots && !queryDocumentSnapshots.isEmpty()) {
+                                snapshots.clear();
+                                snapshots.addAll(queryDocumentSnapshots.getDocuments());
+                                detailsAdapter.notifyDataSetChanged();
+                            } else
+                                navController.navigate(R.id.action_distributionHistoryFragment_to_addDistributionFragment);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
 
-            }
-        });
+                }
+            });
+        }
+        else {
+            getFirestoreReference().collection(MedicineDistribute)
+                    //.whereEqualTo(uid, getUid())
+                    .orderBy("name")
+                    .startAt(name)
+                    .endAt(name + "\uf8ff")
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            if (null != queryDocumentSnapshots && !queryDocumentSnapshots.isEmpty()) {
+                                snapshots.clear();
+                                snapshots.addAll(queryDocumentSnapshots.getDocuments());
+                                detailsAdapter.notifyDataSetChanged();
+                            } else
+                                navController.navigate(R.id.action_distributionHistoryFragment_to_addDistributionFragment);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
+
+
     }
 
 

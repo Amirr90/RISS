@@ -55,7 +55,9 @@ public class AppRepo {
     private void loadTopFundByIdData(String text, final Activity activity) {
 
         getFirestoreReference().collection(FUNDS)
-                .whereArrayContains(fundName, text)
+                .orderBy("fundName")
+                .startAt(text)
+                .endAt(text + "\uf8ff")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -126,30 +128,7 @@ public class AppRepo {
         return FundsMutableLiveData;
 
     }
-
-    public LiveData<List<FundsModel>> getOtherFundByUserId(String userId) {
-        if (otherFundsMutableLiveData == null) {
-            otherFundsMutableLiveData = new MutableLiveData<>();
-            loadOtherFundsData();
-        }
-        return otherFundsMutableLiveData;
-
-    }
-
-    private void loadOtherFundsData() {
-        List<FundsModel> fundsModels = new ArrayList<>();
-        for (int a = 0; a < 5; a++) {
-            FundsModel fundsModel = new FundsModel();
-            fundsModel.setFundName("Fund name");
-            fundsModel.setFundImage("Fund name");
-            fundsModel.setCreatedBy("Fund name");
-            fundsModel.setLikes("Fund name");
-            fundsModel.setTotalInvested("Fund name");
-            fundsModel.setCurrentValue("Fund name");
-            fundsModels.add(fundsModel);
-        }
-        otherFundsMutableLiveData.setValue(fundsModels);
-    }
+    
 
     private void loadFundsData(String fundId) {
 

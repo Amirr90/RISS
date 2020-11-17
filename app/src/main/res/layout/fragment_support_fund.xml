@@ -9,12 +9,12 @@
 
 
     <LinearLayout
-        android:background="@drawable/round"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"
         android:layout_width="183dp"
-        android:gravity="center"
         android:layout_height="183dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/round"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ImageView
@@ -25,68 +25,70 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
 
         <TextView
-            android:textSize="28dp"
-            android:fontFamily="@font/lato"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center_horizontal"
             android:id="@+id/textView29"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello, you want to support" />
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/lato"
+            android:text="Hello, you want to support"
+            android:textColor="#FFFFFF"
+            android:textSize="28dp" />
 
         <TextView
-            android:layout_marginTop="3dp"
-            android:textStyle="bold"
-            android:textSize="28dp"
-            android:fontFamily="@font/lato_bold"
-            android:textColor="#FFFFFF"
-            android:layout_gravity="center_horizontal"
             android:id="@+id/textView30"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sundaram Mutual Fund" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/lato_bold"
+            android:text="Sundaram Mutual Fund"
+            android:textColor="#FFFFFF"
+            android:textSize="28dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginBottom="68dp"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="68dp"
         android:orientation="vertical">
+
         <Button
-            android:textSize="19dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/lato_bold"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="14dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="12dp"
-            android:backgroundTint="#F5487F"
-            android:background="@drawable/rectangle_border"
+            android:id="@+id/btnDirectSupport"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="direct Support" />
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="14dp"
+            android:background="@drawable/rectangle_border"
+            android:backgroundTint="#F5487F"
+            android:fontFamily="@font/lato_bold"
+            android:text="direct Support"
+            android:textColor="@android:color/white"
+            android:textSize="19dp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnCreateFund"
-            android:textSize="19dp"
-            android:textStyle="bold"
-            android:fontFamily="@font/lato_bold"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_alignParentBottom="true"
-            android:backgroundTint="#F5487F"
-            android:background="@drawable/rectangle_border"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="create a fund" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/rectangle_border"
+            android:backgroundTint="#F5487F"
+            android:fontFamily="@font/lato_bold"
+            android:text="create a fund"
+            android:textColor="@android:color/white"
+            android:textSize="19dp"
+            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

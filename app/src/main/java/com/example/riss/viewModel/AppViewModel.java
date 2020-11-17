@@ -33,7 +33,4 @@ public class AppViewModel extends ViewModel {
         return repo.getFundById(fundId);
     }
 
-    public LiveData<List<FundsModel>> getOtherFundByUserId(String userId) {
-        return repo.getOtherFundByUserId(userId);
-    }
 }

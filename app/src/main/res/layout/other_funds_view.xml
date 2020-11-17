@@ -7,6 +7,10 @@
         <variable
             name="funds"
             type="com.google.firebase.firestore.DocumentSnapshot" />
+
+        <variable
+            name="adapterInterface"
+            type="com.example.riss.AdapterInterface" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -21,6 +25,7 @@
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
+            android:onClick="@{()->adapterInterface.onItemClicked(funds.id)}"
             android:paddingLeft="11dp"
             android:paddingTop="13dp"
             android:paddingRight="13dp"
@@ -61,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
                     android:maxLines="1"
-                    android:text="@{funds.getString(`name`)}"
+                    android:text="@{funds.getString(`createdBy`)}"
                     android:textColor="#626262"
                     android:textSize="17dp"
                     android:textStyle="bold" />

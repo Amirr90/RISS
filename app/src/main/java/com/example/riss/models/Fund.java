@@ -22,6 +22,15 @@ public class Fund {
     int totalInvested;
     int currentValue;
     int initialValue;
+    String refId;
+
+    public String getRefId() {
+        return refId;
+    }
+
+    public void setRefId(String refId) {
+        this.refId = refId;
+    }
 
     public int getInitialValue() {
         return initialValue;

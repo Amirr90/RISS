@@ -120,17 +120,20 @@ public class MedicineDistributorListFragment extends Fragment implements Adapter
         } else {
             distributorListBinding.loadingLayout.getRoot().setVisibility(View.VISIBLE);
             getFirestoreReference().collection(QUERY_DISTRIBUTOR_LIST)
-                    .limit(20)
-                    .whereArrayContains(NAME, distributorName)
+                    .orderBy("name")
+                    .startAt(distributorName)
+                    .endAt(distributorName + "\uf8ff")
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             distributorListBinding.loadingLayout.getRoot().setVisibility(View.GONE);
                             try {
+
                                 if (null == queryDocumentSnapshots || queryDocumentSnapshots.isEmpty()) {
                                     return;
                                 }
+                                distributorsList.clear();
                                 distributorsList.addAll(queryDocumentSnapshots.getDocuments());
                                 distributorAdapter.notifyDataSetChanged();
                             } catch (Exception e) {
@@ -152,7 +155,7 @@ public class MedicineDistributorListFragment extends Fragment implements Adapter
     public void onItemClicked(Object o) {
 
         String distributorId = (String) o;
-        Log.d(TAG, "onItemClicked: ID "+distributorId);
+        Log.d(TAG, "onItemClicked: ID " + distributorId);
         Bundle bundle = new Bundle();
         bundle.putString("ID", distributorId);
         navController.navigate(R.id.action_medicineDistributorListFragment_to_distributorDetailFragment, bundle);

@@ -14,7 +14,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import org.w3c.dom.Document;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Filter;
+import java.util.logging.LogRecord;
 
 import static com.example.riss.AppUtils.Utils.TIMESTAMP;
 
@@ -66,5 +69,18 @@ public class DistributorDetailsAdapter extends RecyclerView.Adapter<DistributorD
             super(distributorsViewBinding.getRoot());
             this.distributorsViewBinding = distributorsViewBinding;
         }
+    }
+
+    public List<DocumentSnapshot> filterData(String query) {
+        final String lowerCaseQuery = query.toLowerCase();
+
+        final List<DocumentSnapshot> filteredModelList = new ArrayList<>();
+        for (DocumentSnapshot model : snapshots) {
+            final String text = model.getString("name").toLowerCase();
+            if (text.contains(lowerCaseQuery)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
     }
 }

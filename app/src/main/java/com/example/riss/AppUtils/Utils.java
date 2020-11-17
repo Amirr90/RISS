@@ -76,6 +76,11 @@ public class Utils {
     public static final String DONATION = "duration";
     public static final String QUERY_PUBLIC_REVIEW = "PublicReviews";
     public static final String QUERY_DISTRIBUTOR_LIST = "DistributorsList";
+    public static final String SUPPORT_TYPE_DIRECT = "direct";
+    public static final String SUPPORT_TYPE_BY_CREATING_FUND = "byCreatingFund";
+    public static final String PAYMENT_STATUS_PENDING = "pending";
+    public static final String PAYMENT_STATUS_FAILED = "failed";
+    public static final String PAYMENT_STATUS_SUCCESS = "success";
     public static final String MedicineDistribute = "MedicineDistribute";
     public static final String uid = "uid";
 
@@ -84,6 +89,7 @@ public class Utils {
     public static final String FUND_STATISTICS = "FundStatistics";
     public static final String TotalFundAmount = "TotalFundAmount";
     public static final String TotalFundManger = "TotalFundManger";
+    public static final String FundSupportPayment = "FundSupportPayment";
     public static final String isAadharVerified = "isAadharVerified";
     public static final String fundName = "fundName";
 
