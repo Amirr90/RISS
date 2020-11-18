@@ -134,8 +134,7 @@ public class DistributionHistoryFragment extends Fragment implements AdapterInte
                                 snapshots.clear();
                                 snapshots.addAll(queryDocumentSnapshots.getDocuments());
                                 detailsAdapter.notifyDataSetChanged();
-                            } else
-                                navController.navigate(R.id.action_distributionHistoryFragment_to_addDistributionFragment);
+                            }
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override

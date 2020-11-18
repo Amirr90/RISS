@@ -45,7 +45,7 @@
     </LinearLayout>
 
     <include
-        android:id="@+id/loadingLayout"
+        android:id="@+id/MyLoadingLayout"
         layout="@layout/loading_layout"
         android:visibility="gone" />
 

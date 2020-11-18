@@ -21,8 +21,8 @@ public class AppViewModel extends ViewModel {
         return repo.getTopFundById(text, activity);
     }
 
-    public LiveData<List<Fund>> getPersonalFundsData(Activity activity) {
-        return repo.getPersonalFundsData(activity);
+    public LiveData<List<Fund>> getPersonalFundsData(String fundName,Activity activity) {
+        return repo.getPersonalFundsData(fundName,activity);
     }
 
     public LiveData<List<Fund>> getTopFundsData(Activity activity) {

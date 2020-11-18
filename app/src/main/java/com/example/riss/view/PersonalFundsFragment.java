@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,7 @@ public class PersonalFundsFragment extends Fragment implements AdapterInterface 
         personalFundsBinding.personalFundsRec.setAdapter(personalFundsAdapter);
 
 
-        appViewModel.getPersonalFundsData(requireActivity()).observe(getViewLifecycleOwner(), new Observer<List<Fund>>() {
+        appViewModel.getPersonalFundsData(null, requireActivity()).observe(getViewLifecycleOwner(), new Observer<List<Fund>>() {
             @Override
             public void onChanged(List<Fund> funds) {
                 personalFundsAdapter.submitList(funds);
@@ -63,7 +65,38 @@ public class PersonalFundsFragment extends Fragment implements AdapterInterface 
             }
         });
 
+        personalFundsBinding.editTextTextSearchFund.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (null != s.toString()) {
+                    loadData(s.toString());
+                }
+            }
+        });
+
+    }
+
+    private void loadData(String fundName) {
+        personalFundsBinding.MyLoadingLayout.getRoot().setVisibility(View.VISIBLE);
+        appViewModel.getPersonalFundsData(fundName, requireActivity()).observe(getViewLifecycleOwner(), new Observer<List<Fund>>() {
+            @Override
+            public void onChanged(List<Fund> funds) {
+                personalFundsAdapter.submitList(funds);
+                personalFundsBinding.MyLoadingLayout.getRoot().setVisibility(View.GONE);
+
+            }
+        });
     }
 
     @Override

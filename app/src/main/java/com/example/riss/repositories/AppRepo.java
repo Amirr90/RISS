@@ -80,35 +80,61 @@ public class AppRepo {
         });
     }
 
-    public LiveData<List<Fund>> getPersonalFundsData(Activity activity) {
+    public LiveData<List<Fund>> getPersonalFundsData(String fundName, Activity activity) {
         if (personalFundsMutableLiveData == null) {
             personalFundsMutableLiveData = new MutableLiveData<>();
         }
-        loadPersonalFundsData(activity);
+        loadPersonalFundsData(fundName, activity);
         return personalFundsMutableLiveData;
 
     }
 
-    private void loadPersonalFundsData(Activity activity) {
+    private void loadPersonalFundsData(String fundName, Activity activity) {
 
-        showAlertDialog(activity);
-        getFirestoreReference().collection(FUNDS)
-                .whereEqualTo(uid, getUid())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        hideAlertDialog();
-                        if (null != queryDocumentSnapshots) {
-                            List<Fund> funds = new ArrayList<>();
-                            for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                Fund fund = documentSnapshot.toObject(Fund.class);
-                                funds.add(fund);
+
+        if (null == fundName) {
+            showAlertDialog(activity);
+            getFirestoreReference().collection(FUNDS)
+                    .whereEqualTo(uid, getUid())
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            hideAlertDialog();
+                            if (null != queryDocumentSnapshots) {
+                                List<Fund> funds = new ArrayList<>();
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    Fund fund = documentSnapshot.toObject(Fund.class);
+                                    funds.add(fund);
+                                }
+                                personalFundsMutableLiveData.setValue(funds);
                             }
-                            personalFundsMutableLiveData.setValue(funds);
                         }
-                    }
-                });
+                    });
+        } else {
+            getFirestoreReference()
+                    .collection(FUNDS)
+                    .whereEqualTo(uid, getUid())
+                    .orderBy("fundName")
+                    .startAt(fundName)
+                    .endAt(fundName + "\uf8ff")
+                    .get()
+                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            hideAlertDialog();
+                            if (null != queryDocumentSnapshots) {
+                                List<Fund> funds = new ArrayList<>();
+                                for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                    Fund fund = documentSnapshot.toObject(Fund.class);
+                                    funds.add(fund);
+                                }
+                                personalFundsMutableLiveData.setValue(funds);
+                            }
+                        }
+                    });
+        }
+
     }
 
     public LiveData<List<Fund>> getTopFundsData(Activity activity) {
@@ -128,7 +154,7 @@ public class AppRepo {
         return FundsMutableLiveData;
 
     }
-    
+
 
     private void loadFundsData(String fundId) {
 
