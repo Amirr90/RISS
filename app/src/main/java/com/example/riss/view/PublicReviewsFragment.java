@@ -1,6 +1,9 @@
 package com.example.riss.view;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,22 +12,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.riss.R;
 import com.example.riss.adapters.PublicReviewAdapter;
-import com.example.riss.adapters.TopFundsAdapter;
 import com.example.riss.databinding.FragmentPublicReviewsBinding;
-import com.example.riss.databinding.FragmentTopFundsBinding;
 import com.example.riss.viewModel.AppViewModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.List;

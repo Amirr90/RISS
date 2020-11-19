@@ -4,6 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.riss.AdapterInterface;
+import com.example.riss.AppUtils.Utils;
 import com.example.riss.databinding.TopFundsViewBinding;
 import com.example.riss.models.Fund;
 import com.example.riss.models.FundsModel;
@@ -55,6 +57,7 @@ public class TopFundsAdapter extends ListAdapter<Fund, TopFundsAdapter.FundsVH> 
 
             String initialValue = getCurrencyFormat(fund.getInitialValue());
             String totalValue = getCurrencyFormat(fund.getTotalInvested());
+
             holder.topFundsViewBinding.textView14.setText(initialValue);
             holder.topFundsViewBinding.textView16.setText(totalValue);
 
@@ -66,15 +69,23 @@ public class TopFundsAdapter extends ListAdapter<Fund, TopFundsAdapter.FundsVH> 
         holder.topFundsViewBinding.ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fundId = fund.getFundId();
-                if (isContain) {
-                    holder.topFundsViewBinding.ivLike.setChecked(false);
-                    removeLike(fundId);
-                } else {
-                    holder.topFundsViewBinding.ivLike.setChecked(true);
-                    addLike(fundId);
-                }
 
+
+            }
+        });
+
+
+        holder.topFundsViewBinding.ivLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fundId = fund.getFundId();
+                if (holder.topFundsViewBinding.ivLike.isChecked()) {
+                    Log.d(TAG, "onClick: true");
+                    Utils.addLike(fundId);
+                } else {
+                    Log.d(TAG, "onClick: false");
+                    Utils.removeLike(fundId);
+                }
             }
         });
 
