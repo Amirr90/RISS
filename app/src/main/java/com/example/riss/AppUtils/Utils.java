@@ -200,12 +200,16 @@ public class Utils {
         }
     }
 
+    public static String getCurrencyFormat(double num) {
+        String COUNTRY = "IN";
+        String LANGUAGE = "en";
+        return NumberFormat.getCurrencyInstance(new Locale(LANGUAGE, COUNTRY)).format(num);
+    }
+
     public static String getCurrencyFormat(long num) {
         String COUNTRY = "IN";
         String LANGUAGE = "en";
         return NumberFormat.getCurrencyInstance(new Locale(LANGUAGE, COUNTRY)).format(num);
-
-
     }
 
     public static String getCurrencyFormat(String num) {

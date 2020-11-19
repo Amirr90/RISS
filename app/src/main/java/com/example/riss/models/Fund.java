@@ -19,9 +19,9 @@ public class Fund {
     String description;
     String uid;
     long timestamp;
-    int totalInvested;
-    int currentValue;
-    int initialValue;
+    double totalInvested;
+    double currentValue;
+    double initialValue;
     String refId;
 
     public String getRefId() {
@@ -32,7 +32,7 @@ public class Fund {
         this.refId = refId;
     }
 
-    public int getInitialValue() {
+    public double getInitialValue() {
         return initialValue;
     }
 
@@ -79,7 +79,7 @@ public class Fund {
         this.fundId = fundId;
     }
 
-    public int getTotalInvested() {
+    public double getTotalInvested() {
         return totalInvested;
     }
 
@@ -87,7 +87,7 @@ public class Fund {
         this.totalInvested = totalInvested;
     }
 
-    public int getCurrentValue() {
+    public double getCurrentValue() {
         return currentValue;
     }
 

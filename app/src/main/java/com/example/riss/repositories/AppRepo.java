@@ -186,7 +186,7 @@ public class AppRepo {
             @Override
             public void onFailed(String msg) {
                 hideAlertDialog();
-                Toast.makeText(activity, "try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "try again ", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "onFailed: " + msg);
             }
         });
