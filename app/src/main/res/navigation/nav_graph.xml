@@ -226,10 +226,22 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_personalFundsFragment_to_myFund"
+            app:destination="@id/myFund"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/transactionCompleteFragment"
         android:name="com.example.riss.view.TransactionCompleteFragment"
         android:label="Transaction Done"
         tools:layout="@layout/fragment_ransaction_complete" />
+    <fragment
+        android:id="@+id/myFund"
+        android:name="com.example.riss.view.MyFund"
+        android:label="Fund"
+        tools:layout="@layout/fragment_my_fund" />
 </navigation>

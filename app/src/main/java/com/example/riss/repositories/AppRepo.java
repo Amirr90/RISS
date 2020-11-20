@@ -158,14 +158,19 @@ public class AppRepo {
 
     private void loadFundsData(String fundId) {
 
-        getFirestoreReference().collection(FUNDS).document(fundId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (null != documentSnapshot) {
-                    FundsMutableLiveData.setValue(documentSnapshot);
+        try {
+            getFirestoreReference().collection(FUNDS).document(fundId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (null != documentSnapshot) {
+                        FundsMutableLiveData.setValue(documentSnapshot);
+                    }
                 }
-            }
-        });
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, "loadFundsData: " + e.getLocalizedMessage());
+        }
     }
 
     private void loadTopFundsData(final Activity activity) {

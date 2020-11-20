@@ -105,7 +105,7 @@ public class PersonalFundsFragment extends Fragment implements AdapterInterface 
             Fund fund = (Fund) o;
             Bundle bundle = new Bundle();
             bundle.putString(KEY_FUND_ID, fund.getFundId());
-            navController.navigate(R.id.action_personalFundsFragment_to_fundFragment, bundle);
+            navController.navigate(R.id.action_personalFundsFragment_to_myFund, bundle);
         } catch (Exception e) {
             e.printStackTrace();
 

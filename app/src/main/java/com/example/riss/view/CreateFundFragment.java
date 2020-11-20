@@ -129,7 +129,7 @@ public class CreateFundFragment extends Fragment {
         createFundBinding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position > 0) {
+                if (position >= 0) {
                     initialValue = getInitialValue(position);
                     duration = getDuration(position);
                 }
@@ -222,8 +222,8 @@ public class CreateFundFragment extends Fragment {
             fund.setInitialValue(Integer.parseInt(initialValue));
             fund.setTimestamp(System.currentTimeMillis());
             fund.setLikedIds(likeList);
-            //fund.setExpiryDate(date.getDateAfterMonth(duration));
-            //fund.setStartDate(date.getCurrentDate());
+            fund.setExpiryDate(date.getDateAfterMonth(duration));
+            fund.setStartDate(date.getCurrentDate());
             fund.setDuration(Integer.parseInt(duration));
 
 

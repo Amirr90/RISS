@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context=".view.MyFund">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivFund"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/profile"
+        app:civ_border_color="#F5487F"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:autoSizeTextType="uniform"
+        android:id="@+id/textView50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/lato_bold"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Atul Verma"
+        android:textColor="#424242"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView51"
+        app:layout_constraintEnd_toStartOf="@+id/textView52"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivFund"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/lato"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="45123SMF0"
+        android:textColor="#626262"
+        android:textSize="17dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/textView21"
+        app:layout_constraintEnd_toStartOf="@+id/textView53"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivFund"
+        app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/lato"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="Expiry Date"
+        android:textColor="#626262"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView53"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivFund"
+        app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/lato"
+        android:text="Total Balance"
+        android:textColor="#626262"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView53"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="10dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/lato_bold"
+        android:text="9,500"
+        android:textColor="#5AC557"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/textView54"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivFund"
+        app:layout_constraintVertical_bias="0.0">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:background="#707070" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView21"
+            tools:layout_editor_absoluteX="-1dp">
+
+            <ImageView
+                android:id="@+id/ivHeartFilled"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginLeft="23dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/heart_filled" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="9dp"
+                android:layout_toRightOf="@+id/ivHeartFilled"
+                android:fontFamily="@font/lato"
+                android:text="Total Likes"
+                android:textColor="#4F62C1"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/tvLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView24"
+                android:layout_marginLeft="53dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginBottom="9dp"
+                android:fontFamily="@font/lato_bold"
+                android:text="3,987"
+                android:textColor="#424242"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="#707070" />
+
+            <ImageView
+                android:id="@+id/ivMembers"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="7dp"
+                android:layout_toLeftOf="@+id/textView25"
+                android:src="@drawable/member" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="9dp"
+
+                android:layout_marginRight="32dp"
+                android:fontFamily="@font/lato"
+                android:text="Members"
+                android:textColor="#4F62C1"
+                android:textSize="19dp" />
+
+            <TextView
+                android:id="@+id/tvMember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView25"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="9dp"
+
+                android:layout_marginRight="46dp"
+                android:layout_marginBottom="9dp"
+                android:fontFamily="@font/lato_bold"
+                android:text="1987"
+                android:textColor="#424242"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#707070" />
+    </LinearLayout>
+
+    <TextView
+        android:gravity="end"
+        android:id="@+id/textView54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:autoSizeMaxTextSize="16dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/lato_bold"
+        android:text="Top Five Supportes"
+        android:textColor="#424242"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="16dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

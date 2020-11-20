@@ -26,6 +26,19 @@ public class Fund {
     String refId;
     String startDate;
     String expiryDate;
+    String fundId;
+    boolean isActive;
+    List<String> likedIds;
+    long like;
+    String fundImage;
+
+    public String getFundImage() {
+        return fundImage;
+    }
+
+    public void setFundImage(String fundImage) {
+        this.fundImage = fundImage;
+    }
 
     public String getStartDate() {
         return startDate;
@@ -69,10 +82,6 @@ public class Fund {
     }
 
 
-
-
-
-
     public int getDuration() {
         return duration;
     }
@@ -89,13 +98,6 @@ public class Fund {
         this.refId = refId;
     }
 
-
-
-    String fundId;
-    boolean isActive;
-    List<String> likedIds;
-
-    long like;
 
     public String getLike() {
 

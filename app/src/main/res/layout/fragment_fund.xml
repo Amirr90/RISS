@@ -111,7 +111,7 @@
                            android:layout_below="@id/textView20"
                            android:layout_marginTop="11dp"
                            android:fontFamily="@font/lato"
-                           android:text="Expiry Date 12 Oct, 2020"
+                           android:text="@{`Expiry Date : `+fund.getString(`expiryDate`)}"
                            android:textColor="#626262"
                            android:textSize="14dp" />
 

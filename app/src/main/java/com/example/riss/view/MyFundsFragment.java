@@ -12,18 +12,19 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.riss.databinding.FragmentCreateFundBinding;
+import com.example.riss.databinding.FragmentCreatedFundStatusBinding;
 
 public class MyFundsFragment extends Fragment {
 
 
-    FragmentCreateFundBinding createFundBinding;
+    FragmentCreatedFundStatusBinding createdFundStatusBinding;
     NavController navController;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        createFundBinding = FragmentCreateFundBinding.inflate(getLayoutInflater());
-        return createFundBinding.getRoot();
+        createdFundStatusBinding = FragmentCreatedFundStatusBinding.inflate(getLayoutInflater());
+        return createdFundStatusBinding.getRoot();
     }
 
     @Override
@@ -31,7 +32,6 @@ public class MyFundsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
-
 
     }
 }

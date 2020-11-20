@@ -3,19 +3,31 @@ package com.example.riss;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.riss.AppUtils.Utils;
 import com.example.riss.databinding.ActivityMainBinding;
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.example.riss.AppUtils.Utils.USER_QUERY;
+import static com.example.riss.AppUtils.Utils.getFirestoreReference;
+import static com.example.riss.AppUtils.Utils.getUid;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,13 +60,38 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateUI() {
-        Toast.makeText(this, "updating UI", Toast.LENGTH_SHORT).show();
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             showLoginScreen();
         } else {
+            updateToken();
             startActivity(new Intent(MainActivity.this, HomeScreen.class));
             finish();
         }
+    }
+
+    private void updateToken() {
+        String uid = Utils.getUid();
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("token", token);
+                        getFirestoreReference()
+                                .collection(USER_QUERY).document(getUid())
+                                .update(map);
+
+                        Log.d(TAG, "TOKEN: " + token);
+                    }
+                });
     }
 
     private void showLoginScreen() {

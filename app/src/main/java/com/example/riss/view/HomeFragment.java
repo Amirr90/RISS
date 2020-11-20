@@ -170,7 +170,7 @@ public class HomeFragment extends Fragment {
         list.add(new HomeModel("Miracle", "Drops", R.drawable.pills));
         //list.add(new HomeModel("Service", "Distribute", R.drawable.image_distribution_center));
         list.add(new HomeModel("Distribution", "History", R.drawable.growth));
-        list.add(new HomeModel("Create a", "Funds", R.drawable.create_fund_image));
+        list.add(new HomeModel("My Personal", "Dashboard", R.drawable.dashboard));
         list.add(new HomeModel("Search a", "Funds", R.drawable.search_fund_image));
         list.add(new HomeModel("My Favourite", "Funds", R.drawable.my_personal_fund_image));
         list.add(new HomeModel("Public", "Reviews", R.drawable.public_review_image));
