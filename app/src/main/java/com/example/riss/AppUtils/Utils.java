@@ -322,4 +322,33 @@ public class Utils {
         calendar.setTimeInMillis((int) timestamp);
         return formatter.format(calendar.getTime());
     }
+
+    public static String[] getPlans() {
+        String[] ITEMS = {
+                "₹100 for 3 months",
+                "₹500 for 6 months",
+                "₹1,000 for 9 months",
+                "₹2,500 for 12 months",
+                "₹5,000 for 15 months",
+                "₹10,000 for 18 months",
+                "₹20,000 for 21 months",
+                "₹50,000 for 24 months",
+                "₹1,00,000 for 30 months",
+        };
+        return ITEMS;
+    }
+
+    public static String getInitialValue(int position) {
+        String[] ITEMS = {"100", "500", "1000", "2500", "5000", "10000", "20000",
+                "50000", "100000",
+        };
+        return ITEMS[position];
+    }
+
+    public static String getDuration(int position) {
+        String[] ITEMS = {"3", "6", "9", "12", "15", "18", "21",
+                "24", "30",
+        };
+        return ITEMS[position];
+    }
 }

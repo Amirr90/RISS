@@ -22,7 +22,64 @@ public class Fund {
     double totalInvested;
     double currentValue;
     double initialValue;
+    int duration;
     String refId;
+    String startDate;
+    String expiryDate;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public double getTotalInvested() {
+
+        return totalInvested;
+    }
+
+    public void setTotalInvested(double totalInvested) {
+        this.totalInvested = totalInvested;
+    }
+
+    public double getInitialValue() {
+        return initialValue;
+    }
+
+    public void setInitialValue(double initialValue) {
+        this.initialValue = initialValue;
+    }
+
+    public double getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(double currentValue) {
+        this.currentValue = currentValue;
+    }
+
+
+
+
+
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     public String getRefId() {
         return refId;
@@ -32,13 +89,7 @@ public class Fund {
         this.refId = refId;
     }
 
-    public double getInitialValue() {
-        return initialValue;
-    }
 
-    public void setInitialValue(int initialValue) {
-        this.initialValue = initialValue;
-    }
 
     String fundId;
     boolean isActive;
@@ -79,21 +130,6 @@ public class Fund {
         this.fundId = fundId;
     }
 
-    public double getTotalInvested() {
-        return totalInvested;
-    }
-
-    public void setTotalInvested(int totalInvested) {
-        this.totalInvested = totalInvested;
-    }
-
-    public double getCurrentValue() {
-        return currentValue;
-    }
-
-    public void setCurrentValue(int currentValue) {
-        this.currentValue = currentValue;
-    }
 
     public long getTimestamp() {
         return timestamp;
