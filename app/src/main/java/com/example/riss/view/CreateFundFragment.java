@@ -144,7 +144,6 @@ public class CreateFundFragment extends Fragment {
 
 
     private void createFund() {
-        Log.d(TAG, "createFund: ");
         getFirestoreReference().collection(FUNDS).add(fund).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {

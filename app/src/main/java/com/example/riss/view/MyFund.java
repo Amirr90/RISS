@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentMyFundBinding;
+import com.firebase.ui.auth.data.model.User;
 
 
 public class MyFund extends Fragment {
 
 
     FragmentMyFundBinding myFundBinding;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +32,9 @@ public class MyFund extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+
 
     }
 }
