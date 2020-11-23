@@ -1,5 +1,12 @@
 package com.example.riss.view;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,10 +24,14 @@ import androidx.navigation.Navigation;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentProfileBinding;
 import com.example.riss.interfaces.IUserProfileInterface;
+import com.fxn.pix.Options;
+import com.fxn.pix.Pix;
+import com.fxn.utility.PermUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,12 +54,19 @@ import static com.example.riss.AppUtils.Utils.showAlertDialog;
 
 public class ProfileFragment extends Fragment {
 
+    private static final int FRONT_IMAGE = 1;
+    private static final int BACK_IMAGE = 2;
+    private static final int REQ_CODE_FRONT_IMAGE = 1100;
+    private static final int REQ_CODE_BACK_IMAGE = 2200;
     FragmentProfileBinding profileBinding;
     NavController navController;
     private static final String TAG = "ProfileFragment";
     Map<String, Object> map;
 
     String name, mobile, email, address, occupation, education, aadharNo, description, firstName, lastName;
+    int ID_TYPE;
+
+    CharSequence[] items = {"Aadhar Card", "PAN card", "VoterId card", "Driving Licence"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,7 +109,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
         profileBinding.btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +117,66 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+
+        profileBinding.tvSelectIdType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSelectIdTypeDialog();
+            }
+        });
+
+        profileBinding.ivFrontImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (profileBinding.imageView13.getTag() == "1") {
+                    Toast.makeText(requireActivity(), "Image Already verified, it can not be change", Toast.LENGTH_SHORT).show();
+                } else
+                    selectImage(FRONT_IMAGE);
+
+            }
+        });
+        profileBinding.ivBackImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (profileBinding.imageView16.getTag() == "1") {
+                    Toast.makeText(requireActivity(), "Image Already verified, it can not be change", Toast.LENGTH_SHORT).show();
+                } else
+                    selectImage(BACK_IMAGE);
+
+            }
+        });
     }
+
+    private void selectImage(int imageCode) {
+        Options options = Options.init()
+                .setRequestCode(imageCode == FRONT_IMAGE ? REQ_CODE_FRONT_IMAGE : REQ_CODE_BACK_IMAGE)                                           //Request code for activity results
+                .setCount(1)                                                   //Number of images to restict selection count
+                .setFrontfacing(false)                                         //Front Facing camera on start
+                //.setPreSelectedUrls(returnValue)                               //Pre selected Image Urls
+                //.setSpanCount(4)                                               //Span count for gallery min 1 & max 5
+                .setExcludeVideos(false)                                       //Option to exclude videos
+                .setVideoDurationLimitinSeconds(30)                            //Duration for video recording
+                .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)     //Orientaion
+                .setPath("/RISS/images/profile_image");                                       //Custom Path For media Storage
+
+        Pix.start(requireActivity(), options);
+    }
+
+    private void showSelectIdTypeDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+
+        builder.setTitle("Select ID type");
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                dialog.dismiss();
+                ID_TYPE = item;
+                profileBinding.tvIdTypeText.setText(items[item]);
+
+            }
+        }).show();
+    }
+
 
     private boolean isAllFieldsFill() {
         firstName = profileBinding.etFirstName.getText().toString().trim();
@@ -134,7 +210,7 @@ public class ProfileFragment extends Fragment {
             profileBinding.etEducation.setError("education required");
             return false;
         } else if (TextUtils.isEmpty(aadharNo)) {
-            profileBinding.etAddharNo.setError("aadharNo required");
+            profileBinding.etAddharNo.setError("Aadhar Number required");
             return false;
         } else {
             map = new HashMap<>();
@@ -166,5 +242,34 @@ public class ProfileFragment extends Fragment {
                 Toast.makeText(requireContext(), "try again", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                } else {
+                    Toast.makeText(requireActivity(), "Approve permissions to open Pix ImagePicker", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE_FRONT_IMAGE) {
+            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
+            Bitmap bm = BitmapFactory.decodeFile(returnValue.get(0));
+            profileBinding.ivFrontImage.setImageBitmap(bm);
+        } else if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE_BACK_IMAGE) {
+            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
+            Toast.makeText(requireActivity(), "" + returnValue.get(0).toString(), Toast.LENGTH_SHORT).show();
+            Bitmap bm = BitmapFactory.decodeFile(returnValue.get(0));
+            profileBinding.ivBackImage.setImageBitmap(bm);
+        }
+
     }
 }
