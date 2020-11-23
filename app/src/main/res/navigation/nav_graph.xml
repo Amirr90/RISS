@@ -207,7 +207,7 @@
     <fragment
         android:id="@+id/addDistributionFragment"
         android:name="com.example.riss.view.AddDistributionFragment"
-        android:label="Add Distributor"
+        android:label="Add Beneficiary"
         tools:layout="@layout/fragment_add_distribution" />
     <fragment
         android:id="@+id/searchFundFragment"

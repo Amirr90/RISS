@@ -30,7 +30,7 @@
             android:drawableRight="@drawable/magnifier"
             android:drawablePadding="10dp"
             android:ems="10"
-            android:hint="Search Distributors Here"
+            android:hint="Search Funds Here"
             android:imeOptions="actionSearch"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"

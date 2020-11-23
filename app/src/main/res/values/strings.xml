@@ -111,4 +111,12 @@
     <string name="demo">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
     <string name="fund_text">How Funds Work Individuals, businesses, and governments all use funds to set aside money. Individuals might establish an emergency fund or rainy-day fund to pay for unforeseen expenses or a trust fund to set aside money for a specific person.  Individual and institutional investors can also place money in different types of funds with the goal of earning money. Examples include mutual funds, which gather money from numerous investors and invest it in a diversified portfolio of assets, and hedge funds, which invest the assets of high-net-worth individuals (HNWI) and institutions in a way that is designed to earn above-market returns. Governments use funds, such as special revenue funds, to pay for specific public expenses.  Common Types of Funds The following are examples of funds commonly used for personal ventures:  Emergency funds are personal savings vehicles created by individuals used to cover periods of financial hardships, such as job loss, prolonged illness or a major expense. The rule of thumb is to create an emergency fund that contains at least three months worth of net income. College funds are usually tax-advantaged savings plans set up by families to allocate funds for their children’s college expenses. Trust funds are legal arrangement set up by a grantor who appoints a trustee to administer valuable assets for the benefit of a listed beneficiary for a period of time, after which all or a portion of the funds are released to the beneficiary or beneficiaries. Retirement funds are savings vehicles used by individuals saving for retirement. Retirees receive monthly income or pensions from retirement funds.</string>
     <string name="msg_token_fmt">"TOKEN "</string>
+    <string name="initial_amount">Initial Amount</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="current_value">Current Value</string>
+    <string name="welcome_msg">Welcome! to RISS</string>
+    <string name="total_fund_manager">Total Fund\nManager</string>
+    <string name="overview">Overview</string>
+    <string name="operation">Operations</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

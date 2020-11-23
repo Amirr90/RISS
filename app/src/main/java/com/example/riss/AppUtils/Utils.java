@@ -91,6 +91,9 @@ public class Utils {
     public static final String TotalFundManger = "TotalFundManger";
     public static final String FundSupportPayment = "FundSupportPayment";
     public static final String isAadharVerified = "isAadharVerified";
+    public static final String FundSupport = "FundSupport";
+    public static final String totalInvested = "totalInvested";
+    public static final String support = "support";
     public static final String fundName = "fundName";
 
     public static final String VALUE = "value";

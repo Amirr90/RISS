@@ -67,6 +67,7 @@ public class SupportFundFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         fundId = getArguments().getString("id");
+        supportFundBinding.textView30.setText(getArguments().getString("fundName"));
         supportFundBinding.btnCreateFund.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -43,6 +43,7 @@ import static com.example.riss.AppUtils.Utils.getRandomNumber;
 import static com.example.riss.AppUtils.Utils.getUid;
 import static com.example.riss.AppUtils.Utils.hideAlertDialog;
 import static com.example.riss.AppUtils.Utils.showAlertDialog;
+import static com.example.riss.AppUtils.Utils.support;
 import static com.example.riss.AppUtils.Utils.uid;
 
 
@@ -78,8 +79,10 @@ public class FundFragment extends Fragment implements AdapterInterface {
         fundBinding.btnSupportFund.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Bundle bundle = new Bundle();
                 bundle.putString("id", fundID);
+                bundle.putString("fundName", fundBinding.textView17.getText().toString());
                 navController.navigate(R.id.action_fundFragment_to_supportFundFragment, bundle);
             }
         });
@@ -106,10 +109,13 @@ public class FundFragment extends Fragment implements AdapterInterface {
                 try {
                     String initialValue = getCurrencyFormat(fundsModel.getLong("initialValue"));
                     String totalValue = getCurrencyFormat(fundsModel.getLong("totalInvested"));
+                    String fundSupport = getCountInRomanFormat(fundsModel.getLong(support));
                     fundBinding.textView22.setText(initialValue + "-" + totalValue);
                     List<String> list = (List<String>) fundsModel.get(LIKED_IDS);
 
                     fundBinding.tvLikes.setText(getCountInRomanFormat(list.size()));
+
+                    fundBinding.tvMember.setText(fundSupport);
                     loadData(fundsModel.getString(uid));
                 } catch (Exception e) {
                     e.printStackTrace();

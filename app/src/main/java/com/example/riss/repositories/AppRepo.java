@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import static com.example.riss.AppUtils.ApiCall.getTopFunds;
 import static com.example.riss.AppUtils.Utils.FUNDS;
+import static com.example.riss.AppUtils.Utils.TIMESTAMP;
 import static com.example.riss.AppUtils.Utils.fundName;
 import static com.example.riss.AppUtils.Utils.getFirestoreReference;
 import static com.example.riss.AppUtils.Utils.getUid;
@@ -96,6 +98,7 @@ public class AppRepo {
             showAlertDialog(activity);
             getFirestoreReference().collection(FUNDS)
                     .whereEqualTo(uid, getUid())
+                    .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
                     .get()
                     .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override

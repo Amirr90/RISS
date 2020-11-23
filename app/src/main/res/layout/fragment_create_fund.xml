@@ -62,7 +62,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="25dp"
                 android:hint="Fund Name"
-                android:maxLength="30"
+                android:maxLength="15"
                 android:inputType="textPersonName"
                 android:textColor="#424242"
                 android:textColorHint="#80626262" />

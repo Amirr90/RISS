@@ -37,8 +37,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="23dp"
                     android:loadHomeRecImage="@{homeView.image}"
-                    android:visibility="visible"
-                    app:srcCompat="@drawable/savings" />
+                    android:visibility="visible" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -51,7 +50,7 @@
                     android:hint="@{homeView.title}"
                     android:singleLine="true"
                     android:textColor="#424242"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -64,7 +63,7 @@
                     android:hint="@{homeView.text}"
                     android:singleLine="true"
                     android:textColor="#424242"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
             </RelativeLayout>
 

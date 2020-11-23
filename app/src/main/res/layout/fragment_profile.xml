@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -24,7 +25,7 @@
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:orientation="vertical"
                 android:paddingBottom="75dp">
@@ -43,7 +44,7 @@
                     android:paddingLeft="10dp"
                     android:text="Edit Profile"
                     android:textColor="#F5487F"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:loadHomeProfileImage="@{user.getString(`image`)}"
@@ -65,7 +66,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Your name"
                     android:textColor="#626262"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
                <LinearLayout
@@ -74,6 +75,7 @@
                    android:orientation="horizontal"
                    android:weightSum="2">
                    <EditText
+                       android:maxLength="20"
                        android:layout_marginRight="10dp"
                        android:layout_weight="1"
                        android:id="@+id/etFirstName"
@@ -86,9 +88,10 @@
                        android:text="@{user.getString(`firstName`)}"
                        android:textColor="#626262"
                        android:textColorHint="#80626262"
-                       android:textSize="21dp"
+                       android:textSize="19sp"
                        android:textStyle="bold" />
                    <EditText
+                       android:maxLength="10"
                        android:layout_marginLeft="10dp"
                        android:layout_weight="1"
                        android:id="@+id/etLastName"
@@ -101,7 +104,7 @@
                        android:text="@{user.getString(`lastName`)}"
                        android:textColor="#626262"
                        android:textColorHint="#80626262"
-                       android:textSize="21dp"
+                       android:textSize="19sp"
                        android:textStyle="bold" />
                </LinearLayout>
 
@@ -112,10 +115,11 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Mobile No."
                     android:textColor="#626262"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
                 <EditText
+                    android:maxLength="10"
                     android:enabled="false"
                     android:id="@+id/etMobile"
                     android:hint="enter Mobile Number here"
@@ -127,7 +131,7 @@
                     android:text="@{user.getString(`mobile`)}"
                     android:textColor="#626262"
                     android:textColorHint="#80626262"
-                    android:textSize="21dp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -137,7 +141,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Email ID"
                     android:textColor="#626262"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
                 <EditText
@@ -147,11 +151,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:fontFamily="@font/lato_bold"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:text="@{user.getString(`email`)}"
                     android:textColor="#626262"
                     android:textColorHint="#80626262"
-                    android:textSize="21dp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -161,7 +165,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Address"
                     android:textColor="#626262"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
                 <EditText
@@ -171,11 +175,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:fontFamily="@font/lato_bold"
-                    android:inputType="textPersonName"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
                     android:text="@{user.getString(`address`)}"
                     android:textColor="#626262"
                     android:textColorHint="#80626262"
-                    android:textSize="21dp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -185,7 +190,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Occupation"
                     android:textColor="#626262"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
                 <EditText
@@ -195,11 +200,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:fontFamily="@font/lato_bold"
-                    android:inputType="textPersonName"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
                     android:text="@{user.getString(`occupation`)}"
                     android:textColor="#626262"
                     android:textColorHint="#80626262"
-                    android:textSize="21dp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
 
@@ -210,7 +216,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Education"
                     android:textColor="#626262"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
                 <EditText
@@ -220,11 +226,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:fontFamily="@font/lato_bold"
-                    android:inputType="textPersonName"
                     android:text="@{user.getString(`education`)}"
                     android:textColor="#626262"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
                     android:textColorHint="#80626262"
-                    android:textSize="21dp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -234,7 +241,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Aadhar Card No"
                     android:textColor="#626262"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="normal" />
 
                 <EditText
@@ -245,11 +252,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="25dp"
                     android:fontFamily="@font/lato_bold"
-                    android:inputType="textPersonName"
+                    android:inputType="textPhonetic"
                     android:text="@{user.getString(`aadharNo`)}"
                     android:textColor="#626262"
                     android:textColorHint="#80626262"
-                    android:textSize="21dp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
 
@@ -259,18 +266,18 @@
                     android:fontFamily="@font/lato"
                     android:text="Description"
                     android:textColor="#626262"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:drawableRight="@drawable/edit"
                     android:fontFamily="@font/lato_bold"
                     android:text="Type Description Here"
                     android:textColor="#626262"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:drawableRightCompat="@drawable/edit" />
 
 
                 <TextView
@@ -295,9 +302,9 @@
             android:background="@drawable/rectangle_border"
             android:backgroundTint="#F5487F"
             android:fontFamily="@font/lato_bold"
-            android:text="Update Profile"
+            android:text="@string/update_profile"
             android:textColor="@android:color/white"
-            android:textSize="19dp"
+            android:textSize="19sp"
             android:textStyle="bold" />
     </RelativeLayout>
 </layout>

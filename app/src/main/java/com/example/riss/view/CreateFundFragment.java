@@ -206,7 +206,6 @@ public class CreateFundFragment extends Fragment {
             Toast.makeText(requireActivity(), "description required", Toast.LENGTH_SHORT).show();
             return false;
         } else {
-
             AddMonthsToCurrentDate date = new AddMonthsToCurrentDate();
 
             List<String> likeList = new ArrayList<>();
@@ -223,6 +222,7 @@ public class CreateFundFragment extends Fragment {
             fund.setLikedIds(likeList);
             fund.setExpiryDate(date.getDateAfterMonth(duration));
             fund.setStartDate(date.getCurrentDate());
+            fund.setSupport(0);
             fund.setDuration(Integer.parseInt(duration));
 
 

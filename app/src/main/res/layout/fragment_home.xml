@@ -39,9 +39,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato"
-                        android:text="Welcome! to RISS"
+                        android:text="@string/welcome_msg"
                         android:textColor="#7B7B7B"
-                        android:textSize="20dp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tvFirstName"
@@ -51,7 +51,7 @@
                         android:fontFamily="@font/lato_black"
                         android:text="@{user.getString(`firstName`)}"
                         android:textColor="#323232"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -64,7 +64,7 @@
                         android:fontFamily="@font/lato_black"
                         android:text="@{` `+user.getString(`lastName`)}"
                         android:textColor="#F5487F"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
 
@@ -87,9 +87,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="21dp"
                     android:fontFamily="@font/lato_black"
-                    android:text="Overview"
+                    android:text="@string/overview"
                     android:textColor="#323232"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
 
@@ -125,7 +125,7 @@
                                 android:autoSizeTextType="uniform"
                                 android:fontFamily="@font/lato"
                                 android:gravity="center"
-                                android:text="Total Fund\nManager"
+                                android:text="@string/total_fund_manager"
                                 android:textColor="@android:color/white"
                                 android:textSize="14sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +144,6 @@
                                 android:layout_marginBottom="8dp"
                                 android:autoSizeTextType="uniform"
                                 android:fontFamily="@font/lato_black"
-                                android:text="2,220"
                                 android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
@@ -194,7 +193,7 @@
                                 android:autoSizeTextType="uniform"
                                 android:fontFamily="@font/lato"
                                 android:gravity="center"
-                                android:text="Total Fund\nAmount"
+                                android:text="@string/total_fund_manager"
                                 android:textColor="@android:color/white"
                                 android:textSize="14sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -213,7 +212,6 @@
                                 android:layout_marginBottom="8dp"
                                 android:autoSizeTextType="uniform"
                                 android:fontFamily="@font/lato_black"
-                                android:text="92,230"
                                 android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
@@ -242,9 +240,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/lato_black"
-                    android:text="Operations"
+                    android:text="@string/operation"
                     android:textColor="#323232"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -265,7 +263,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:text="Sign Out"
+                    android:text="@string/sign_out"
                     android:visibility="gone" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

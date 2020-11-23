@@ -31,6 +31,15 @@ public class Fund {
     List<String> likedIds;
     long like;
     String fundImage;
+    int support;
+
+    public int getSupport() {
+        return support;
+    }
+
+    public void setSupport(int support) {
+        this.support = support;
+    }
 
     public String getFundImage() {
         return fundImage;
