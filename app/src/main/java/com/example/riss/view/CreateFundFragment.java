@@ -223,8 +223,8 @@ public class CreateFundFragment extends Fragment {
             fund.setExpiryDate(date.getDateAfterMonth(duration));
             fund.setStartDate(date.getCurrentDate());
             fund.setSupport(0);
+            fund.setCreatedBy("");
             fund.setDuration(Integer.parseInt(duration));
-
 
             if (from.equalsIgnoreCase("SupportFundFragment")) {
                 fundID = getArguments().getString("id");

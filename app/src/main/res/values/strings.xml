@@ -119,4 +119,9 @@
     <string name="overview">Overview</string>
     <string name="operation">Operations</string>
     <string name="sign_out">Sign Out</string>
+    <string name="withdraw_fund">Withdraw Fund</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="enetr_quantity">Enter quantity here</string>
+    <string name="view_all">View All</string>
 </resources>

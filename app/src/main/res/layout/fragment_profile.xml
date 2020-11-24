@@ -130,7 +130,6 @@
                     android:fontFamily="@font/lato_bold"
                     android:hint="enter Mobile Number here"
                     android:inputType="textPersonName"
-                    android:maxLength="10"
                     android:text="@{user.getString(`mobile`)}"
                     android:textColor="#626262"
                     android:textColorHint="#80626262"

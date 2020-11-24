@@ -12,17 +12,19 @@
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textView46"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato_bold"
         android:text="Hey,"
         android:textColor="#1F306E"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:textStyle="bold" />
 
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/textView47"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +33,7 @@
         android:gravity="center"
         android:text="You want to take miracle drops, So please enter quantity."
         android:textColor="#424242"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="normal" />
 
     <LinearLayout
@@ -51,14 +53,14 @@
 
         <TextView
             android:id="@+id/textView48"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="9dp"
             android:layout_weight="1"
             android:fontFamily="@font/lato"
             android:text="Enter Quantity"
             android:textColor="#626262"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="normal" />
     </LinearLayout>
 
@@ -69,7 +71,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/rectangle_border"
         android:gravity="center_vertical"
-        android:hint="Enter quantity here"
+        android:hint="@string/enetr_quantity"
         android:inputType="phone"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
@@ -88,14 +90,14 @@
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:background="@drawable/rectangle_border"
             android:drawableTint="#F5487F"
             android:fontFamily="@font/lato_bold"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textColor="#F5487F"
-            android:textSize="19dp"
+            android:textSize="19sp"
             android:textStyle="bold" />
 
 
@@ -103,14 +105,14 @@
             android:id="@+id/btnOk"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:background="@drawable/rectangle_border"
             android:backgroundTint="#F5487F"
             android:fontFamily="@font/lato_bold"
-            android:text="OK"
+            android:text="@string/ok"
             android:textColor="@android:color/white"
-            android:textSize="19dp"
+            android:textSize="19sp"
             android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

@@ -9,284 +9,332 @@
             name="fund"
             type="com.google.firebase.firestore.DocumentSnapshot" />
     </data>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        tools:context=".view.MyFund">
+        android:layout_height="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivFund"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:loadFundImage="@{fund.getString(`image`)}"
-            android:src="@drawable/fund_def"
-            app:civ_border_color="#F5487F"
-            app:civ_border_width="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:text="@{fund.getString(`fundName`)}"
-            android:id="@+id/textView50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/lato_bold"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textAlignment="viewStart"
-            android:textColor="#424242"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView21"
-            app:layout_constraintEnd_toStartOf="@+id/textView52"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/ivFund"
-            app:layout_constraintTop_toTopOf="@+id/ivFund" />
-
-        <TextView
-            android:id="@+id/textView51"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/lato"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@{`fId: `+fund.id}"
-            android:textColor="#B1B0B0"
-            android:textSize="8dp"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="@+id/ivFund"
-            app:layout_constraintStart_toEndOf="@+id/ivFund"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/lato"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="@{fund.getString(`expiryDate`)}"
-            android:textColor="#626262"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView51"
-            app:layout_constraintStart_toEndOf="@+id/ivFund"
-            app:layout_constraintTop_toBottomOf="@+id/textView50" />
-
-        <TextView
-            android:id="@+id/textView52"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/lato"
-            android:text="Total Balance"
-            android:textColor="#626262"
-            android:textSize="14dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView53"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivFund"
-            app:layout_constraintVertical_bias="0.48000002" />
-
-        <TextView
-
-            android:id="@+id/textView53"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/lato_bold"
-            android:text="9,500"
-            android:textColor="#5AC557"
-            android:textSize="21dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/ivFund"
-            app:layout_constraintEnd_toEndOf="@+id/textView52"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/textView52"
-            app:layout_constraintTop_toBottomOf="@+id/textView52"
-            app:layout_constraintVertical_bias="0.17000002" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivFund">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <View
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="12dp"
-                android:background="#707070" />
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                tools:context=".view.MyFund">
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="3dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView21"
-                tools:layout_editor_absoluteX="-1dp">
-
-                <ImageView
-                    android:id="@+id/ivHeartFilled"
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginLeft="23dp"
-                    android:layout_marginTop="12dp"
-                    android:src="@drawable/heart_filled" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivFund"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:loadFundImage="@{fund.getString(`image`)}"
+                    android:src="@drawable/fund_def"
+                    app:civ_border_color="#F5487F"
+                    app:civ_border_width="1dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/textView50"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_toRightOf="@+id/ivHeartFilled"
-                    android:fontFamily="@font/lato"
-                    android:text="Total Likes"
-                    android:textColor="#4F62C1"
-                    android:textSize="19dp" />
-
-                <TextView
-                    android:id="@+id/tvLikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView24"
-                    android:layout_marginLeft="53dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginBottom="9dp"
+                    android:layout_marginStart="4dp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="@font/lato_bold"
-                    android:text="3,987"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@{fund.getString(`fundName`)}"
+                    android:textAlignment="viewStart"
+                    android:textColor="#424242"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/textView21"
+                    app:layout_constraintEnd_toStartOf="@+id/textView52"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/ivFund"
+                    app:layout_constraintTop_toTopOf="@+id/ivFund" />
+
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/lato"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@{`fId: `+fund.id}"
+                    android:textColor="#B1B0B0"
+                    android:textSize="8dp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivFund"
+                    app:layout_constraintStart_toEndOf="@+id/ivFund"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/lato"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@{fund.getString(`expiryDate`)}"
+                    android:textColor="#626262"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView51"
+                    app:layout_constraintStart_toEndOf="@+id/ivFund"
+                    app:layout_constraintTop_toBottomOf="@+id/textView50" />
+
+                <TextView
+                    android:id="@+id/textView52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/lato"
+                    android:text="Total Balance"
+                    android:textColor="#626262"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView53"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ivFund"
+                    app:layout_constraintVertical_bias="0.48000002" />
+
+                <TextView
+
+                    android:id="@+id/textView53"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="9,500"
+                    android:textColor="#5AC557"
+                    android:textSize="21dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivFund"
+                    app:layout_constraintEnd_toEndOf="@+id/textView52"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/textView52"
+                    app:layout_constraintTop_toBottomOf="@+id/textView52"
+                    app:layout_constraintVertical_bias="0.17000002" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFund">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="12dp"
+                        android:background="#707070" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivHeartFilled"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/heart_filled"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                            app:layout_constraintEnd_toStartOf="@+id/textView24"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView24" />
+
+                        <TextView
+                            android:id="@+id/textView24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_toRightOf="@+id/ivHeartFilled"
+                            android:fontFamily="@font/lato"
+                            android:text="Total Likes"
+                            android:textColor="#4F62C1"
+                            android:textSize="19sp"
+                            app:layout_constraintEnd_toStartOf="@+id/view"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/ivHeartFilled"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvLikes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/textView24"
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="0"
+                            android:textColor="#424242"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/ivMembers"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25"
+                            app:layout_constraintVertical_bias="0.32999998" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="0.5dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:background="#707070"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/ivMembers"
+                            android:layout_width="17dp"
+                            android:layout_height="17dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toLeftOf="@+id/textView25"
+                            android:src="@drawable/member"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView25"
+                            app:layout_constraintEnd_toStartOf="@+id/textView25"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toEndOf="@+id/view"
+                            app:layout_constraintTop_toTopOf="@+id/textView25" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/lato"
+                            android:text="Members"
+                            android:textColor="#4F62C1"
+                            android:textSize="19dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/ivMembers"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvMember"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/textView25"
+                            android:layout_alignParentRight="true"
+
+                            android:layout_marginBottom="7dp"
+                            android:fontFamily="@font/lato_bold"
+                            android:text="0"
+                            android:textColor="#424242"
+                            android:textSize="20dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/textView24"
+                            app:layout_constraintStart_toStartOf="@+id/ivHeartFilled"
+                            app:layout_constraintTop_toBottomOf="@+id/textView24"
+                            app:layout_constraintVertical_bias="0.32999998" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#707070" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:autoSizeMaxTextSize="16dp"
+                    android:autoSizeTextType="uniform"
+                    android:fontFamily="@font/lato_bold"
+                    android:gravity="end"
+                    android:importantForAutofill="yes"
+                    android:text="Top 10 Supportes"
                     android:textColor="#424242"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/button"
+                    app:layout_constraintEnd_toStartOf="@+id/button"
+                    app:layout_constraintHorizontal_bias="0.226"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                <View
-                    android:layout_width="0.5dp"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:background="#707070" />
-
-                <ImageView
-                    android:id="@+id/ivMembers"
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginRight="7dp"
-                    android:layout_toLeftOf="@+id/textView25"
-                    android:src="@drawable/member" />
-
-                <TextView
-                    android:id="@+id/textView25"
+                <Button
+                    android:id="@+id/button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="9dp"
-
-                    android:layout_marginRight="32dp"
-                    android:fontFamily="@font/lato"
-                    android:text="Supports"
-                    android:textColor="#4F62C1"
-                    android:textSize="19dp" />
-
-                <TextView
-                    android:id="@+id/tvMember"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView25"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="9dp"
-
-                    android:layout_marginRight="46dp"
-                    android:layout_marginBottom="9dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginEnd="44dp"
+                    android:background="@drawable/rectangle_border"
+                    android:backgroundTint="#F5487F"
                     android:fontFamily="@font/lato_bold"
-                    android:text="1987"
-                    android:textColor="#424242"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    android:text="@string/view_all"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="#707070" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView54"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="24dp"
-            android:autoSizeMaxTextSize="16dp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/lato_bold"
-            android:gravity="end"
-            android:importantForAutofill="yes"
-            android:text="Top 10 Supportes"
-            android:textColor="#424242"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/button"
-            app:layout_constraintEnd_toStartOf="@+id/button"
-            app:layout_constraintHorizontal_bias="0.226"
-            app:layout_constraintStart_toStartOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/supporterRec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp"
+                    android:nestedScrollingEnabled="false"
+                    android:paddingBottom="30dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/button"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/recent_support_view" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="44dp"
+            android:id="@+id/btnSupportFund"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/rectangle_border"
             android:backgroundTint="#F5487F"
             android:fontFamily="@font/lato_bold"
-            android:text="View All"
+            android:text="@string/withdraw_fund"
             android:textColor="@android:color/white"
-            android:textSize="10dp"
+            android:textSize="19sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/supporterRec"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="24dp"
-            android:nestedScrollingEnabled="false"
-            android:paddingBottom="30dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
-            tools:itemCount="5"
-            tools:listitem="@layout/recent_support_view" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="left"
-            app:constraint_referenced_ids="textView50"
-            tools:layout_editor_absoluteX="392dp" />
-
-
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+
 </layout>

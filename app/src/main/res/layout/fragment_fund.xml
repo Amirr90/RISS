@@ -44,7 +44,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="12dp">
+                        android:padding="10dp">
 
 
                         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -60,10 +60,8 @@
                             android:id="@+id/rlNamingLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignBottom="@+id/ivFund"
                             android:layout_marginLeft="12dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginBottom="14dp"
+                            android:layout_marginTop="5dp"
                             android:layout_toRightOf="@id/ivFund"
                             android:orientation="vertical">
 
@@ -74,7 +72,7 @@
                                 android:fontFamily="@font/lato_bold"
                                 android:text="@{fund.getString(`fundName`)}"
                                 android:textColor="#424242"
-                                android:textSize="21dp"
+                                android:textSize="21sp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -84,29 +82,30 @@
                                 android:fontFamily="@font/lato_bold"
                                 android:text="@{fund.getString(`createdBy`)}"
                                 android:textColor="#626262"
-                                android:textSize="19dp"
+                                android:textSize="19sp"
                                 android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/textView19"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
                                 android:fontFamily="@font/lato_italic"
-                                android:text="@{`fId: `+fund.getString(`fundId`)}"
+                                android:text="@{`fund Id: `+fund.getString(`fundId`)}"
                                 android:textColor="#626262"
-                                android:textSize="10dp" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <TextView
                             android:id="@+id/textView20"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/ivFund"
-                            android:layout_marginTop="21dp"
+                            android:layout_below="@+id/textView21"
+                            android:layout_marginTop="15dp"
                             android:fontFamily="@font/lato_bold"
                             android:text="Current Value"
                             android:textColor="#626262"
-                            android:textSize="19dp"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -118,19 +117,19 @@
                             android:fontFamily="@font/lato"
                             android:text="@{`Expiry Date : `+fund.getString(`expiryDate`)}"
                             android:textColor="#626262"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/textView22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/rlNamingLayout"
+                            android:layout_below="@+id/textView21"
                             android:layout_alignParentRight="true"
-                            android:layout_marginTop="21dp"
+                            android:layout_marginTop="15dp"
                             android:layout_marginRight="18dp"
                             android:fontFamily="@font/lato_bold"
                             android:textColor="#5AC557"
-                            android:textSize="19dp"
+                            android:textSize="19sp"
                             android:textStyle="bold" />
 
 
@@ -142,71 +141,99 @@
                         android:layout_marginTop="12dp"
                         android:background="#707070" />
 
-                    <RelativeLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp">
+                        android:layout_height="80dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
                             android:id="@+id/ivHeartFilled"
                             android:layout_width="17dp"
                             android:layout_height="17dp"
-                            android:layout_marginLeft="23dp"
-                            android:layout_marginTop="12dp"
-                            android:src="@drawable/heart_filled" />
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/heart_filled"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                            app:layout_constraintEnd_toStartOf="@+id/textView24"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/textView24" />
 
                         <TextView
                             android:id="@+id/textView24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="7dp"
-                            android:layout_marginTop="9dp"
+                            android:layout_marginTop="16dp"
                             android:layout_toRightOf="@+id/ivHeartFilled"
                             android:fontFamily="@font/lato"
                             android:text="Total Likes"
                             android:textColor="#4F62C1"
-                            android:textSize="19dp" />
+                            android:textSize="19sp"
+                            app:layout_constraintEnd_toStartOf="@+id/view"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/ivHeartFilled"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/tvLikes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/textView24"
-                            android:layout_marginLeft="53dp"
-                            android:layout_marginTop="9dp"
-                            android:layout_marginBottom="9dp"
+                            android:layout_marginBottom="7dp"
                             android:fontFamily="@font/lato_bold"
-                            android:text="3,987"
+                            android:text="0"
                             android:textColor="#424242"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/ivMembers"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25"
+                            app:layout_constraintVertical_bias="0.32999998" />
 
                         <View
+                            android:id="@+id/view"
                             android:layout_width="0.5dp"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:background="#707070" />
+                            android:background="#707070"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/ivMembers"
                             android:layout_width="17dp"
                             android:layout_height="17dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginRight="7dp"
+                            android:layout_marginEnd="8dp"
                             android:layout_toLeftOf="@+id/textView25"
-                            android:src="@drawable/member" />
+                            android:src="@drawable/member"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView25"
+                            app:layout_constraintEnd_toStartOf="@+id/textView25"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toEndOf="@+id/view"
+                            app:layout_constraintTop_toTopOf="@+id/textView25" />
 
                         <TextView
                             android:id="@+id/textView25"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
-                            android:layout_marginTop="9dp"
 
-                            android:layout_marginRight="32dp"
+                            android:layout_marginTop="16dp"
                             android:fontFamily="@font/lato"
                             android:text="Members"
                             android:textColor="#4F62C1"
-                            android:textSize="19dp" />
+                            android:textSize="19dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/ivMembers"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/tvMember"
@@ -214,16 +241,19 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/textView25"
                             android:layout_alignParentRight="true"
-                            android:layout_marginTop="9dp"
 
-                            android:layout_marginRight="46dp"
-                            android:layout_marginBottom="9dp"
+                            android:layout_marginBottom="7dp"
                             android:fontFamily="@font/lato_bold"
                             android:text="0"
                             android:textColor="#424242"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/textView24"
+                            app:layout_constraintStart_toStartOf="@+id/ivHeartFilled"
+                            app:layout_constraintTop_toBottomOf="@+id/textView24"
+                            app:layout_constraintVertical_bias="0.32999998" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
                         android:layout_width="match_parent"
