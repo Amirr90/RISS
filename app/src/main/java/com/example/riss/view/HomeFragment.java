@@ -230,9 +230,8 @@ public class HomeFragment extends Fragment {
                             navController.navigate(R.id.action_homeFragment_to_distributionHistoryFragment);
                             break;
                         case 5:
-                            Bundle bundle = new Bundle();
-                            bundle.putString(FROM, "HomeFragment");
-                            navController.navigate(R.id.action_homeFragment_to_createFundFragment, bundle);
+                            navController.navigate(R.id.action_homeFragment_to_myDashboardFragment);
+
                             break;
                         case 6:
                             navController.navigate(R.id.action_homeFragment_to_searchFundFragment);

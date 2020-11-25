@@ -89,4 +89,13 @@ dependencies {
     implementation 'com.razorpay:checkout:1.5.16'
 
 
+    //high chart
+    //implementation 'com.highsoft.highcharts:highcharts:8.1.2'
+
+    implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
+
+
+
+
 }

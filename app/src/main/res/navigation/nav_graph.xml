@@ -66,6 +66,13 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_myDashboardFragment"
+            app:destination="@id/myDashboardFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/topFundsFragment"
@@ -244,4 +251,9 @@
         android:name="com.example.riss.view.MyFund"
         android:label="Fund"
         tools:layout="@layout/fragment_my_fund" />
+    <fragment
+        android:id="@+id/myDashboardFragment"
+        android:name="com.example.riss.view.MyDashboardFragment"
+        android:label="fragment_my_dashboard"
+        tools:layout="@layout/fragment_my_dashboard" />
 </navigation>
