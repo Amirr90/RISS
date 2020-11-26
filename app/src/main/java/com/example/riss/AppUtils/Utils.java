@@ -2,6 +2,7 @@ package com.example.riss.AppUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -203,6 +205,19 @@ public class Utils {
         }
     }
 
+    public static String getCountInRomanFormat(String num) {
+        Number number = Integer.parseInt(num);
+        char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
+        long numValue = number.longValue();
+        int value = (int) Math.floor(Math.log10(numValue));
+        int base = value / 3;
+        if (value >= 3 && base < suffix.length) {
+            return new DecimalFormat("#0.0").format(numValue / Math.pow(10, base * 3)) + suffix[base];
+        } else {
+            return new DecimalFormat("#,##0").format(numValue);
+        }
+    }
+
     public static String getCurrencyFormat(double num) {
         String COUNTRY = "IN";
         String LANGUAGE = "en";
@@ -353,5 +368,31 @@ public class Utils {
                 "24", "30",
         };
         return ITEMS[position];
+    }
+
+
+    public static List<Integer> getColorList() {
+        List<Integer> color = new ArrayList<>();
+        color.add(Color.parseColor("#56B7F1"));
+        color.add(Color.parseColor("#CDA67F"));
+        color.add(Color.parseColor("#abd166"));
+        color.add(Color.parseColor("#28B463"));
+        color.add(Color.parseColor("#F7DC6F"));
+        color.add(Color.parseColor("#1F618D"));
+        color.add(Color.parseColor("#F5B7B1"));
+        color.add(Color.parseColor("#CCCCFF"));
+        color.add(Color.parseColor("#6495ED"));
+        color.add(Color.parseColor("#ff00bf"));
+        color.add(Color.parseColor("#0080ff"));
+        color.add(Color.parseColor("#40ff00"));
+        color.add(Color.parseColor("#80ff00"));
+        color.add(Color.parseColor("#ff9966"));
+        color.add(Color.parseColor("#abd1ba"));
+        color.add(Color.parseColor("#c2c2a3"));
+        color.add(Color.parseColor("#56B7F1"));
+        color.add(Color.parseColor("#CDA67F"));
+        color.add(Color.parseColor("#FED70E"));
+        color.add(Color.parseColor("#FED70E"));
+        return color;
     }
 }

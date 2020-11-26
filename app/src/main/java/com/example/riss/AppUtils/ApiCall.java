@@ -2,6 +2,7 @@ package com.example.riss.AppUtils;
 
 import com.example.riss.interfaces.Api;
 import com.example.riss.interfaces.ApiCallbackInterface;
+import com.example.riss.models.DashboardModel;
 
 import java.util.Map;
 import java.util.UUID;
@@ -30,6 +31,26 @@ public class ApiCall {
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
+                apiCallbackInterface.onFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public static void getDashboardData(final ApiCallbackInterface apiCallbackInterface) {
+        final Api api = ApiUtils.getAPIService();
+        Call<DashboardModel> getTopFund = api.getDashboardData(getUid());
+        getTopFund.enqueue(new Callback<DashboardModel>() {
+            @Override
+            public void onResponse(Call<DashboardModel> call, Response<DashboardModel> response) {
+                if (response.code() == 200) {
+                    if (response.body().getResponseCode() == 1) {
+                        apiCallbackInterface.onSuccess(response.body());
+                    } else apiCallbackInterface.onFailed(response.body().getResult());
+                } else apiCallbackInterface.onFailed(response.errorBody().toString());
+            }
+
+            @Override
+            public void onFailure(Call<DashboardModel> call, Throwable t) {
                 apiCallbackInterface.onFailed(t.getLocalizedMessage());
             }
         });

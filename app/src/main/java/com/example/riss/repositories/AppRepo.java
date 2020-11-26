@@ -8,8 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.riss.AppUtils.ApiCall;
 import com.example.riss.AppUtils.Utils;
 import com.example.riss.interfaces.ApiCallbackInterface;
+import com.example.riss.models.DashboardModel;
 import com.example.riss.models.Fund;
 import com.example.riss.models.FundsModel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,7 +45,40 @@ public class AppRepo {
     public MutableLiveData<List<Fund>> topFundByIdMutableLiveData;
     public MutableLiveData<List<FundsModel>> otherFundsMutableLiveData;
     public MutableLiveData<DocumentSnapshot> FundsMutableLiveData;
+    public MutableLiveData<DashboardModel> dashboardMutableLiveData;
 
+
+    public LiveData<DashboardModel> getDashboardData(Activity activity) {
+        if (dashboardMutableLiveData == null) {
+            dashboardMutableLiveData = new MutableLiveData<>();
+        }
+        loadDashboardData(activity);
+        return dashboardMutableLiveData;
+
+    }
+
+    private void loadDashboardData(final Activity activity) {
+        showAlertDialog(activity);
+        ApiCall.getDashboardData(new ApiCallbackInterface() {
+            @Override
+            public void onSuccess(Object obj) {
+                hideAlertDialog();
+                DashboardModel dashboardModel = (DashboardModel) obj;
+                Log.d(TAG, "onSuccess: " + dashboardModel);
+                if (null != dashboardModel) {
+                    dashboardMutableLiveData.setValue(dashboardModel);
+                } else Toast.makeText(activity, "try again", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                hideAlertDialog();
+                Toast.makeText(activity, "try again ", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onFailed: " + msg);
+            }
+        });
+    }
 
     public LiveData<List<Fund>> getTopFundById(String text, Activity activity) {
         if (topFundByIdMutableLiveData == null) {
