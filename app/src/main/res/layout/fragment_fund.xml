@@ -182,17 +182,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/textView24"
-                            android:layout_marginBottom="7dp"
+                            android:layout_marginTop="8dp"
                             android:fontFamily="@font/lato_bold"
-                            android:text="0"
                             android:textColor="#424242"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/textView25"
-                            app:layout_constraintStart_toStartOf="@+id/ivMembers"
-                            app:layout_constraintTop_toBottomOf="@+id/textView25"
-                            app:layout_constraintVertical_bias="0.32999998" />
+                            app:layout_constraintEnd_toEndOf="@+id/textView24"
+                            app:layout_constraintStart_toStartOf="@+id/ivHeartFilled"
+                            app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
                         <View
                             android:id="@+id/view"
@@ -210,7 +207,6 @@
                             android:layout_width="17dp"
                             android:layout_height="17dp"
                             android:layout_marginEnd="8dp"
-                            android:layout_toLeftOf="@+id/textView25"
                             android:src="@drawable/member"
                             app:layout_constraintBottom_toBottomOf="@+id/textView25"
                             app:layout_constraintEnd_toStartOf="@+id/textView25"
@@ -223,13 +219,11 @@
                             android:id="@+id/textView25"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/lato"
-                            android:text="Members"
+                            android:text="@string/supports"
                             android:textColor="#4F62C1"
-                            android:textSize="19dp"
+                            android:textSize="19sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toEndOf="@+id/ivMembers"
@@ -240,19 +234,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/textView25"
-                            android:layout_alignParentRight="true"
-
-                            android:layout_marginBottom="7dp"
+                            android:layout_marginTop="8dp"
                             android:fontFamily="@font/lato_bold"
-                            android:text="0"
                             android:textColor="#424242"
-                            android:textSize="20dp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/textView24"
-                            app:layout_constraintStart_toStartOf="@+id/ivHeartFilled"
-                            app:layout_constraintTop_toBottomOf="@+id/textView24"
-                            app:layout_constraintVertical_bias="0.32999998" />
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/ivMembers"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View

@@ -99,15 +99,16 @@
                     android:id="@+id/textView52"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/lato"
                     android:text="Total Balance"
                     android:textColor="#626262"
                     android:textSize="14dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView53"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/ivFund"
-                    app:layout_constraintVertical_bias="0.48000002" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFund" />
 
                 <TextView
 
@@ -118,24 +119,22 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="9,500"
                     android:textColor="#5AC557"
-                    android:textSize="21dp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/ivFund"
                     app:layout_constraintEnd_toEndOf="@+id/textView52"
-                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_bias="0.551"
                     app:layout_constraintStart_toStartOf="@+id/textView52"
-                    app:layout_constraintTop_toBottomOf="@+id/textView52"
-                    app:layout_constraintVertical_bias="0.17000002" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivFund">
+                    app:layout_constraintTop_toBottomOf="@+id/textView53">
 
                     <View
                         android:layout_width="match_parent"
@@ -184,17 +183,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/textView24"
-                            android:layout_marginBottom="7dp"
+                            android:layout_marginBottom="8dp"
                             android:fontFamily="@font/lato_bold"
                             android:text="0"
                             android:textColor="#424242"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/textView25"
-                            app:layout_constraintStart_toStartOf="@+id/ivMembers"
-                            app:layout_constraintTop_toBottomOf="@+id/textView25"
-                            app:layout_constraintVertical_bias="0.32999998" />
+                            app:layout_constraintEnd_toEndOf="@+id/textView24"
+                            app:layout_constraintStart_toStartOf="@+id/ivHeartFilled"
+                            app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
                         <View
                             android:id="@+id/view"
@@ -229,7 +227,7 @@
 
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/lato"
-                            android:text="Members"
+                            android:text="@string/supports"
                             android:textColor="#4F62C1"
                             android:textSize="19dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -242,19 +240,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/textView25"
-                            android:layout_alignParentRight="true"
-
-                            android:layout_marginBottom="7dp"
+                            android:layout_marginBottom="8dp"
                             android:fontFamily="@font/lato_bold"
                             android:text="0"
                             android:textColor="#424242"
-                            android:textSize="20dp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/textView24"
-                            app:layout_constraintStart_toStartOf="@+id/ivHeartFilled"
-                            app:layout_constraintTop_toBottomOf="@+id/textView24"
-                            app:layout_constraintVertical_bias="0.32999998" />
+                            app:layout_constraintEnd_toEndOf="@+id/textView25"
+                            app:layout_constraintStart_toStartOf="@+id/ivMembers"
+                            app:layout_constraintTop_toBottomOf="@+id/textView25" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
@@ -268,20 +263,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="16dp"
                     android:autoSizeMaxTextSize="16dp"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/lato_bold"
-                    android:gravity="end"
                     android:importantForAutofill="yes"
-                    android:text="Top 10 Supportes"
+                    android:text="Top Five Supporters"
                     android:textColor="#424242"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/button"
+                    app:layout_constraintBottom_toBottomOf="@+id/button"
                     app:layout_constraintEnd_toStartOf="@+id/button"
-                    app:layout_constraintHorizontal_bias="0.226"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/button" />
 
                 <Button
                     android:id="@+id/button"
@@ -307,33 +301,35 @@
                     android:nestedScrollingEnabled="false"
                     android:paddingBottom="30dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/button"
-                    tools:itemCount="5"
+                    tools:itemCount="2"
                     tools:listitem="@layout/recent_support_view" />
+
+                <Button
+                    android:id="@+id/btnSupportFund"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/rectangle_border"
+                    android:backgroundTint="#F5487F"
+                    android:fontFamily="@font/lato_bold"
+                    android:text="@string/withdraw_fund"
+                    android:textColor="@android:color/white"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/supporterRec" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/btnSupportFund"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rectangle_border"
-            android:backgroundTint="#F5487F"
-            android:fontFamily="@font/lato_bold"
-            android:text="@string/withdraw_fund"
-            android:textColor="@android:color/white"
-            android:textSize="19sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

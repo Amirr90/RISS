@@ -1,7 +1,10 @@
 package com.example.riss.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,25 +14,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.example.riss.R;
 import com.example.riss.databinding.DashboardStatsViewBinding;
 import com.example.riss.databinding.FragmentMyDashboardBinding;
 import com.example.riss.models.DashboardModel;
-import com.example.riss.models.Fund;
 import com.example.riss.models.FundsModel;
 import com.example.riss.models.StatsModel;
 import com.example.riss.viewModel.AppViewModel;
 
-import org.eazegraph.lib.charts.StackedBarChart;
-import org.eazegraph.lib.models.BarModel;
 import org.eazegraph.lib.models.PieModel;
-import org.eazegraph.lib.models.StackedBarModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,12 +125,16 @@ public class MyDashboardFragment extends Fragment {
         }
         dashboardBinding.piechart.startAnimation();
 
-        setPieChartLegendsRec();
+        setPieChartLegendsRec(fundList);
     }
 
-    private void setPieChartLegendsRec() {
+    private void setPieChartLegendsRec(List<FundsModel> fundList) {
 
+        List<Integer> colors = getColorList();
         List<StatsModel> statsModels = new ArrayList<>();
+        for (int a = 0; a < fundList.size(); a++) {
+            statsModels.add(new StatsModel(0, colors.get(a), fundList.get(a).getFundName(), "10", ""));
+        }
         dashboardBinding.recPieStats.setAdapter(new PieStatsAdapter(statsModels));
     }
 
@@ -147,6 +144,7 @@ public class MyDashboardFragment extends Fragment {
         super.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
+
 
     private class StatsAdapter extends RecyclerView.Adapter<StatsAdapter.StatsVH> {
         List<StatsModel> statsModels;
@@ -169,8 +167,7 @@ public class MyDashboardFragment extends Fragment {
             try {
                 StatsModel statsModel = statsModels.get(position);
                 holder.viewBinding.setStats(statsModel);
-               /* holder.viewBinding.linearLayout2.setBackgroundColor(statsModel.getColorCode());
-                holder.viewBinding.imageView15.setImageResource(statsModel.getIcon());*/
+
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.d(TAG, "onBindViewHolder: " + e.getLocalizedMessage());

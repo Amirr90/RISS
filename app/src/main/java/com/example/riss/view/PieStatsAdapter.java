@@ -31,11 +31,17 @@ public class PieStatsAdapter extends RecyclerView.Adapter<PieStatsAdapter.PieVH>
     @Override
     public void onBindViewHolder(@NonNull PieVH holder, int position) {
 
+        try {
+            StatsModel statsModel = statsModels.get(position);
+            holder.viewBinding.setStats(statsModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        return statsModels.size();
     }
 
     public class PieVH extends RecyclerView.ViewHolder {
