@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import com.example.riss.AppUtils.ResponseModel;
 import com.example.riss.models.DashboardModel;
+import com.example.riss.models.OTPModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -33,9 +34,17 @@ public interface Api {
 
 
     @GET("generateOtp")
-    Call<Void> generateOtp(
+    Call<OTPModel> generateOtp(
             @Query("uid") String uid,
             @Query("mobileNumber") String mobileNumber
+    );
+
+    @GET("sms")
+    Call<Void> sendOtp(
+            @Query("auth") String auth,
+            @Query("msisdn") String msisdn,
+            @Query("senderid") String senderid,
+            @Query("message") String mobileNumber
     );
 
 

@@ -1,8 +1,11 @@
 package com.example.riss.AppUtils;
 
+import android.util.Log;
+
 import com.example.riss.interfaces.Api;
 import com.example.riss.interfaces.ApiCallbackInterface;
 import com.example.riss.models.DashboardModel;
+import com.example.riss.models.OTPModel;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -17,6 +20,7 @@ import static com.example.riss.AppUtils.Utils.getUid;
 
 public class ApiCall {
 
+    private static final String TAG = "ApiCall";
 
     public static void getTopFunds(final ApiCallbackInterface apiCallbackInterface) {
         final Api api = ApiUtils.getAPIService();
@@ -117,20 +121,54 @@ public class ApiCall {
         final Api api = ApiUtils.getAPIService();
 
         String uid = getUid();
-        Call<Void> generateOtp = api.generateOtp(uid, number);
+        Call<OTPModel> generateOtp = api.generateOtp(uid, number);
+
+        generateOtp.enqueue(new Callback<OTPModel>() {
+            @Override
+            public void onResponse(@NotNull Call<OTPModel> call, @NotNull Response<OTPModel> response) {
+                try {
+                    if (response.code() == 200 && response.body() != null) {
+                        if (response.body().getResponeCode() == 1) {
+                            apiCallbackInterface.onSuccess(String.valueOf(response.body().getOtp()));
+                        } else apiCallbackInterface.onFailed(response.body().getResult());
+                    } else apiCallbackInterface.onFailed("try again");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<OTPModel> call, @NotNull Throwable t) {
+                apiCallbackInterface.onFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public static void sendOtp(String otp, String number, final ApiCallbackInterface apiCallbackInterface) {
+        final Api api = ApiUtils.getOtpURl();
+        String authKey = "D!~5682Lrpn4QxQWG";
+        String senderId = "JHASMS";
+        String msg = "Use " + otp + " to verify your mobile number";
+
+        Call<Void> generateOtp = api.sendOtp(authKey, number, senderId, msg);
 
         generateOtp.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NotNull Call<Void> call, @NotNull Response<Void> response) {
                 if (response.code() == 200) {
                     apiCallbackInterface.onSuccess("OTP Sent");
-                } else apiCallbackInterface.onFailed("try again");
+                    Log.d(TAG, "OTP sent Response : " + response.body());
+                } else {
+                    apiCallbackInterface.onFailed("try again");
+                }
 
             }
 
             @Override
             public void onFailure(@NotNull Call<Void> call, @NotNull Throwable t) {
                 apiCallbackInterface.onFailed(t.getLocalizedMessage());
+                Log.d(TAG, "OTP  not sent Response : " + t.getLocalizedMessage());
             }
         });
     }

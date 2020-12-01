@@ -111,8 +111,8 @@ public class AddDistributionFragment extends Fragment {
         ApiCall.requestOtp(number, new ApiCallbackInterface() {
             @Override
             public void onSuccess(Object obj) {
-                startTimer();
-                Toast.makeText(requireActivity(), "OTP send successfully to number " + number, Toast.LENGTH_SHORT).show();
+                String otp = (String) obj;
+                sendOtp(otp);
             }
 
             @Override
@@ -124,6 +124,23 @@ public class AddDistributionFragment extends Fragment {
 
     private void startTimer() {
 
+    }
+
+    private void sendOtp(String otp) {
+
+        String number = addDistributionBinding.etMobileToDis.getText().toString();
+        ApiCall.sendOtp(otp, number, new ApiCallbackInterface() {
+            @Override
+            public void onSuccess(Object obj) {
+                Toast.makeText(requireActivity(), "OTP send successfully to number " + addDistributionBinding.etMobileToDis.getText().toString(), Toast.LENGTH_SHORT).show();
+                startTimer();
+            }
+
+            @Override
+            public void onFailed(String msg) {
+
+            }
+        });
     }
 
     private void checkMedicineStatus() {
