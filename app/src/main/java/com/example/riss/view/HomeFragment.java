@@ -106,6 +106,7 @@ public class HomeFragment extends Fragment {
             public void profileData(DocumentSnapshot snapshot) {
                 homeBinding.setUser(snapshot);
                 setUser(snapshot);
+                homeBinding.group3.setVisibility(View.VISIBLE);
 
             }
 
@@ -269,10 +270,6 @@ public class HomeFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-    }
+
 
 }

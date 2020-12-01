@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.riss.AppUtils.ApiCall;
 import com.example.riss.HomeScreen;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentAddDistributionBinding;
@@ -91,6 +92,38 @@ public class AddDistributionFragment extends Fragment {
 
             }
         });
+
+
+        addDistributionBinding.btnGetOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String number = addDistributionBinding.etMobileToDis.getText().toString().trim();
+                if (number.length() == 10) {
+                    addDistributionBinding.btnGetOTP.setEnabled(false);
+                    requestOtp(number);
+                }
+            }
+        });
+    }
+
+    private void requestOtp(final String number) {
+
+        ApiCall.requestOtp(number, new ApiCallbackInterface() {
+            @Override
+            public void onSuccess(Object obj) {
+                startTimer();
+                Toast.makeText(requireActivity(), "OTP send successfully to number " + number, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailed(String msg) {
+                Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void startTimer() {
+
     }
 
     private void checkMedicineStatus() {
@@ -106,9 +139,13 @@ public class AddDistributionFragment extends Fragment {
         distributeMedicine(map, new ApiCallbackInterface() {
             @Override
             public void onSuccess(Object obj) {
+
                 hideAlertDialog();
-                Toast.makeText(requireActivity(), "Added Successfully", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(requireActivity(), "" + (String) obj, Toast.LENGTH_SHORT).show();
+
                 HomeScreen.getInstance().onSupportNavigateUp();
+
             }
 
             @Override

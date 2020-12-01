@@ -1,34 +1,30 @@
 package com.example.riss.view;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.example.riss.AdapterInterface;
-import com.example.riss.AppUtils.Utils;
 import com.example.riss.R;
 import com.example.riss.adapters.DistributorDetailsAdapter;
 import com.example.riss.databinding.FragmentDistributionHistoryBinding;
-import com.example.riss.databinding.FragmentDistributorDetailBinding;
 import com.example.riss.viewModel.AppViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.model.Document;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +86,12 @@ public class DistributionHistoryFragment extends Fragment implements AdapterInte
             }
         });
 
+        distributionHistoryBinding.addDistributorBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_distributionHistoryFragment_to_addDistributionFragment);
+            }
+        });
 
         loadData(null);
 
@@ -119,8 +121,7 @@ public class DistributionHistoryFragment extends Fragment implements AdapterInte
 
                 }
             });
-        }
-        else {
+        } else {
             getFirestoreReference().collection(MedicineDistribute)
                     //.whereEqualTo(uid, getUid())
                     .orderBy("name")
@@ -147,6 +148,11 @@ public class DistributionHistoryFragment extends Fragment implements AdapterInte
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+    }
 
     @Override
     public void onItemClicked(Object o) {

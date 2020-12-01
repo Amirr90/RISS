@@ -308,7 +308,7 @@
                     tools:listitem="@layout/recent_support_view" />
 
                 <Button
-                    android:id="@+id/btnSupportFund"
+                    android:id="@+id/btnWithdrawFund"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_alignParentBottom="true"

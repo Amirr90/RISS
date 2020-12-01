@@ -2,10 +2,8 @@ package com.example.riss.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,19 +17,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.riss.AppUtils.Utils;
-import com.example.riss.PaymentUtils.Pay;
 import com.example.riss.PaymentUtils.PaymentCallback;
 import com.example.riss.PaymentUtils.StartPayment;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentSupportFundBinding;
 import com.example.riss.databinding.RequestAmountDialogViewBinding;
-import com.example.riss.databinding.RequestMedicineDialogViewBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-
-import okhttp3.internal.Util;
 
 import static com.example.riss.AppUtils.Utils.FundSupportPayment;
 import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_PENDING;

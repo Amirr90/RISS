@@ -125,4 +125,11 @@
     <string name="enetr_quantity">Enter quantity here</string>
     <string name="view_all">View All</string>
     <string name="supports">Support</string>
+    <string name="fund_name">Fund Name</string>
+    <string name="mobile_number">Mobile No</string>
+    <string name="otp">OTP</string>
+    <string name="heading_withdraw_fund">RULES FOR WITHDRAWAL FROM A FUND</string>
+    <string name="withdraw_rule_1">1. Minimum withdraw amount will be Rs 1000.</string>
+    <string name="withdraw_rule_2">2. Next withdrawal request could be done only after 30 days of previous withdrawal.</string>
+    <string name="withdraw_rule_3">3. Handling Charges on Fund Withdrawal :-</string>
 </resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="termsCondition"
+            type="com.example.riss.models.TermsConditionModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView83"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="@{termsCondition.serial}"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/view4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView84"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginBottom="15dp"
+            android:text="@{termsCondition.withdrawalPercentage}"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/view4"
+            app:layout_constraintStart_toEndOf="@+id/textView83"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="15dp"
+            android:text="@{termsCondition.handlingCharges}"
+            android:textColor="@color/colorAccent"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="wrap_content"
+            android:layout_height="0.8dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView84" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

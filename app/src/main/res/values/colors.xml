@@ -4,4 +4,34 @@
     <color name="colorPrimaryDark">#1F306E</color>
     <color name="colorAccent">#424242</color>
     <color name="colorBackground">#F4F4F4</color>
+
+
+    <!--Random Color-->
+    <color name="color1">#C0CA33</color>
+    <color name="color2">#CDA67F</color>
+    <color name="color3">#abd166</color>
+    <color name="color4">#28B463</color>
+    <color name="color6">#1F618D</color>
+    <color name="color7">#F5B7B1</color>
+    <color name="color8">#CCCCFF</color>
+    <color name="color9">#6495ED</color>
+    <color name="color10">#ff00bf</color>
+    <color name="color12">#0080ff</color>
+    <color name="color13">#40ff00</color>
+    <color name="color14">#80ff00</color>
+    <color name="color15">#ff9966</color>
+    <color name="color16">#abd1ba</color>
+    <color name="color17">#c2c2a3</color>
+    <color name="color18">#CDA67F</color>
+    <color name="color19">#FED70E</color>
+    <color name="color20">#F4511E</color>
+    <color name="color5">#F7DC6F</color>
+    <color name="color11">#7CB342</color>
+
+
+    <color name="colorRedLight">#FBC2C2</color>
+    <color name="colorGreenLight">#A8F5DB</color>
+    <color name="colorBlueLight">#CBCEFF</color>
+    <color name="colorYellowLight">#FFF6CB</color>
+
 </resources>

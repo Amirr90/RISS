@@ -1,5 +1,7 @@
 package com.example.riss.view;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,11 @@ import java.util.List;
 
 public class PieStatsAdapter extends RecyclerView.Adapter<PieStatsAdapter.PieVH> {
     List<StatsModel> statsModels;
+    Context context;
 
-    public PieStatsAdapter(List<StatsModel> statsModels) {
+    public PieStatsAdapter(List<StatsModel> statsModels, Context context) {
         this.statsModels = statsModels;
+        this.context = context;
     }
 
     @NonNull
@@ -28,12 +32,15 @@ public class PieStatsAdapter extends RecyclerView.Adapter<PieStatsAdapter.PieVH>
         return new PieVH(viewBinding);
     }
 
+    @SuppressLint("UseCompatLoadingForColorStateLists")
     @Override
     public void onBindViewHolder(@NonNull PieVH holder, int position) {
 
         try {
             StatsModel statsModel = statsModels.get(position);
             holder.viewBinding.setStats(statsModel);
+            holder.viewBinding.linearLayout4.setBackgroundTintList(context.getResources().getColorStateList(statsModel.getColorCode()));
+
         } catch (Exception e) {
             e.printStackTrace();
         }

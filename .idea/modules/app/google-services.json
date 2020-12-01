@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "1069027970140",
+    "firebase_url": "https://riss-68d96.firebaseio.com",
+    "project_id": "riss-68d96",
+    "storage_bucket": "riss-68d96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069027970140:android:a4bbccd512618960636a99",
+        "android_client_info": {
+          "package_name": "com.example.riss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069027970140-9si2lsgludu41gpvdnlle0o2v7umfhn9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riss",
+            "certificate_hash": "9ab130af24a445e6b014e441f8c347c8f3e0719e"
+          }
+        },
+        {
+          "client_id": "1069027970140-m7r3knool582jn16j8etvnbgih3dt9pn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.riss",
+            "certificate_hash": "ccd23b97db745af155384cbd55c7bb4416226cb9"
+          }
+        },
+        {
+          "client_id": "1069027970140-7mr3a1uftdifdnh667q7eabfgknbkdfo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwtOer7RFhSbkuRG6WOdjUHXP4FHSPJIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069027970140-7mr3a1uftdifdnh667q7eabfgknbkdfo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

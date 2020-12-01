@@ -34,7 +34,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Full Name"
                     android:textColor="#626262"
-                    android:textSize="17dp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:layout_marginBottom="25dp"
-                    android:hint="Fund Name"
+                    android:hint="Full Name"
                     android:inputType="textPersonName"
                     android:textColor="#424242"
                     android:textColorHint="#80626262" />
@@ -54,9 +54,9 @@
                     android:drawableLeft="@drawable/smartphone_small"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/lato_bold"
-                    android:text="Mobile No."
+                    android:text="@string/mobile_number"
                     android:textColor="#626262"
-                    android:textSize="17dp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -72,7 +72,7 @@
                         android:layout_marginTop="7dp"
                         android:layout_marginBottom="25dp"
                         android:layout_weight="2"
-                        android:hint="Fund Name"
+                        android:hint="@string/fund_name"
                         android:inputType="phone"
                         android:maxLength="10"
                         android:textColor="#424242"
@@ -90,7 +90,7 @@
                         android:enabled="false"
                         android:fontFamily="@font/lato_bold"
                         android:text="GET  OTP"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -100,9 +100,9 @@
                     android:drawableLeft="@drawable/address_small"
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/lato_bold"
-                    android:text="OTP"
+                    android:text="@string/otp"
                     android:textColor="#626262"
-                    android:textSize="17dp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -113,7 +113,7 @@
                     android:layout_marginBottom="25dp"
                     android:hint="OTP here"
                     android:inputType="phone"
-                    android:maxLength="4"
+                    android:maxLength="6"
                     android:textColor="#424242"
                     android:textColorHint="#80626262" />
 
@@ -125,7 +125,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Address"
                     android:textColor="#626262"
-                    android:textSize="17dp"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
 
                 <EditText
@@ -134,15 +134,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp"
                     android:layout_marginBottom="25dp"
-                    android:hint="Fund Name"
+                    android:hint="Full Address"
                     android:inputType="textPersonName"
                     android:textColor="#424242"
                     android:textColorHint="#80626262" />
+
                 <Button
                     android:id="@+id/btnDistributeMedicine"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_marginBottom="12dp"
@@ -151,7 +151,7 @@
                     android:fontFamily="@font/lato_bold"
                     android:text="Save"
                     android:textColor="@android:color/white"
-                    android:textSize="19dp"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

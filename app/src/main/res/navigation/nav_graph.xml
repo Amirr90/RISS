@@ -250,10 +250,35 @@
         android:id="@+id/myFund"
         android:name="com.example.riss.view.MyFund"
         android:label="Fund"
-        tools:layout="@layout/fragment_my_fund" />
+        tools:layout="@layout/fragment_my_fund" >
+        <action
+            android:id="@+id/action_myFund_to_withdrawFundAmountFragment"
+            app:destination="@id/withdrawFundAmountFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_myFund_to_termsConditionFragment"
+            app:destination="@id/termsConditionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
     <fragment
         android:id="@+id/myDashboardFragment"
         android:name="com.example.riss.view.MyDashboardFragment"
         android:label="fragment_my_dashboard"
         tools:layout="@layout/fragment_my_dashboard" />
+    <fragment
+        android:id="@+id/withdrawFundAmountFragment"
+        android:name="com.example.riss.view.WithdrawFundAmountFragment"
+        android:label="fragment_withdraw_fund_amount"
+        tools:layout="@layout/fragment_withdraw_fund_amount" />
+    <fragment
+        android:id="@+id/termsConditionFragment"
+        android:name="com.example.riss.TermsConditionFragment"
+        android:label="Terms Condition"
+        tools:layout="@layout/fragment_terms_condition" />
 </navigation>

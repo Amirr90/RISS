@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.riss.AppUtils.Utils;
 import com.example.riss.databinding.ActivityMainBinding;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateToken() {
-        String uid = Utils.getUid();
-
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override

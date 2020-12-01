@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,13 +16,11 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.riss.PaymentUtils.PaymentCallback;
-import com.example.riss.PaymentUtils.StartPayment;
 import com.example.riss.databinding.ActivityHomeScreenBinding;
+import com.example.riss.view.CreateFundFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultWithDataListener;
 
@@ -135,12 +132,15 @@ public class HomeScreen extends AppCompatActivity implements PaymentResultWithDa
     public void onPaymentSuccess(String s, PaymentData paymentData) {
         Log.d(TAG, "onPaymentSuccess: Status " + s);
         Log.d(TAG, "onPaymentSuccess: " + paymentData.getSignature());
-      try {
-          payment.updatePaymentStatus(paymentData.getPaymentId(), PAYMENT_STATUS_SUCCESS);
-      } catch (Exception e) {
-          e.printStackTrace();
-          Log.d(TAG, "onPaymentSuccess: "+e.getLocalizedMessage());
-      }
+        try {
+            if (null != payment)
+                payment.updatePaymentStatus(paymentData.getPaymentId(), PAYMENT_STATUS_SUCCESS);
+            else
+                CreateFundFragment.startPayment.updatePaymentStatus(paymentData.getPaymentId(), PAYMENT_STATUS_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, "onPaymentSuccess: " + e.getLocalizedMessage());
+        }
 
     }
 

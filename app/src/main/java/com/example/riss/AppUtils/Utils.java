@@ -371,13 +371,16 @@ public class Utils {
     }
 
 
-    public static List<Integer> getColorList() {
+    public static boolean isInternetConnected() {
+        return true;
+    }
+
+    public static List<Integer> getColorListForGraph() {
         List<Integer> color = new ArrayList<>();
-        color.add(Color.parseColor("#56B7F1"));
+        color.add(Color.parseColor("#C0CA33"));
         color.add(Color.parseColor("#CDA67F"));
         color.add(Color.parseColor("#abd166"));
         color.add(Color.parseColor("#28B463"));
-        color.add(Color.parseColor("#F7DC6F"));
         color.add(Color.parseColor("#1F618D"));
         color.add(Color.parseColor("#F5B7B1"));
         color.add(Color.parseColor("#CCCCFF"));
@@ -389,10 +392,37 @@ public class Utils {
         color.add(Color.parseColor("#ff9966"));
         color.add(Color.parseColor("#abd1ba"));
         color.add(Color.parseColor("#c2c2a3"));
-        color.add(Color.parseColor("#56B7F1"));
         color.add(Color.parseColor("#CDA67F"));
         color.add(Color.parseColor("#FED70E"));
-        color.add(Color.parseColor("#FED70E"));
+        color.add(Color.parseColor("#F4511E"));
+        color.add(Color.parseColor("#F7DC6F"));
+        color.add(Color.parseColor("#7CB342"));
+        return color;
+    }
+
+    public static List<Integer> getColorList() {
+        List<Integer> color = new ArrayList<>();
+        color.add(R.color.color1);
+        color.add(R.color.color2);
+        color.add(R.color.color3);
+        color.add(R.color.color4);
+        color.add(R.color.color5);
+        color.add(R.color.color6);
+        color.add(R.color.color7);
+        color.add(R.color.color8);
+        color.add(R.color.color9);
+        color.add(R.color.color10);
+        color.add(R.color.color11);
+        color.add(R.color.color12);
+        color.add(R.color.color13);
+        color.add(R.color.color14);
+        color.add(R.color.color15);
+        color.add(R.color.color15);
+        color.add(R.color.color16);
+        color.add(R.color.color17);
+        color.add(R.color.color18);
+        color.add(R.color.color19);
+        color.add(R.color.color20);
         return color;
     }
 }

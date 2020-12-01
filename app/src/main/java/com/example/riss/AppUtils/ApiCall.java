@@ -4,6 +4,8 @@ import com.example.riss.interfaces.Api;
 import com.example.riss.interfaces.ApiCallbackInterface;
 import com.example.riss.models.DashboardModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 import java.util.UUID;
 
@@ -84,7 +86,7 @@ public class ApiCall {
 
         String uid = getUid();
         String mid = UUID.randomUUID().toString();
-        Call<Void> getTopFund = api.distributeMedicine(
+        Call<ResponseModel> getTopFund = api.distributeMedicine(
                 uid,
                 map.get("qty"),
                 map.get("name"),
@@ -93,19 +95,44 @@ public class ApiCall {
                 map.get("address"),
                 System.currentTimeMillis());
 
-        getTopFund.enqueue(new Callback<Void>() {
+        getTopFund.enqueue(new Callback<ResponseModel>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.code() == 201) {
-                    apiCallbackInterface.onSuccess(response.body());
+                    apiCallbackInterface.onSuccess(response.body().getResult());
+                } else if (response.code() == 200) {
+                    apiCallbackInterface.onFailed(response.body().getResult());
                 } else apiCallbackInterface.onFailed("try again\n" + response.errorBody());
 
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
                 apiCallbackInterface.onFailed(t.getLocalizedMessage());
             }
         });
     }
+
+    public static void requestOtp(String number, final ApiCallbackInterface apiCallbackInterface) {
+        final Api api = ApiUtils.getAPIService();
+
+        String uid = getUid();
+        Call<Void> generateOtp = api.generateOtp(uid, number);
+
+        generateOtp.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NotNull Call<Void> call, @NotNull Response<Void> response) {
+                if (response.code() == 200) {
+                    apiCallbackInterface.onSuccess("OTP Sent");
+                } else apiCallbackInterface.onFailed("try again");
+
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<Void> call, @NotNull Throwable t) {
+                apiCallbackInterface.onFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
 }

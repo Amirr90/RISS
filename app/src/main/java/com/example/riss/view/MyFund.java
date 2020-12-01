@@ -1,5 +1,8 @@
 package com.example.riss.view;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,8 @@ import android.widget.Toast;
 import com.example.riss.R;
 import com.example.riss.adapters.SupportAdapter;
 import com.example.riss.databinding.FragmentMyFundBinding;
+import com.example.riss.databinding.RequestAmountDialogViewBinding;
+import com.example.riss.databinding.TermsConditionDialogViewBinding;
 import com.example.riss.interfaces.IUserProfileInterface;
 import com.example.riss.interfaces.OnClickListener;
 import com.firebase.ui.auth.data.model.User;
@@ -55,6 +61,8 @@ public class MyFund extends Fragment implements OnClickListener {
     SupportAdapter supportAdapter;
     List<DocumentSnapshot> supportFundsList;
 
+    AlertDialog optionDialog;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,6 +84,43 @@ public class MyFund extends Fragment implements OnClickListener {
         myFundBinding.supporterRec.setAdapter(supportAdapter);
 
         setFund();
+
+        myFundBinding.btnWithdrawFund.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTermsAndConditionDialog();
+            }
+        });
+
+    }
+
+    private void showTermsAndConditionDialog() {
+        LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View formElementsView = inflater.inflate(R.layout.terms_condition_dialog_view, null, false);
+
+        final TermsConditionDialogViewBinding genderViewBinding = TermsConditionDialogViewBinding.bind(formElementsView);
+
+
+        genderViewBinding.btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                optionDialog.dismiss();
+                navController.navigate(R.id.action_myFund_to_termsConditionFragment);
+            }
+        });
+
+        genderViewBinding.btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                optionDialog.dismiss();
+                navController.navigate(R.id.action_myFund_to_withdrawFundAmountFragment);
+            }
+        });
+
+        // the alert dialog
+        optionDialog = new AlertDialog.Builder(requireActivity()).create();
+        optionDialog.setView(formElementsView);
+        optionDialog.show();
 
     }
 

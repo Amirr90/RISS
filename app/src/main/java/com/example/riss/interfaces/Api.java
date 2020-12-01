@@ -31,9 +31,17 @@ public interface Api {
             @Field("timestamp") Long timestamp
     );
 
+
+    @GET("generateOtp")
+    Call<Void> generateOtp(
+            @Query("uid") String uid,
+            @Query("mobileNumber") String mobileNumber
+    );
+
+
     @FormUrlEncoded
     @POST("distributeMedicine")
-    Call<Void> distributeMedicine(
+    Call<ResponseModel> distributeMedicine(
             @Field("uid") String uid,
             @Field("qty") String qty,
             @Field("name") String name,

@@ -18,8 +18,9 @@ import java.util.Map;
 
 import static com.example.riss.AppUtils.Utils.FundSupportPayment;
 import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_SUCCESS;
+import static com.example.riss.AppUtils.Utils.SUPPORT_TYPE_BY_CREATING_FUND;
 
-public class StartPayment  {
+public class StartPayment {
     private static final String TAG = "StartPayment";
     Activity activity;
     PaymentCallback paymentCallback;
@@ -133,14 +134,16 @@ public class StartPayment  {
         checkout.setKeyID(credentials.getKEY_TEST());
 
         String image = "https://digidoctor.in/assets/images/logonew.png";
+
+        int amount = 100 * Integer.parseInt(getAmount());
         try {
             JSONObject options = new JSONObject();
-            options.put("name", "RISS APP");
+            options.put("name", getFundName());
             options.put("description", "" + System.currentTimeMillis());
             options.put("image", image);
             options.put("theme.color", "#3399cc");
             options.put("currency", "INR");
-            options.put("amount", "10000");//pass amount in currency subunits
+            options.put("amount", "" + amount);//pass amount in currency subunits
             //options.put("prefill.email", getEmail());
             options.put("prefill.contact", Utils.getMobile());
             checkout.open(activity, options);
@@ -151,24 +154,45 @@ public class StartPayment  {
 
 
     public void updatePaymentStatus(String paymentId, String status) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("paymentStatus", status);
-        map.put("razorPayId", paymentId);
-        if (status.equalsIgnoreCase(PAYMENT_STATUS_SUCCESS)) {
-            Utils.getFirestoreReference().collection(FundSupportPayment).document(getTxId()).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    paymentCallback.onPaymentSuccess();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, "onFailure: "+e.getLocalizedMessage());
-                    paymentCallback.onPaymentSuccess();
-                    Toast.makeText(activity, "Failed to update status", Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else paymentCallback.onPaymentFailed();
+        if (getSupportType().equals(SUPPORT_TYPE_BY_CREATING_FUND)) {
+            if (status.equalsIgnoreCase(PAYMENT_STATUS_SUCCESS)) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("razorPayId", paymentId);
+                Utils.getFirestoreReference().collection(FundSupportPayment).document(getFundId()).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        paymentCallback.onPaymentSuccess();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
+                        paymentCallback.onPaymentSuccess();
+                        Toast.makeText(activity, "Failed to update status", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                /* paymentCallback.onPaymentSuccess();*/
+            } else paymentCallback.onPaymentFailed();
+        } else {
+            Map<String, Object> map = new HashMap<>();
+            map.put("paymentStatus", status);
+            map.put("razorPayId", paymentId);
+            if (status.equalsIgnoreCase(PAYMENT_STATUS_SUCCESS)) {
+                Utils.getFirestoreReference().collection(FundSupportPayment).document(getTxId()).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        paymentCallback.onPaymentSuccess();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
+                        paymentCallback.onPaymentSuccess();
+                        Toast.makeText(activity, "Failed to update status", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else paymentCallback.onPaymentFailed();
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.riss.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,10 +20,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.riss.AppUtils.AddMonthsToCurrentDate;
+import com.example.riss.PaymentUtils.PaymentCallback;
+import com.example.riss.PaymentUtils.StartPayment;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentCreateFundBinding;
 import com.example.riss.databinding.LinkAadharDialogViewBinding;
 import com.example.riss.models.Fund;
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,19 +35,28 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.riss.AppUtils.Utils.FUNDS;
+import static com.example.riss.AppUtils.Utils.FundSupportPayment;
 import static com.example.riss.AppUtils.Utils.KEY_FUND_ID;
+import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_FAILED;
+import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_PENDING;
+import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_SUCCESS;
+import static com.example.riss.AppUtils.Utils.SUPPORT_TYPE_BY_CREATING_FUND;
 import static com.example.riss.AppUtils.Utils.USER_QUERY;
 import static com.example.riss.AppUtils.Utils.getDuration;
 import static com.example.riss.AppUtils.Utils.getFirestoreReference;
 import static com.example.riss.AppUtils.Utils.getInitialValue;
 import static com.example.riss.AppUtils.Utils.getPlans;
+import static com.example.riss.AppUtils.Utils.getRandomNumber;
 import static com.example.riss.AppUtils.Utils.getUid;
 import static com.example.riss.AppUtils.Utils.hideAlertDialog;
 import static com.example.riss.AppUtils.Utils.hideKeyboard;
 import static com.example.riss.AppUtils.Utils.isAadharVerified;
+import static com.example.riss.AppUtils.Utils.isInternetConnected;
 import static com.example.riss.AppUtils.Utils.showAlertDialog;
 import static com.google.common.net.HttpHeaders.FROM;
 
@@ -64,6 +77,10 @@ public class CreateFundFragment extends Fragment {
 
     String initialValue, duration;
     String[] ITEMS;
+    String createdFundId;
+
+    public static StartPayment startPayment;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,41 +101,127 @@ public class CreateFundFragment extends Fragment {
         createFundBinding.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isFieldFilled()) {
-                    hideKeyboard(requireActivity());
-                    showAlertDialog(requireActivity());
-                    getFirestoreReference().collection(USER_QUERY).document(getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            try {
-                                boolean status = documentSnapshot.getBoolean(isAadharVerified);
-                                if (status) {
-                                    Log.d(TAG, "onSuccess: Creating fund ");
-                                    createFund();
-                                } else {
-                                    hideAlertDialog();
-                                    showLinkAadharDialog();
+                if (isInternetConnected()) {
+                    if (isFieldFilled()) {
+                        hideKeyboard(requireActivity());
+                        showAlertDialog(requireActivity());
+                        getFirestoreReference().collection(USER_QUERY).document(getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                try {
+                                    boolean status = documentSnapshot.getBoolean(isAadharVerified);
+                                    if (status) {
+                                        Log.d(TAG, "onSuccess: Creating fund ");
+                                        startPayment();
+
+                                    } else {
+                                        hideAlertDialog();
+                                        showLinkAadharDialog();
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Log.d(TAG, "error in creating Fund:=>" + e.getLocalizedMessage());
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                Log.d(TAG, "error in creating Fund:=>" + e.getLocalizedMessage());
                             }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            hideAlertDialog();
-                            Toast.makeText(requireActivity(), "try again", Toast.LENGTH_SHORT).show();
-                            hideAlertDialog();
-                        }
-                    });
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                hideAlertDialog();
+                                Toast.makeText(requireActivity(), "try again", Toast.LENGTH_SHORT).show();
+                                hideAlertDialog();
+                            }
+                        });
+                    }
+                } else {
+                    Toast.makeText(requireActivity(), "No internet available", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         setSpinnerPlan();
-      /*  createFundBinding.tvFundName.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);
-        createFundBinding.tvFundID.setVisibility(from.equalsIgnoreCase("HomeFragment") ? View.GONE : View.VISIBLE);*/
+
+    }
+
+
+    private void startPayment() {
+        createdFundId = "RISS" + System.currentTimeMillis();
+        String txId = String.valueOf(getRandomNumber(10000000, 99999999));
+        startPayment = new StartPayment(requireActivity());
+        startPayment.setAmount(initialValue);
+        startPayment.setUid(getUid());
+        startPayment.setFundName(createdBy);
+        startPayment.setSupportType(SUPPORT_TYPE_BY_CREATING_FUND);
+        startPayment.setTxId(String.valueOf(System.currentTimeMillis()));
+        startPayment.setTxId(txId);
+        startPayment.setTimestamp(System.currentTimeMillis());
+        startPayment.setFundId(createdFundId);
+        startPayment.setPaymentStatus(PAYMENT_STATUS_PENDING);
+
+        //init payment
+        getFirestoreReference().collection(FundSupportPayment).document(createdFundId)
+                .set(startPayment).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+
+                startPayment.initPayment(new PaymentCallback() {
+                    @Override
+                    public void onPaymentSuccess() {
+                        updatePaymentStatus(true);
+                    }
+
+                    @Override
+                    public void onPaymentFailed() {
+                        updatePaymentStatus(false);
+                    }
+                });
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
+
+    }
+
+    private void updatePaymentStatus(final boolean isPaid) {
+        Map<String, Object> updatePaymentMap = new HashMap<>();
+        if (isPaid)
+            updatePaymentMap.put("paymentStatus", PAYMENT_STATUS_SUCCESS);
+        else {
+            updatePaymentMap.put("paymentStatus", PAYMENT_STATUS_FAILED);
+        }
+        getFirestoreReference().collection(FundSupportPayment).document(createdFundId).update(updatePaymentMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                if (isPaid) {
+                    createFund(createdFundId);
+                } else
+                    Toast.makeText(requireActivity(), "Payment Failed", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                new AlertDialog.Builder(requireActivity())
+                        .setMessage("Failed to update transaction, If money is deducted it will revert back to you with in 5 working days or contact us")
+                        .setPositiveButton("Contact us", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                Toast.makeText(requireActivity(), "show Contact us page", Toast.LENGTH_SHORT).show();
+                            }
+                        }).setNegativeButton("Dismiss", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                }).setCancelable(false)
+                        .show();
+            }
+        });
+
     }
 
     private void setSpinnerPlan() {
@@ -143,24 +246,30 @@ public class CreateFundFragment extends Fragment {
     }
 
 
-    private void createFund() {
-        getFirestoreReference().collection(FUNDS).add(fund).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+    private void createFund(final String createdFundId) {
+        getFirestoreReference().collection(FUNDS).document(createdFundId)
+                .set(fund)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        hideAlertDialog();
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "onComplete: Task");
+                            Toast.makeText(requireContext(), "Fund Created Successfully", Toast.LENGTH_SHORT).show();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString(KEY_FUND_ID, createdFundId);
+                            navController.navigate(R.id.action_createFundFragment_to_fundFragment, bundle);
+                        } else {
+                            Log.d(TAG, "onComplete: fail " + task.getException());
+                            Toast.makeText(requireActivity(), "failed to create fund, try again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnCanceledListener(new OnCanceledListener() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
+            public void onCanceled() {
                 hideAlertDialog();
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "onComplete: Task");
-                    Toast.makeText(requireContext(), "Fund Created Successfully", Toast.LENGTH_SHORT).show();
-                    String fundId = task.getResult().getId();
-
-                    Bundle bundle = new Bundle();
-                    bundle.putString(KEY_FUND_ID, fundId);
-                    navController.navigate(R.id.action_createFundFragment_to_fundFragment, bundle);
-                } else {
-                    Log.d(TAG, "onComplete: fail " + task.getException());
-                    Toast.makeText(requireActivity(), "failed to create fund, try again", Toast.LENGTH_SHORT).show();
-                }
-
+                Toast.makeText(requireActivity(), "failed to create fund, try again", Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

@@ -51,6 +51,7 @@ public class AppRepo {
     public LiveData<DashboardModel> getDashboardData(Activity activity) {
         if (dashboardMutableLiveData == null) {
             dashboardMutableLiveData = new MutableLiveData<>();
+
         }
         loadDashboardData(activity);
         return dashboardMutableLiveData;
