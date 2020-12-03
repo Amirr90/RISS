@@ -224,6 +224,12 @@ public class HomeFragment extends Fragment {
                         case 1:
                             navController.navigate(R.id.action_homeFragment_to_personalFundsFragment2);
                             break;
+                        case 2:
+                            Bundle bundle = new Bundle();
+                            bundle.putString(FROM, "SupportFundFragment");
+                            navController.navigate(R.id.action_homeFragment_to_createFundFragment, bundle
+                            );
+                            break;
                         case 3:
                             navController.navigate(R.id.action_homeFragment_to_medicineDistributorListFragment);
                             break;
@@ -269,7 +275,6 @@ public class HomeFragment extends Fragment {
         super.onResume();
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
-
 
 
 }

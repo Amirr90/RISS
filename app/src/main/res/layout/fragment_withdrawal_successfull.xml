@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.TransactionCompleteFragment">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".WithdrawalSuccessfullFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_margin="16dp"
@@ -30,7 +29,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            android:text="Congratulations Your Payment is successfully completed."
+            android:text="Congratulations your withdraw fund amount request submit successfully!!"
             android:textColor="#262E3F"
             android:textSize="16dp"
             android:textStyle="bold"
@@ -39,14 +38,15 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView11" />
 
         <TextView
+            android:gravity="center"
             android:textColor="#3F4E6E"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Thank you for using our services."
+            android:text="Sit back and relax, we will notify you when your request is completed."
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -61,9 +61,9 @@
             android:background="@drawable/rectangle_border"
             android:backgroundTint="#F5487F"
             android:fontFamily="@font/lato_bold"
-            android:text="HOME SCREEN"
+            android:text="View History"
             android:textColor="@android:color/white"
-            android:textSize="19dp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

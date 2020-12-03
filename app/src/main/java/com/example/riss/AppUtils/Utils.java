@@ -95,6 +95,7 @@ public class Utils {
     public static final String isAadharVerified = "isAadharVerified";
     public static final String FundSupport = "FundSupport";
     public static final String totalInvested = "totalInvested";
+    public static final String fundAmount = "fundAmount";
     public static final String support = "support";
     public static final String fundName = "fundName";
 
@@ -107,6 +108,18 @@ public class Utils {
         builder.setView(inflater.inflate(R.layout.loading_lay, null));
 
         builder.setCancelable(true);
+        alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(android.R.color.transparent)));
+        alertDialog.show();
+
+    }
+
+    public static void showAlertDialog(Activity activity, boolean isCancelable) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LayoutInflater inflater = activity.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.loading_lay, null));
+
+        builder.setCancelable(isCancelable);
         alertDialog = builder.create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(android.R.color.transparent)));
         alertDialog.show();
@@ -231,7 +244,7 @@ public class Utils {
     }
 
     public static String getCurrencyFormat(String num) {
-        Long number = Long.parseLong(num);
+        Double number = Double.parseDouble(num);
         String COUNTRY = "IN";
         String LANGUAGE = "en";
         return NumberFormat.getCurrencyInstance(new Locale(LANGUAGE, COUNTRY)).format(number);
@@ -424,5 +437,31 @@ public class Utils {
         color.add(R.color.color19);
         color.add(R.color.color20);
         return color;
+    }
+
+    public static List<String> getData() {
+        List<String> strings = new ArrayList<>();
+        strings.add("10");
+        strings.add("20");
+        strings.add("30");
+        strings.add("40");
+        strings.add("50");
+        strings.add("75");
+        strings.add("100");
+
+        return strings;
+    }
+
+    public static String getHandlingCharger(int position) {
+        List<String> strings = new ArrayList<>();
+        strings.add("2.5");
+        strings.add("3.5");
+        strings.add("5.0");
+        strings.add("7.0");
+        strings.add("10.0");
+        strings.add("15.0");
+        strings.add("20.0");
+
+        return strings.get(position);
     }
 }

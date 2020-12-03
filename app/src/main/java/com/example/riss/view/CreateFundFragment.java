@@ -326,6 +326,7 @@ public class CreateFundFragment extends Fragment {
             fund.setUid(getUid());
             fund.setTotalInvested(0);
             fund.setCurrentValue(0);
+            fund.setFundAmount(0);
             fund.setInitialValue(Integer.parseInt(initialValue));
             fund.setTimestamp(System.currentTimeMillis());
             fund.setLikedIds(likeList);

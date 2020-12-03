@@ -22,6 +22,7 @@ import com.example.riss.R;
 import com.example.riss.databinding.FragmentAddDistributionBinding;
 import com.example.riss.interfaces.ApiCallbackInterface;
 
+import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class AddDistributionFragment extends Fragment {
     String name, mobile, address, otp;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         addDistributionBinding = FragmentAddDistributionBinding.inflate(getLayoutInflater());

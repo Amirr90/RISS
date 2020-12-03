@@ -59,4 +59,12 @@ public interface Api {
             @Field("address") String address,
             @Field("timestamp") Long timestamp
     );
+
+
+    @POST("withdrawFundAmount")
+    Call<ResponseModel> withdrawFund(
+            @Query("fundId") String fundId,
+            @Query("uid") String uid,
+            @Query("amount") double amount
+    );
 }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -63,6 +64,8 @@ public class MyFund extends Fragment implements OnClickListener {
 
     AlertDialog optionDialog;
 
+    String fundAmount = null;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -109,11 +112,20 @@ public class MyFund extends Fragment implements OnClickListener {
             }
         });
 
+        genderViewBinding.btnDismiss.setText("Proceed");
         genderViewBinding.btnDismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 optionDialog.dismiss();
-                navController.navigate(R.id.action_myFund_to_withdrawFundAmountFragment);
+                if (fundAmount != null) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fundAmount", fundAmount);
+                    bundle.putString("fundId", fundId);
+                    navController.navigate(R.id.action_myFund_to_withdrawFundAmountFragment, bundle);
+                } else {
+                    Toast.makeText(requireActivity(), "try again", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -139,7 +151,9 @@ public class MyFund extends Fragment implements OnClickListener {
 
                             setSupportRecData(documentSnapshot);
                             myFundBinding.setFund(documentSnapshot);
-                            myFundBinding.textView53.setText(getCurrencyFormat(documentSnapshot.getLong(totalInvested)));
+
+                            fundAmount = String.valueOf(documentSnapshot.getLong(fundAmount));
+                            myFundBinding.textView53.setText(getCurrencyFormat(documentSnapshot.getLong(fundAmount)));
 
                             List<String> list = (List<String>) documentSnapshot.get(LIKED_IDS);
                             myFundBinding.tvLikes.setText(getCountInRomanFormat(list.size()));
@@ -191,5 +205,11 @@ public class MyFund extends Fragment implements OnClickListener {
     @Override
     public void onItemClick(int position, String id) {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
     }
 }

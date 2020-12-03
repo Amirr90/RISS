@@ -32,6 +32,15 @@ public class Fund {
     long like;
     String fundImage;
     int support;
+    int fundAmount;
+
+    public int getFundAmount() {
+        return fundAmount;
+    }
+
+    public void setFundAmount(int fundAmount) {
+        this.fundAmount = fundAmount;
+    }
 
     public int getSupport() {
         return support;
