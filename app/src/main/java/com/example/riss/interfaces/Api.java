@@ -65,6 +65,7 @@ public interface Api {
     Call<ResponseModel> withdrawFund(
             @Query("fundId") String fundId,
             @Query("uid") String uid,
-            @Query("amount") double amount
+            @Query("amount") double amount,
+            @Query("amountToWithdraw") double amountToBank
     );
 }

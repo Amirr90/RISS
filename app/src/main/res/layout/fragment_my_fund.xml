@@ -116,7 +116,6 @@
                     android:layout_height="wrap_content"
                     android:autoSizeTextType="uniform"
                     android:fontFamily="@font/lato_bold"
-                    android:text="9,500"
                     android:textColor="#5AC557"
                     android:textSize="30sp"
                     android:textStyle="bold"

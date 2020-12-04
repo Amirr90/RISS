@@ -11,12 +11,17 @@ import com.example.riss.models.Fund;
 import com.example.riss.models.FundsModel;
 import com.example.riss.repositories.AppRepo;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.model.Document;
 
 import java.util.List;
 
 public class AppViewModel extends ViewModel {
 
     AppRepo repo = new AppRepo();
+
+    public LiveData<List<DocumentSnapshot>> getWithdrawFundHistory(Activity activity) {
+        return repo.getWithdrawFundHistory(activity);
+    }
 
     public LiveData<DashboardModel> getDashboardData(Activity activity) {
         return repo.getDashboardData(activity);

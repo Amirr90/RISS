@@ -45,8 +45,37 @@ public class AppRepo {
     public MutableLiveData<List<Fund>> topFundByIdMutableLiveData;
     public MutableLiveData<List<FundsModel>> otherFundsMutableLiveData;
     public MutableLiveData<DocumentSnapshot> FundsMutableLiveData;
+    public MutableLiveData<List<DocumentSnapshot>> WithdrawFundsMutableLiveData;
     public MutableLiveData<DashboardModel> dashboardMutableLiveData;
 
+
+    public LiveData<List<DocumentSnapshot>> getWithdrawFundHistory(Activity activity) {
+        if (WithdrawFundsMutableLiveData == null) {
+            WithdrawFundsMutableLiveData = new MutableLiveData<>();
+        }
+        loadWithdrawFundData(activity);
+        return WithdrawFundsMutableLiveData;
+
+    }
+
+    private void loadWithdrawFundData(final Activity activity) {
+
+        getFirestoreReference().collection("WithdrawFundAmountRequest")
+                .whereEqualTo("uid", getUid())
+                .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        WithdrawFundsMutableLiveData.setValue(queryDocumentSnapshots.getDocuments());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(activity, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     public LiveData<DashboardModel> getDashboardData(Activity activity) {
         if (dashboardMutableLiveData == null) {

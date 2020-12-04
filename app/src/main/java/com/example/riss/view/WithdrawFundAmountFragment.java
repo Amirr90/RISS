@@ -47,6 +47,9 @@ public class WithdrawFundAmountFragment extends Fragment implements OnClickListe
     String fundId;
 
 
+    double fundAmountAfterPercent;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -158,9 +161,12 @@ public class WithdrawFundAmountFragment extends Fragment implements OnClickListe
     private void submittingWithdrawFundAmount(String fundId) {
         showAlertDialog(requireActivity(), false);
 
-        double amount = Double.parseDouble(finalAmount);
+        double fundWithdrawAmount = fundAmountAfterPercent;
+
+        double amountToWithdrawToBank = Double.parseDouble(finalAmount);
+
         Log.d(TAG, "submittingWithdrawFundAmount: " + fundId);
-        withdrawFund(fundId, amount, new ApiCallbackInterface() {
+        withdrawFund(fundId, fundWithdrawAmount, amountToWithdrawToBank, new ApiCallbackInterface() {
             @Override
             public void onSuccess(Object obj) {
                 hideAlertDialog();
@@ -188,6 +194,7 @@ public class WithdrawFundAmountFragment extends Fragment implements OnClickListe
         int percent = Integer.parseInt(limit);
 
         int percentAmount = (percent * amount) / 100;
+        fundAmountAfterPercent = percentAmount;
         amountBinding.textView91.setText(Utils.getCurrencyFormat(percentAmount));
 
         amountBinding.textView92.setText("Handling Changes  " + getHandlingCharger(position) + "%");

@@ -243,6 +243,9 @@ public class HomeFragment extends Fragment {
                         case 6:
                             navController.navigate(R.id.action_homeFragment_to_searchFundFragment);
                             break;
+                        case 7:
+                            navController.navigate(R.id.action_homeFragment_to_withdrawFundHistoryFragment);
+                            break;
                         case 8:
                             navController.navigate(R.id.action_homeFragment_to_publicReviewsFragment);
                             break;

@@ -173,10 +173,10 @@ public class ApiCall {
         });
     }
 
-    public static void withdrawFund(String fundId, double amount, final ApiCallbackInterface apiCallbackInterface) {
+    public static void withdrawFund(String fundId, double amount,double amountToBank, final ApiCallbackInterface apiCallbackInterface) {
 
         final Api api = ApiUtils.getAPIService();
-        Call<ResponseModel> call = api.withdrawFund(fundId, getUid(), amount);
+        Call<ResponseModel> call = api.withdrawFund(fundId, getUid(), amount,amountToBank);
 
         call.enqueue(new Callback<ResponseModel>() {
             @Override
@@ -184,8 +184,9 @@ public class ApiCall {
 
                 if (response.code() == 200) {
                     if (null != response.body())
-                        apiCallbackInterface.onSuccess(response.body().getResult());
-                    else apiCallbackInterface.onFailed(response.message());
+                        if (response.body().getResponseCode() == 1) {
+                            apiCallbackInterface.onSuccess(response.body().getResult());
+                        } else apiCallbackInterface.onFailed(response.message());
                 } else apiCallbackInterface.onFailed("" + response.code());
             }
 

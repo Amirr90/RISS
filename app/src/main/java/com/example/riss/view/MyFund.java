@@ -43,6 +43,7 @@ import static com.example.riss.AppUtils.Utils.LIKED_IDS;
 import static com.example.riss.AppUtils.Utils.TIMESTAMP;
 import static com.example.riss.AppUtils.Utils.TotalFundAmount;
 import static com.example.riss.AppUtils.Utils.checkUserProfile;
+import static com.example.riss.AppUtils.Utils.fundAmount_KEY;
 import static com.example.riss.AppUtils.Utils.getCountInRomanFormat;
 import static com.example.riss.AppUtils.Utils.getCurrencyFormat;
 import static com.example.riss.AppUtils.Utils.getFirestoreReference;
@@ -152,8 +153,8 @@ public class MyFund extends Fragment implements OnClickListener {
                             setSupportRecData(documentSnapshot);
                             myFundBinding.setFund(documentSnapshot);
 
-                            fundAmount = String.valueOf(documentSnapshot.getLong(fundAmount));
-                            myFundBinding.textView53.setText(getCurrencyFormat(documentSnapshot.getLong(fundAmount)));
+                            fundAmount = String.valueOf(documentSnapshot.getLong(fundAmount_KEY));
+                            myFundBinding.textView53.setText(getCurrencyFormat(documentSnapshot.getLong(fundAmount_KEY)));
 
                             List<String> list = (List<String>) documentSnapshot.get(LIKED_IDS);
                             myFundBinding.tvLikes.setText(getCountInRomanFormat(list.size()));
