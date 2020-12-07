@@ -125,6 +125,8 @@ public class SupportFundFragment extends Fragment {
         payment.setTxId(txId);
         payment.setUid(Utils.getUid());
         payment.setFundId(fundId);
+        payment.setFundName(getArguments().getString("fundName"));
+        payment.setUserName(getArguments().getString("fundName"));
         payment.setSupportType(SUPPORT_TYPE_DIRECT);
         payment.setAmount(amount);
         payment.setPaymentStatus(PAYMENT_STATUS_PENDING);

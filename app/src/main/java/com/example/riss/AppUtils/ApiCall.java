@@ -97,7 +97,8 @@ public class ApiCall {
                 map.get("otp"),
                 map.get("mobile"),
                 map.get("address"),
-                System.currentTimeMillis());
+                System.currentTimeMillis(),
+                map.get("fundID"));
 
         getTopFund.enqueue(new Callback<ResponseModel>() {
             @Override
@@ -173,10 +174,10 @@ public class ApiCall {
         });
     }
 
-    public static void withdrawFund(String fundId, double amount,double amountToBank, final ApiCallbackInterface apiCallbackInterface) {
+    public static void withdrawFund(String fundId, double amount, double amountToBank, final ApiCallbackInterface apiCallbackInterface) {
 
         final Api api = ApiUtils.getAPIService();
-        Call<ResponseModel> call = api.withdrawFund(fundId, getUid(), amount,amountToBank);
+        Call<ResponseModel> call = api.withdrawFund(fundId, getUid(), amount, amountToBank);
 
         call.enqueue(new Callback<ResponseModel>() {
             @Override
@@ -186,7 +187,7 @@ public class ApiCall {
                     if (null != response.body())
                         if (response.body().getResponseCode() == 1) {
                             apiCallbackInterface.onSuccess(response.body().getResult());
-                        } else apiCallbackInterface.onFailed(response.message());
+                        } else apiCallbackInterface.onFailed(response.body().getResult());
                 } else apiCallbackInterface.onFailed("" + response.code());
             }
 

@@ -14,11 +14,17 @@ public class DashboardModel {
     private int totalCreatedFund;
     private int totalInvestedAmount;
     private double earnedAmount;
+    private double fundAmount;
     private String result;
     private String username;
     private List<MedicineDistributerModel>MedicineDistributeList;
     private List<FundsModel>fundList;
     User user;
+
+
+    public double getFundAmount() {
+        return fundAmount;
+    }
 
     public List<MedicineDistributerModel> getMedicineDistributeList() {
         return MedicineDistributeList;

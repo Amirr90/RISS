@@ -124,15 +124,30 @@
                     app:layout_constraintStart_toStartOf="@+id/textView52"
                     app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
+                <TextView
+                    android:visibility="gone"
+                    android:fontFamily="@font/lato_italic"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:id="@+id/tvPendingAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amount Pending : 1,000"
+                    android:textColor="@color/color20"
+                    android:textSize="14sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="@+id/textView53"
+                    app:layout_constraintStart_toStartOf="@+id/textView53"
+                    app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView53">
+                    app:layout_constraintTop_toBottomOf="@+id/tvPendingAmount">
 
                     <View
                         android:layout_width="match_parent"

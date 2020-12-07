@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.riss.AppUtils.Utils;
+import com.example.riss.HomeScreen;
+import com.example.riss.view.HomeFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.razorpay.Checkout;
@@ -16,9 +18,14 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.riss.AppUtils.Utils.FUNDS;
 import static com.example.riss.AppUtils.Utils.FundSupportPayment;
+import static com.example.riss.AppUtils.Utils.IMAGE;
 import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_SUCCESS;
 import static com.example.riss.AppUtils.Utils.SUPPORT_TYPE_BY_CREATING_FUND;
+import static com.example.riss.AppUtils.Utils.SUPPORT_TYPE_DIRECT;
+import static com.example.riss.AppUtils.Utils.USER_NAME;
+import static com.example.riss.AppUtils.Utils.getFirestoreReference;
 
 public class StartPayment {
     private static final String TAG = "StartPayment";
@@ -191,6 +198,20 @@ public class StartPayment {
                         Toast.makeText(activity, "Failed to update status", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                Map<String, Object> updateFundSupportMap = new HashMap<>();
+                updateFundSupportMap.put("amount", Integer.parseInt(getAmount()));
+                updateFundSupportMap.put("fundId", getFundId());
+                updateFundSupportMap.put("fundName", getFundName());
+                updateFundSupportMap.put("image", "");
+                updateFundSupportMap.put("refId", null);
+                updateFundSupportMap.put("timestamp", System.currentTimeMillis());
+                updateFundSupportMap.put("userImage", "" + HomeFragment.user.getString(IMAGE));
+                updateFundSupportMap.put("uid", getUid());
+                updateFundSupportMap.put("userName", "" + HomeFragment.user.getString(USER_NAME));
+                updateFundSupportMap.put("supportType", SUPPORT_TYPE_DIRECT);
+                Utils.getFirestoreReference().collection(FUNDS).document(getFundId())
+                        .collection("FundSupport").add(updateFundSupportMap);
             } else paymentCallback.onPaymentFailed();
         }
     }

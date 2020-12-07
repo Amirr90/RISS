@@ -52,14 +52,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:textColor="#626262"
-            android:fontFamily="@font/lato"
             android:id="@+id/textView57"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@{funds.getString(`fundName`)}"
-            android:textSize="12dp"
+            android:fontFamily="@font/lato"
+            android:text="@{funds.getString(`supportType`).equalsIgnoreCase(`direct`)?`Direct Support`:funds.getString(`fundName`)}"
+            android:textColor="#626262"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/textView56"
             app:layout_constraintStart_toEndOf="@+id/ivFund"
             app:layout_constraintTop_toBottomOf="@+id/textView55" />

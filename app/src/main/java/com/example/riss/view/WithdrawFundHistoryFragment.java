@@ -49,13 +49,15 @@ public class WithdrawFundHistoryFragment extends Fragment {
 
 
         snapshots = new ArrayList<>();
-        adapter = new WithdrawFundAdapter(snapshots);
+        adapter = new WithdrawFundAdapter(snapshots,requireActivity());
 
         withdrawFundAmountBinding.recHistoryFund.setAdapter(adapter);
 
-       /* withdrawFundAmountBinding.recHistoryFund.addItemDecoration(new
+        withdrawFundAmountBinding.recHistoryFund.addItemDecoration(new
                 DividerItemDecoration(requireActivity(),
-                DividerItemDecoration.VERTICAL));*/
+                DividerItemDecoration.VERTICAL));
+
+
         appViewModel.getWithdrawFundHistory(requireActivity()).observe(getViewLifecycleOwner(), new Observer<List<DocumentSnapshot>>() {
             @Override
             public void onChanged(List<DocumentSnapshot> documentSnapshots) {

@@ -15,26 +15,39 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.riss.HomeScreen;
 import com.example.riss.R;
+import com.example.riss.adapters.DirectSupportAdapter;
 import com.example.riss.databinding.DashboardStatsViewBinding;
 import com.example.riss.databinding.FragmentMyDashboardBinding;
 import com.example.riss.models.DashboardModel;
 import com.example.riss.models.FundsModel;
 import com.example.riss.models.StatsModel;
 import com.example.riss.viewModel.AppViewModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.eazegraph.lib.models.PieModel;
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.riss.AppUtils.Utils.FundSupportPayment;
+import static com.example.riss.AppUtils.Utils.SUPPORT_TYPE_DIRECT;
+import static com.example.riss.AppUtils.Utils.TIMESTAMP;
 import static com.example.riss.AppUtils.Utils.getColorList;
 import static com.example.riss.AppUtils.Utils.getColorListForGraph;
 import static com.example.riss.AppUtils.Utils.getCountInRomanFormat;
 import static com.example.riss.AppUtils.Utils.getCurrencyFormat;
+import static com.example.riss.AppUtils.Utils.getFirestoreReference;
+import static com.example.riss.AppUtils.Utils.getUid;
 
 
 public class MyDashboardFragment extends Fragment {
@@ -69,6 +82,7 @@ public class MyDashboardFragment extends Fragment {
                 setStatsRec(dashboardModel);
 
                 setData(dashboardModel);
+                setDirectSupportData(dashboardModel);
 
                 dashboardBinding.group.setVisibility(View.VISIBLE);
                 dashboardBinding.group2.setVisibility(View.VISIBLE);
@@ -83,13 +97,37 @@ public class MyDashboardFragment extends Fragment {
         });
     }
 
+    private void setDirectSupportData(DashboardModel dashboardModel) {
+        getFirestoreReference().collection(FundSupportPayment)
+                .whereEqualTo("uid", getUid())
+                .whereEqualTo("supportType", SUPPORT_TYPE_DIRECT)
+                .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        dashboardBinding.recDirectSupport.addItemDecoration(new
+                                DividerItemDecoration(getActivity(),
+                                DividerItemDecoration.VERTICAL));
+                        dashboardBinding.recDirectSupport.setAdapter(new DirectSupportAdapter(queryDocumentSnapshots.getDocuments()));
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
+            }
+        });
+
+    }
+
     private void setData(DashboardModel dashboardModel) {
 
         dashboardBinding.textView64.setText(getCurrencyFormat(dashboardModel.getTotalInvestedAmount()));
-        dashboardBinding.textView60.setText(getCurrencyFormat(dashboardModel.getEarnedAmount()));
+        dashboardBinding.tvFundAmount.setText(getCurrencyFormat(dashboardModel.getFundAmount()));
         dashboardBinding.textView65.setText(getCurrencyFormat(dashboardModel.getTotalEarningFromFunds()));
         dashboardBinding.textView74.setText(getCountInRomanFormat(dashboardModel.getFundList().size()));
         dashboardBinding.setDashboardModel(dashboardModel);
+
     }
 
     private void setStatsRec(DashboardModel dashboardModel) {

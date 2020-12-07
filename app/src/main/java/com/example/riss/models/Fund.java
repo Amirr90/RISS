@@ -18,6 +18,8 @@ public class Fund {
     String address;
     String description;
     String uid;
+    String nomineeName;
+    String nomineeDetail;
     long timestamp;
     double totalInvested;
     double currentValue;
@@ -33,6 +35,31 @@ public class Fund {
     String fundImage;
     int support;
     int fundAmount;
+    int medicineDistributeTarget;
+
+    public String getNomineeName() {
+        return nomineeName;
+    }
+
+    public void setNomineeName(String nomineeName) {
+        this.nomineeName = nomineeName;
+    }
+
+    public String getNomineeDetail() {
+        return nomineeDetail;
+    }
+
+    public void setNomineeDetail(String nomineeDetail) {
+        this.nomineeDetail = nomineeDetail;
+    }
+
+    public int getMedicineDistributeTarget() {
+        return medicineDistributeTarget;
+    }
+
+    public void setMedicineDistributeTarget(int medicineDistributeTarget) {
+        this.medicineDistributeTarget = medicineDistributeTarget;
+    }
 
     public int getFundAmount() {
         return fundAmount;

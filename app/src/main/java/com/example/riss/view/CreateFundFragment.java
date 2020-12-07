@@ -73,7 +73,7 @@ public class CreateFundFragment extends Fragment {
 
     String fundID;
 
-    String createdBy, mobileNo, email, address, description, from;
+    String createdBy, mobileNo, email, address, description, from, nomineeName, nomineeDetails;
 
     String initialValue, duration;
     String[] ITEMS;
@@ -162,7 +162,6 @@ public class CreateFundFragment extends Fragment {
                 .set(startPayment).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-
                 startPayment.initPayment(new PaymentCallback() {
                     @Override
                     public void onPaymentSuccess() {
@@ -289,6 +288,8 @@ public class CreateFundFragment extends Fragment {
         email = createFundBinding.etEmail.getText().toString().trim();
         address = createFundBinding.etAddress.getText().toString().trim();
         description = createFundBinding.etDescription.getText().toString().trim();
+        nomineeName = createFundBinding.etNomineeName.getText().toString();
+        nomineeDetails = createFundBinding.etNomineeDetails.getText().toString();
 
 
         if (TextUtils.isEmpty(createdBy)) {
@@ -314,6 +315,14 @@ public class CreateFundFragment extends Fragment {
             createFundBinding.etDescription.setError("required");
             Toast.makeText(requireActivity(), "description required", Toast.LENGTH_SHORT).show();
             return false;
+        } else if (!TextUtils.isEmpty(nomineeDetails)) {
+            createFundBinding.etDescription.setError("required");
+            Toast.makeText(requireActivity(), "nominee Name required", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!TextUtils.isEmpty(nomineeName)) {
+            createFundBinding.etDescription.setError("required");
+            Toast.makeText(requireActivity(), "nominee Details Name required", Toast.LENGTH_SHORT).show();
+            return false;
         } else {
             AddMonthsToCurrentDate date = new AddMonthsToCurrentDate();
 
@@ -323,6 +332,8 @@ public class CreateFundFragment extends Fragment {
             fund.setEmail(email);
             fund.setAddress(address);
             fund.setDescription(description);
+            fund.setNomineeName(nomineeName);
+            fund.setNomineeDetail(nomineeDetails);
             fund.setUid(getUid());
             fund.setTotalInvested(0);
             fund.setCurrentValue(0);
@@ -333,6 +344,7 @@ public class CreateFundFragment extends Fragment {
             fund.setExpiryDate(date.getDateAfterMonth(duration));
             fund.setStartDate(date.getCurrentDate());
             fund.setSupport(0);
+            fund.setMedicineDistributeTarget(0);
             fund.setCreatedBy("");
             fund.setDuration(Integer.parseInt(duration));
 
@@ -348,9 +360,7 @@ public class CreateFundFragment extends Fragment {
     private void showLinkAadharDialog() {
         LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View formElementsView = inflater.inflate(R.layout.link_aadhar_dialog_view, null, false);
-
         LinkAadharDialogViewBinding genderViewBinding = LinkAadharDialogViewBinding.bind(formElementsView);
-
 
         genderViewBinding.btnLinkAadhar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -360,7 +370,6 @@ public class CreateFundFragment extends Fragment {
 
             }
         });
-
         // the alert dialog
         optionDialog = new AlertDialog.Builder(requireActivity()).create();
         optionDialog.setView(formElementsView);

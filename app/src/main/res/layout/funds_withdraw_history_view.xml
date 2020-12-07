@@ -10,13 +10,13 @@
             type="com.google.firebase.firestore.DocumentSnapshot" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginLeft="2dp"
+<!--    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="5dp">-->
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,21 +27,23 @@
             android:padding="8dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:loadFundImage="@{withdrawFund.getString(`fundImage`)}"
                 android:id="@+id/ivFund"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
+                android:loadFundImage="@{withdrawFund.getString(`fundImage`)}"
                 android:src="@drawable/profile"
                 app:civ_border_color="#F5487F"
-                app:civ_border_width="2dp" />
+                app:civ_border_width="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView96"
+                android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="25dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/lato"
                 android:text="@{withdrawFund.getString(`status`)}"
                 android:textColor="#FFB300"
@@ -50,6 +52,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:textStyle="bold"
                 android:id="@+id/textView97"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +60,7 @@
                 android:fontFamily="@font/lato"
                 android:text="@{withdrawFund.getString(`fundName`)}"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvAmount"
                 app:layout_constraintStart_toEndOf="@+id/ivFund"
                 app:layout_constraintTop_toTopOf="@+id/ivFund"
@@ -82,8 +85,8 @@
                 android:fontFamily="@font/lato"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textView96" />
+                app:layout_constraintEnd_toEndOf="@+id/tvStatus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+<!--    </androidx.cardview.widget.CardView>-->
 </layout>

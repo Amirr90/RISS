@@ -171,16 +171,51 @@ public class WithdrawFundAmountFragment extends Fragment implements OnClickListe
             public void onSuccess(Object obj) {
                 hideAlertDialog();
                 String msg = (String) obj;
-                Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show();
                 navController.navigate(R.id.action_withdrawFundAmountFragment_to_withdrawalSuccessfullFragment);
             }
 
             @Override
             public void onFailed(String msg) {
                 hideAlertDialog();
-                Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(requireActivity(), msg, Toast.LENGTH_LONG).show();
+                showFailedDialog(msg);
             }
         });
+    }
+
+
+    private void showFailedDialog(String msg) {
+        LayoutInflater inflater = (LayoutInflater) requireActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View formElementsView = inflater.inflate(R.layout.terms_condition_dialog_view, null, false);
+
+        final TermsConditionDialogViewBinding genderViewBinding = TermsConditionDialogViewBinding.bind(formElementsView);
+
+
+        genderViewBinding.tvMessage.setText(msg);
+        genderViewBinding.btnOk.setText("Dismiss");
+        genderViewBinding.btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                optionDialog.dismiss();
+            }
+        });
+
+        genderViewBinding.btnDismiss.setVisibility(View.GONE);
+        genderViewBinding.btnDismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                optionDialog.dismiss();
+
+
+            }
+        });
+
+        // the alert dialog
+        optionDialog = new AlertDialog.Builder(requireActivity()).create();
+        optionDialog.setView(formElementsView);
+        optionDialog.show();
+
     }
 
     @Override

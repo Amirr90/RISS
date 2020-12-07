@@ -40,13 +40,16 @@ import static com.example.riss.AppUtils.Utils.FUNDS;
 import static com.example.riss.AppUtils.Utils.FundSupport;
 import static com.example.riss.AppUtils.Utils.KEY_FUND_ID;
 import static com.example.riss.AppUtils.Utils.LIKED_IDS;
+import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_PENDING;
 import static com.example.riss.AppUtils.Utils.TIMESTAMP;
 import static com.example.riss.AppUtils.Utils.TotalFundAmount;
 import static com.example.riss.AppUtils.Utils.checkUserProfile;
 import static com.example.riss.AppUtils.Utils.fundAmount_KEY;
 import static com.example.riss.AppUtils.Utils.getCountInRomanFormat;
 import static com.example.riss.AppUtils.Utils.getCurrencyFormat;
+import static com.example.riss.AppUtils.Utils.getData;
 import static com.example.riss.AppUtils.Utils.getFirestoreReference;
+import static com.example.riss.AppUtils.Utils.getUid;
 import static com.example.riss.AppUtils.Utils.hideAlertDialog;
 import static com.example.riss.AppUtils.Utils.showAlertDialog;
 import static com.example.riss.AppUtils.Utils.support;
@@ -93,6 +96,36 @@ public class MyFund extends Fragment implements OnClickListener {
             @Override
             public void onClick(View view) {
                 showTermsAndConditionDialog();
+            }
+        });
+
+        setPendingAmount();
+
+    }
+
+    private void setPendingAmount() {
+
+        getFirestoreReference().collection("WithdrawFundAmountRequest")
+                .whereEqualTo("uid", getUid())
+                .whereEqualTo("status", PAYMENT_STATUS_PENDING)
+                .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Log.d(TAG, "onSuccess: " + queryDocumentSnapshots.getDocuments().toString());
+                        if (null != queryDocumentSnapshots) {
+                            if (!queryDocumentSnapshots.getDocuments().isEmpty()) {
+                                String amount = queryDocumentSnapshots.getDocuments().get(0).getString("amountToWithdraw");
+                                myFundBinding.tvPendingAmount.setText("Pending Amount : " + getCurrencyFormat(amount));
+                                myFundBinding.tvPendingAmount.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
             }
         });
 

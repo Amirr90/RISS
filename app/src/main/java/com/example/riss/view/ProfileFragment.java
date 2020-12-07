@@ -46,6 +46,7 @@ import static com.example.riss.AppUtils.Utils.USER_NAME;
 import static com.example.riss.AppUtils.Utils.USER_QUERY;
 import static com.example.riss.AppUtils.Utils.checkUserProfile;
 import static com.example.riss.AppUtils.Utils.getFirestoreReference;
+import static com.example.riss.AppUtils.Utils.getMobile;
 import static com.example.riss.AppUtils.Utils.getUid;
 import static com.example.riss.AppUtils.Utils.hideAlertDialog;
 import static com.example.riss.AppUtils.Utils.hideKeyboard;
@@ -83,6 +84,8 @@ public class ProfileFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         showAlertDialog(requireActivity());
+
+        profileBinding.etMobile.setText(getMobile());
         checkUserProfile(new IUserProfileInterface() {
             @Override
             public void isProfileVerified(boolean b) {

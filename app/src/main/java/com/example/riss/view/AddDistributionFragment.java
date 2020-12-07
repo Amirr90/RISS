@@ -11,9 +11,12 @@ import androidx.navigation.Navigation;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.riss.AppUtils.ApiCall;
@@ -21,26 +24,44 @@ import com.example.riss.HomeScreen;
 import com.example.riss.R;
 import com.example.riss.databinding.FragmentAddDistributionBinding;
 import com.example.riss.interfaces.ApiCallbackInterface;
+import com.example.riss.models.FundsModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.example.riss.AppUtils.ApiCall.distributeMedicine;
+import static com.example.riss.AppUtils.Utils.FUNDS;
+import static com.example.riss.AppUtils.Utils.FUND_ID;
+import static com.example.riss.AppUtils.Utils.getFirestoreReference;
+import static com.example.riss.AppUtils.Utils.getUid;
 import static com.example.riss.AppUtils.Utils.hideAlertDialog;
 import static com.example.riss.AppUtils.Utils.hideKeyboard;
 import static com.example.riss.AppUtils.Utils.showAlertDialog;
 
 
 public class AddDistributionFragment extends Fragment {
+    private static final String TAG = "AddDistributionFragment";
+    private static final String TEXT_SELECT_FUND = "-select fund-";
 
     FragmentAddDistributionBinding addDistributionBinding;
 
     NavController navController;
 
     String name, mobile, address, otp;
+    List<String> fundNameList = new ArrayList<>();
+    List<String> fundIdsList = new ArrayList<>();
+
+    String selectedFundName = null;
+    String selectedFundId = null;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -65,6 +86,8 @@ public class AddDistributionFragment extends Fragment {
             }
         });
 
+
+        setSpinnerData();
 
         addDistributionBinding.etMobileToDis.addTextChangedListener(new TextWatcher() {
             @Override
@@ -107,17 +130,79 @@ public class AddDistributionFragment extends Fragment {
         });
     }
 
+    private void setSpinnerData() {
+
+        showAlertDialog(requireActivity());
+        getFirestoreReference().collection(FUNDS)
+                .whereEqualTo("uid", getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if (queryDocumentSnapshots == null && queryDocumentSnapshots.getDocuments().isEmpty())
+                            return;
+
+                        fundIdsList.clear();
+                        fundNameList.clear();
+
+
+                        fundNameList.add(TEXT_SELECT_FUND);
+                        for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
+                            fundNameList.add(snapshot.getString("fundName"));
+                            fundIdsList.add(snapshot.getId());
+                        }
+
+
+                        ArrayAdapter<String> branchListAdapter = new ArrayAdapter<>(getActivity(),
+                                android.R.layout.simple_spinner_item, fundNameList);
+                        branchListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        addDistributionBinding.showFundSpinner.setAdapter(branchListAdapter);
+
+
+                        addDistributionBinding.showFundSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                                if (position != 0) {
+                                    selectedFundName = fundNameList.get(position);
+                                    selectedFundId = fundIdsList.get(position - 1);
+                                    Toast.makeText(requireActivity(), "selected '" + selectedFundName + "'", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+                        hideAlertDialog();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: " + e.getLocalizedMessage());
+                hideAlertDialog();
+            }
+        });
+
+    }
+
     private void requestOtp(final String number) {
 
+        showAlertDialog(requireActivity());
+        hideKeyboard(requireActivity());
         ApiCall.requestOtp(number, new ApiCallbackInterface() {
             @Override
             public void onSuccess(Object obj) {
                 String otp = (String) obj;
                 sendOtp(otp);
+
             }
 
             @Override
             public void onFailed(String msg) {
+                hideAlertDialog();
                 Toast.makeText(requireActivity(), msg, Toast.LENGTH_SHORT).show();
             }
         });
@@ -133,6 +218,7 @@ public class AddDistributionFragment extends Fragment {
         ApiCall.sendOtp(otp, number, new ApiCallbackInterface() {
             @Override
             public void onSuccess(Object obj) {
+                hideAlertDialog();
                 Toast.makeText(requireActivity(), "OTP send successfully to number " + addDistributionBinding.etMobileToDis.getText().toString(), Toast.LENGTH_SHORT).show();
                 startTimer();
             }
@@ -140,6 +226,8 @@ public class AddDistributionFragment extends Fragment {
             @Override
             public void onFailed(String msg) {
 
+                hideAlertDialog();
+                Toast.makeText(requireActivity(), "Failed to sent OTP", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -153,6 +241,7 @@ public class AddDistributionFragment extends Fragment {
         map.put("mobile", mobile);
         map.put("otp", otp);
         map.put("address", address);
+        map.put("fundID", selectedFundId);
 
         distributeMedicine(map, new ApiCallbackInterface() {
             @Override
@@ -195,6 +284,9 @@ public class AddDistributionFragment extends Fragment {
             return false;
         } else if (TextUtils.isEmpty(address)) {
             Toast.makeText(requireActivity(), "address required", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (selectedFundName == null && selectedFundId == null) {
+            Toast.makeText(requireActivity(), "select Fund name from list", Toast.LENGTH_SHORT).show();
             return false;
         } else
             return true;

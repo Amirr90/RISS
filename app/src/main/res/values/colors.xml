@@ -33,5 +33,8 @@
     <color name="colorGreenLight">#A8F5DB</color>
     <color name="colorBlueLight">#CBCEFF</color>
     <color name="colorYellowLight">#FFF6CB</color>
+    <color name="orange">#FB8C00</color>
+    <color name="red">#E53935</color>
+    <color name="green">#43A047</color>
 
 </resources>

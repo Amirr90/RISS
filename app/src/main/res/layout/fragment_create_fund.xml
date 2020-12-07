@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:orientation="vertical"
@@ -62,8 +62,8 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="25dp"
                 android:hint="Fund Name"
-                android:maxLength="15"
                 android:inputType="textPersonName"
+                android:maxLength="15"
                 android:textColor="#424242"
                 android:textColorHint="#80626262" />
 
@@ -125,8 +125,8 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="25dp"
                 android:hint="Your Address"
-                android:maxLength="60"
                 android:inputType="textMultiLine"
+                android:maxLength="60"
                 android:textColor="#424242"
                 android:textColorHint="#80626262" />
 
@@ -173,9 +173,53 @@
                 android:layout_marginBottom="25dp"
                 android:hint="Occupation"
                 android:inputType="textPersonName"
-                android:textColor="#424242"
                 android:maxLength="20"
                 android:maxLines="1"
+                android:textColor="#424242"
+                android:textColorHint="#80626262" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:text="Nominee"
+                android:textColor="#424242"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etNomineeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="25dp"
+                android:hint="Enter Nominee name here"
+                android:inputType="textPersonName"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:textColor="#424242"
+                android:textColorHint="#80626262" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato_bold"
+                android:text="Nominee Details"
+                android:textColor="#424242"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etNomineeDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="25dp"
+                android:hint="Enter Nominee details"
+                android:inputType="textPersonName"
+                android:maxLength="20"
+                android:maxLines="1"
+                android:textColor="#424242"
                 android:textColorHint="#80626262" />
 
             <TextView
@@ -193,9 +237,9 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginBottom="25dp"
                 android:hint="Your Education"
+                android:inputType="textPersonName"
                 android:maxLength="20"
                 android:maxLines="1"
-                android:inputType="textPersonName"
                 android:textColor="#424242"
                 android:textColorHint="#80626262" />
 

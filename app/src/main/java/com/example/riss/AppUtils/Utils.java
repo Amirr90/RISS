@@ -80,9 +80,12 @@ public class Utils {
     public static final String QUERY_DISTRIBUTOR_LIST = "DistributorsList";
     public static final String SUPPORT_TYPE_DIRECT = "direct";
     public static final String SUPPORT_TYPE_BY_CREATING_FUND = "byCreatingFund";
-    public static final String PAYMENT_STATUS_PENDING = "pending";
-    public static final String PAYMENT_STATUS_FAILED = "failed";
-    public static final String PAYMENT_STATUS_SUCCESS = "success";
+    public static final String PAYMENT_STATUS_PENDING = "Pending";
+    public static final String PAYMENT_STATUS_FAILED = "Failed";
+    public static final String PAYMENT_STATUS_SUCCESS = "Success";
+    public static final String PAYMENT_STATUS_ACCEPTED = "Accepted";
+    public static final String PAYMENT_STATUS_APPROVED = "Approved";
+    public static final String PAYMENT_STATUS_REJECTED = "Reject";
     public static final String MedicineDistribute = "MedicineDistribute";
     public static final String uid = "uid";
 
@@ -255,13 +258,10 @@ public class Utils {
         if (time < 1000000000000L) {
             time *= 1000;
         }
-
         long now = System.currentTimeMillis();
         if (time > now || time <= 0) {
             return null;
         }
-
-
         final long diff = now - time;
         if (diff < MINUTE_MILLIS) {
             return "just now";
