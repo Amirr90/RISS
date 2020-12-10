@@ -82,4 +82,10 @@ public class CustomLoadImage {
             view.setVisibility(GONE);
         else view.setVisibility(VISIBLE);
     }
+
+    @BindingAdapter("android:setCustomVisibility")
+    public static void setCustomVisibility(View view, Boolean status) {
+        if (null != status)
+            view.setVisibility(status ? GONE : VISIBLE);
+    }
 }

@@ -1,12 +1,16 @@
 package com.example.riss;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,14 +22,22 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.riss.databinding.ActivityHomeScreenBinding;
 import com.example.riss.view.CreateFundFragment;
+import com.fxn.pix.Pix;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.razorpay.PaymentData;
 import com.razorpay.PaymentResultWithDataListener;
 
+import java.util.ArrayList;
+
 import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_FAILED;
 import static com.example.riss.AppUtils.Utils.PAYMENT_STATUS_SUCCESS;
+import static com.example.riss.view.ProfileFragment.BACK_IMAGE_URL;
+import static com.example.riss.view.ProfileFragment.FRONT_IMAGE_URL;
+import static com.example.riss.view.ProfileFragment.REQ_CODE_BACK_IMAGE;
+import static com.example.riss.view.ProfileFragment.REQ_CODE_FRONT_IMAGE;
+import static com.example.riss.view.ProfileFragment.profileBinding;
 import static com.example.riss.view.SupportFundFragment.payment;
 
 public class HomeScreen extends AppCompatActivity implements PaymentResultWithDataListener {
@@ -149,5 +161,37 @@ public class HomeScreen extends AppCompatActivity implements PaymentResultWithDa
         Log.d(TAG, "onPaymentError: " + paymentData.getData());
         payment.updatePaymentStatus(paymentData.getPaymentId(), PAYMENT_STATUS_FAILED);
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE_FRONT_IMAGE) {
+            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
+            if (null != returnValue && returnValue.isEmpty()) {
+                Toast.makeText(instance, "try again", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Bitmap bm = BitmapFactory.decodeFile(returnValue.get(0));
+            Log.d(TAG, "ImagePath: " + bm);
+            profileBinding.ivFrontImage.setImageBitmap(bm);
+            FRONT_IMAGE_URL = returnValue.get(0);
+        } else if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE_BACK_IMAGE) {
+            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
+            if (null != returnValue && returnValue.isEmpty()) {
+                Toast.makeText(instance, "try again", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Bitmap bm = BitmapFactory.decodeFile(returnValue.get(0));
+            profileBinding.ivBackImage.setImageBitmap(bm);
+            BACK_IMAGE_URL = returnValue.get(0);
+        } else {
+            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
+            Bitmap bm = BitmapFactory.decodeFile(returnValue.get(0));
+            profileBinding.ivBackImage.setImageBitmap(bm);
+            Log.d(TAG, "RandomImagePath: " + bm);
+        }
     }
 }

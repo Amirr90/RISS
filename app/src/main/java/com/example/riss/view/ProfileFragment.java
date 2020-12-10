@@ -1,12 +1,9 @@
 package com.example.riss.view;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,13 +24,22 @@ import com.example.riss.interfaces.IUserProfileInterface;
 import com.fxn.pix.Options;
 import com.fxn.pix.Pix;
 import com.fxn.utility.PermUtil;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static com.example.riss.AppUtils.Utils.AADHAR_NO;
 import static com.example.riss.AppUtils.Utils.ADDRESS;
@@ -55,22 +61,29 @@ import static com.example.riss.AppUtils.Utils.showAlertDialog;
 
 public class ProfileFragment extends Fragment {
 
-    private static final int FRONT_IMAGE = 1;
-    private static final int BACK_IMAGE = 2;
-    private static final int REQ_CODE_FRONT_IMAGE = 1100;
-    private static final int REQ_CODE_BACK_IMAGE = 2200;
-    FragmentProfileBinding profileBinding;
+    public static final int FRONT_IMAGE = 1;
+    public static final int BACK_IMAGE = 2;
+    public static final int REQ_CODE_FRONT_IMAGE = 1100;
+    public static final int REQ_CODE_BACK_IMAGE = 2200;
+    public static FragmentProfileBinding profileBinding;
     NavController navController;
     private static final String TAG = "ProfileFragment";
     Map<String, Object> map;
 
     String name, mobile, email, address, occupation, education, aadharNo, description, firstName, lastName;
-    int ID_TYPE;
+    int ID_TYPE = -1;
 
     CharSequence[] items = {"Aadhar Card", "PAN card", "VoterId card", "Driving Licence"};
 
+    public static String FRONT_IMAGE_URL = null;
+    public static String BACK_IMAGE_URL = null;
+
+
+    Map<String, Object> urlsMap;
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         profileBinding = FragmentProfileBinding.inflate(getLayoutInflater());
@@ -85,6 +98,7 @@ public class ProfileFragment extends Fragment {
 
         showAlertDialog(requireActivity());
 
+        urlsMap = new HashMap<>();
         profileBinding.etMobile.setText(getMobile());
         checkUserProfile(new IUserProfileInterface() {
             @Override
@@ -131,6 +145,7 @@ public class ProfileFragment extends Fragment {
         profileBinding.ivFrontImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (profileBinding.imageView13.getTag() == "1") {
                     Toast.makeText(requireActivity(), "Image Already verified, it can not be change", Toast.LENGTH_SHORT).show();
                 } else
@@ -141,6 +156,7 @@ public class ProfileFragment extends Fragment {
         profileBinding.ivBackImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (profileBinding.imageView16.getTag() == "1") {
                     Toast.makeText(requireActivity(), "Image Already verified, it can not be change", Toast.LENGTH_SHORT).show();
                 } else
@@ -152,15 +168,14 @@ public class ProfileFragment extends Fragment {
 
     private void selectImage(int imageCode) {
         Options options = Options.init()
-                .setRequestCode(imageCode == FRONT_IMAGE ? REQ_CODE_FRONT_IMAGE : REQ_CODE_BACK_IMAGE)                                           //Request code for activity results
-                .setCount(1)                                                   //Number of images to restict selection count
-                .setFrontfacing(false)                                         //Front Facing camera on start
-                //.setPreSelectedUrls(returnValue)                               //Pre selected Image Urls
-                //.setSpanCount(4)                                               //Span count for gallery min 1 & max 5
-                .setExcludeVideos(false)                                       //Option to exclude videos
-                .setVideoDurationLimitinSeconds(30)                            //Duration for video recording
-                .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)     //Orientaion
-                .setPath("/RISS/images/profile_image");                                       //Custom Path For media Storage
+                .setRequestCode(imageCode == FRONT_IMAGE ? REQ_CODE_FRONT_IMAGE : REQ_CODE_BACK_IMAGE)
+                .setCount(1)
+                .setFrontfacing(false)
+                .setExcludeVideos(false)
+
+                .setVideoDurationLimitinSeconds(30)
+                .setScreenOrientation(Options.SCREEN_ORIENTATION_PORTRAIT)
+                .setPath("/RISS/images/profile_image");
 
         Pix.start(requireActivity(), options);
     }
@@ -175,7 +190,14 @@ public class ProfileFragment extends Fragment {
                 dialog.dismiss();
                 ID_TYPE = item;
                 profileBinding.tvIdTypeText.setText(items[item]);
-
+               /* if (item == 1 || item == 3) {
+                    profileBinding.ivBackImage.setVisibility(View.GONE);
+                    profileBinding.textView58.setVisibility(View.GONE);
+                } else {
+                    profileBinding.ivBackImage.setVisibility(View.VISIBLE);
+                    profileBinding.textView58.setVisibility(View.VISIBLE);
+                }
+*/
             }
         }).show();
     }
@@ -231,12 +253,11 @@ public class ProfileFragment extends Fragment {
 
     private void updateProfile() {
         hideKeyboard(requireActivity());
-        showAlertDialog(requireActivity());
+        showAlertDialog(requireActivity(), false);
         getFirestoreReference().collection(USER_QUERY).document(getUid()).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                hideAlertDialog();
-                Toast.makeText(requireActivity(), R.string.profile_updated_successfully, Toast.LENGTH_SHORT).show();
+                uploadImage();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -248,31 +269,118 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NotNull String permissions[], @NotNull int[] grantResults) {
         switch (requestCode) {
             case PermUtil.REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 } else {
                     Toast.makeText(requireActivity(), "Approve permissions to open Pix ImagePicker", Toast.LENGTH_LONG).show();
                 }
-                return;
+
             }
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE_FRONT_IMAGE) {
-            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
-            Bitmap bm = BitmapFactory.decodeFile(returnValue.get(0));
-            profileBinding.ivFrontImage.setImageBitmap(bm);
-        } else if (resultCode == Activity.RESULT_OK && requestCode == REQ_CODE_BACK_IMAGE) {
-            ArrayList<String> returnValue = data.getStringArrayListExtra(Pix.IMAGE_RESULTS);
-            Toast.makeText(requireActivity(), "" + returnValue.get(0).toString(), Toast.LENGTH_SHORT).show();
-            Bitmap bm = BitmapFactory.decodeFile(returnValue.get(0));
-            profileBinding.ivBackImage.setImageBitmap(bm);
-        }
 
+    private void uploadImage() {
+       /* if (ID_TYPE == 1 || ID_TYPE == 3) {
+            if (FRONT_IMAGE_URL != null)
+                uploadFrontImage(FRONT_IMAGE_URL);
+            else
+                Toast.makeText(requireActivity(), R.string.profile_updated_successfully, Toast.LENGTH_SHORT).show();
+        } else {
+            if (null != FRONT_IMAGE_URL && null != BACK_IMAGE_URL) {
+                uploadFrontImage(FRONT_IMAGE_URL);
+            } else
+                Toast.makeText(requireActivity(), "select front and back both Image", Toast.LENGTH_SHORT).show();
+        }*/
+        if (null != FRONT_IMAGE_URL && null != BACK_IMAGE_URL) {
+            uploadFrontImage(FRONT_IMAGE_URL);
+        } else if (null == FRONT_IMAGE_URL && null != BACK_IMAGE_URL) {
+            Toast.makeText(requireActivity(), "Select Front Image", Toast.LENGTH_SHORT).show();
+        } else if (null == BACK_IMAGE_URL && null != FRONT_IMAGE_URL) {
+            Toast.makeText(requireActivity(), "Select Back Image", Toast.LENGTH_SHORT).show();
+        } else
+            Toast.makeText(requireActivity(), R.string.profile_updated_successfully, Toast.LENGTH_SHORT).show();
     }
+
+    private void uploadFrontImage(String frontImageUrl) {
+        StorageReference mStorageRef;
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        Uri file = Uri.fromFile(new File(frontImageUrl));
+        final StorageReference riversRef = mStorageRef.child("aadharImage/" + getUid() + "/frontImage/" + System.currentTimeMillis() + ".jpg");
+        UploadTask uploadTask = riversRef.putFile(file);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+                return riversRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.d(TAG, "onCompleteFrontImage: " + downloadUri);
+                    urlsMap.put("aadharFront", "" + downloadUri);
+                    if (null == BACK_IMAGE_URL) {
+                        updateImage(urlsMap);
+                        return;
+                    }
+                    uploadBackImage(BACK_IMAGE_URL);
+                } else {
+                    Log.d(TAG, "onUploadingBackImageError: " + Objects.requireNonNull(task.getException()).getLocalizedMessage());
+                }
+            }
+        });
+    }
+
+    private void uploadBackImage(String frontImageUrl) {
+        StorageReference mStorageRef;
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        Uri file = Uri.fromFile(new File(frontImageUrl));
+        final StorageReference riversRef = mStorageRef.child("aadharImage/" + getUid() + "/backImage/" + System.currentTimeMillis() + ".jpg");
+        UploadTask uploadTask = riversRef.putFile(file);
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw Objects.requireNonNull(task.getException());
+                }
+
+                return riversRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri downloadUri = task.getResult();
+                    Log.d(TAG, "onCompleteBackImage: " + downloadUri);
+                    urlsMap.put("aadharBack", "" + downloadUri);
+                    updateImage(urlsMap);
+                } else {
+                    Log.d(TAG, "onUploadingFrontImageError: " + Objects.requireNonNull(task.getException()).getLocalizedMessage());
+                }
+            }
+        });
+    }
+
+    private void updateImage(Map<String, Object> urlsMap) {
+        getFirestoreReference().collection(USER_QUERY).document(getUid()).update(urlsMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                hideAlertDialog();
+                Toast.makeText(requireActivity(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                hideAlertDialog();
+                Toast.makeText(requireActivity(), "could't update profile try again", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

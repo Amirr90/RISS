@@ -132,4 +132,6 @@
     <string name="withdraw_rule_1">1. Minimum withdraw amount will be Rs 1000.</string>
     <string name="withdraw_rule_2">2. Next withdrawal request could be done only after 30 days of previous withdrawal.</string>
     <string name="withdraw_rule_3">3. Handling Charges on Fund Withdrawal :-</string>
+    <string name="select_id_type">Select ID type first</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
