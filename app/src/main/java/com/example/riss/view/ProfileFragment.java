@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 if (profileBinding.imageView13.getTag() == "1") {
-                    Toast.makeText(requireActivity(), "Image Already verified, it can not be change", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), getString(R.string.already_image_verifified_text), Toast.LENGTH_SHORT).show();
                 } else
                     selectImage(FRONT_IMAGE);
 
@@ -158,7 +158,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 if (profileBinding.imageView16.getTag() == "1") {
-                    Toast.makeText(requireActivity(), "Image Already verified, it can not be change", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), getString(R.string.already_image_verifified_text), Toast.LENGTH_SHORT).show();
                 } else
                     selectImage(BACK_IMAGE);
 
@@ -184,7 +184,7 @@ public class ProfileFragment extends Fragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
 
-        builder.setTitle("Select ID type");
+        builder.setTitle(R.string.selected_id_type);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 dialog.dismiss();

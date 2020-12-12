@@ -94,6 +94,7 @@ public class HomeFragment extends Fragment {
         });
     }
 
+
     private void init() {
         showAlertDialog(requireActivity());
         checkUserProfile(new IUserProfileInterface() {
